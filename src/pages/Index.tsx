@@ -3,13 +3,30 @@ import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/com
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Textarea } from "@/components/ui/textarea";
-import { Rocket, Target, Zap, TrendingUp, Palette, Code, Share2, BarChart, Mail, Phone, MapPin } from "lucide-react";
+import { Target, Zap, TrendingUp, Palette, Share2, Mail, Phone } from "lucide-react";
 
 const Index = () => {
   return (
     <div className="min-h-screen bg-midnight text-offwhite font-inter">
+      {/* Navigation */}
+      <nav className="fixed top-0 left-0 right-0 bg-midnight/95 backdrop-blur-sm border-b border-border z-50">
+        <div className="container max-w-6xl mx-auto px-6 md:px-12">
+          <div className="flex items-center justify-between h-16">
+            <a href="#" className="font-poppins font-bold text-xl text-phoenix1">BRANDL1FT</a>
+            <div className="hidden md:flex items-center gap-8">
+              <a href="#home" className="hover:text-phoenix1 transition-colors">Home</a>
+              <a href="#why-choose-us" className="hover:text-phoenix1 transition-colors">Why Us</a>
+              <a href="#packages" className="hover:text-phoenix1 transition-colors">Packages</a>
+              <a href="#team" className="hover:text-phoenix1 transition-colors">Team</a>
+              <a href="#contact" className="hover:text-phoenix1 transition-colors">Contact</a>
+            </div>
+            <Button className="bg-phoenix1 hover:bg-phoenix2">Get Started</Button>
+          </div>
+        </div>
+      </nav>
+
       {/* Hero Section */}
-      <section className="relative min-h-[90vh] flex items-center justify-center overflow-hidden px-6 md:px-12">
+      <section id="home" className="relative min-h-[90vh] flex items-center justify-center overflow-hidden px-6 md:px-12 pt-24">
         <div className="absolute inset-0 bg-gradient-to-br from-phoenix1/20 via-midnight to-midnight" />
         <div className="absolute inset-0 opacity-30">
           <div className="absolute top-1/4 left-1/4 w-64 h-64 bg-cyan/20 rounded-full blur-3xl animate-pulse" />
@@ -17,32 +34,23 @@ const Index = () => {
         </div>
         
         <div className="container max-w-6xl mx-auto relative z-10">
-          <div className="grid md:grid-cols-2 gap-12 items-center">
-            <div className="text-center md:text-left space-y-6 animate-fade-in">
-              <h1 className="font-poppins font-bold text-5xl md:text-6xl lg:text-7xl leading-tight">
-                BRAND<span className="text-phoenix1">L1FT</span>
-              </h1>
-              <p className="text-3xl md:text-4xl font-semibold text-cyan">
-                Lifting Brands to New Heights 🚀
-              </p>
-              <p className="text-xl md:text-2xl text-muted-foreground font-poppins">
-                A Name Your Brand Needs
-              </p>
-              <div className="flex flex-col sm:flex-row gap-4 justify-center md:justify-start pt-4">
-                <Button size="lg" className="bg-phoenix1 hover:bg-phoenix2 text-white shadow-lg hover:shadow-xl hover:shadow-phoenix1/50 transition-all active:scale-95">
-                  Start Your Project
-                </Button>
-                <Button size="lg" variant="outline" className="border-phoenix2 text-phoenix1 hover:bg-phoenix1/10">
-                  View Our Work
-                </Button>
-              </div>
-            </div>
-            
-            <div className="relative flex justify-center animate-scale-in">
-              <div className="relative w-64 h-64 md:w-80 md:h-80">
-                <div className="absolute inset-0 bg-gradient-to-br from-phoenix1 to-cyan rounded-full blur-2xl opacity-40 animate-pulse" />
-                <Rocket className="relative w-full h-full text-phoenix1 drop-shadow-2xl" strokeWidth={1} />
-              </div>
+          <div className="text-center space-y-6 animate-fade-in">
+            <h1 className="font-poppins font-bold text-5xl md:text-6xl lg:text-7xl leading-tight">
+              BRAND<span className="text-phoenix1">L1FT</span>
+            </h1>
+            <p className="text-3xl md:text-4xl font-semibold text-cyan">
+              Lifting Brands to New Heights 🚀
+            </p>
+            <p className="text-xl md:text-2xl text-muted-foreground font-poppins max-w-3xl mx-auto">
+              Where creativity meets strategy. We transform businesses through innovative marketing solutions that drive real, measurable growth.
+            </p>
+            <div className="flex flex-col sm:flex-row gap-4 justify-center pt-4">
+              <Button size="lg" className="bg-phoenix1 hover:bg-phoenix2 text-white shadow-lg hover:shadow-xl hover:shadow-phoenix1/50 transition-all active:scale-95">
+                Start Your Project
+              </Button>
+              <Button size="lg" variant="outline" className="border-phoenix2 text-phoenix1 hover:bg-phoenix1/10">
+                View Our Work
+              </Button>
             </div>
           </div>
         </div>
@@ -50,34 +58,33 @@ const Index = () => {
 
       {/* About Snapshot */}
       <section className="py-16 md:py-24 px-6 md:px-12 bg-charcoal/50">
+        <div className="container max-w-6xl mx-auto text-center mb-12">
+          <h2 className="font-poppins font-bold text-4xl md:text-5xl mb-4">About BrandLift</h2>
+          <p className="text-lg text-muted-foreground max-w-4xl mx-auto leading-relaxed">
+            BrandLift is a creative marketing agency that helps businesses grow through storytelling, strategy, and digital innovation. We build strong brand identities, design impactful visuals, and manage digital presence that delivers real results.
+          </p>
+        </div>
         <div className="container max-w-6xl mx-auto">
-          <div className="grid md:grid-cols-2 gap-12 items-center">
-            <div className="space-y-6">
-              <h2 className="font-poppins font-bold text-4xl md:text-5xl">Who We Are</h2>
-              <p className="text-lg text-muted-foreground leading-relaxed">
-                We're a creative powerhouse dedicated to elevating brands through strategic marketing, stunning design, and performance-driven campaigns. Our mission is simple: make your brand unforgettable.
-              </p>
-            </div>
-            <div className="grid grid-cols-3 gap-6">
-              {[
-                { label: "Clients", value: "50+" },
-                { label: "Campaigns", value: "200+" },
-                { label: "Avg ROI", value: "3.5x" }
-              ].map((stat, i) => (
-                <Card key={i} className="bg-charcoal border-phoenix1/20 hover:border-phoenix1 transition-colors text-center">
-                  <CardContent className="pt-6">
-                    <p className="text-3xl font-bold text-phoenix1 font-poppins">{stat.value}</p>
-                    <p className="text-sm text-muted-foreground mt-2">{stat.label}</p>
-                  </CardContent>
-                </Card>
-              ))}
-            </div>
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+            {[
+              { label: "Brands Elevated", value: "150+" },
+              { label: "Impressions", value: "3.5M+" },
+              { label: "Avg ROI", value: "285%" },
+              { label: "Client Satisfaction", value: "98%" }
+            ].map((stat, i) => (
+              <Card key={i} className="bg-charcoal border-phoenix1/20 hover:border-phoenix1 transition-colors text-center">
+                <CardContent className="pt-6">
+                  <p className="text-3xl md:text-4xl font-bold text-phoenix1 font-poppins">{stat.value}</p>
+                  <p className="text-sm text-muted-foreground mt-2">{stat.label}</p>
+                </CardContent>
+              </Card>
+            ))}
           </div>
         </div>
       </section>
 
       {/* Why Choose Us */}
-      <section className="py-16 md:py-24 px-6 md:px-12">
+      <section id="why-choose-us" className="py-16 md:py-24 px-6 md:px-12">
         <div className="container max-w-6xl mx-auto">
           <h2 className="font-poppins font-bold text-4xl md:text-5xl text-center mb-16">Why Choose Us</h2>
           <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
@@ -99,57 +106,35 @@ const Index = () => {
         </div>
       </section>
 
-      {/* Services Grid */}
-      <section className="py-16 md:py-24 px-6 md:px-12 bg-charcoal/50">
-        <div className="container max-w-6xl mx-auto">
-          <h2 className="font-poppins font-bold text-4xl md:text-5xl text-center mb-16">Our Services</h2>
-          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
-            {[
-              { icon: Palette, title: "Brand Identity", desc: "Logo, colors, voice—your complete brand DNA" },
-              { icon: Code, title: "Web Development", desc: "Fast, beautiful, conversion-optimized sites" },
-              { icon: Share2, title: "Social Media", desc: "Content that engages and grows your audience" },
-              { icon: BarChart, title: "Performance Marketing", desc: "Paid ads that deliver measurable ROI" },
-              { icon: TrendingUp, title: "SEO & Analytics", desc: "Rank higher, understand your customers" },
-              { icon: Zap, title: "Campaign Strategy", desc: "End-to-end campaigns that move the needle" }
-            ].map((service, i) => (
-              <Card key={i} className="bg-charcoal border-border hover:border-cyan hover:-translate-y-2 hover:shadow-xl hover:shadow-cyan/20 transition-all group">
-                <CardHeader>
-                  <service.icon className="w-10 h-10 text-phoenix1 mb-3 group-hover:text-cyan transition-colors" />
-                  <CardTitle className="text-lg font-poppins">{service.title}</CardTitle>
-                  <CardDescription className="text-sm text-muted-foreground">{service.desc}</CardDescription>
-                  <a href="#" className="text-cyan text-sm hover:underline inline-flex items-center gap-1 pt-2">
-                    Learn more →
-                  </a>
-                </CardHeader>
-              </Card>
-            ))}
-          </div>
-        </div>
-      </section>
-
       {/* Packages */}
-      <section className="py-16 md:py-24 px-6 md:px-12">
+      <section id="packages" className="py-16 md:py-24 px-6 md:px-12 bg-charcoal/50">
         <div className="container max-w-6xl mx-auto">
-          <h2 className="font-poppins font-bold text-4xl md:text-5xl text-center mb-16">Choose Your Package</h2>
-          <div className="grid md:grid-cols-3 gap-6">
+          <h2 className="font-poppins font-bold text-4xl md:text-5xl text-center mb-16">Packages & Pricing</h2>
+          <p className="text-center text-muted-foreground mb-12 max-w-3xl mx-auto">
+            Choose the perfect package for your business goals. All plans include professional content creation, strategic planning, and a complimentary awareness campaign to jumpstart your growth.
+          </p>
+          <div className="grid md:grid-cols-3 gap-6 lg:gap-8">
             {[
               {
-                name: "Starter",
-                price: "$2,999",
+                name: "Basic",
+                price: "₹15,000",
+                period: "/month",
                 recommended: false,
-                features: ["Brand Identity", "5-Page Website", "Social Media Setup", "1 Month Support"]
+                features: ["5 Professional Reels", "2 Engaging Carousels", "Content Planning & Uploading", "Free Awareness Campaign", "₹5,000 Ad Spend Included"]
               },
               {
                 name: "Growth",
-                price: "$5,999",
+                price: "₹25,000",
+                period: "/month",
                 recommended: true,
-                features: ["Everything in Starter", "SEO Optimization", "Content Strategy", "3-Month Campaign", "Analytics Dashboard"]
+                features: ["10 Professional Reels", "5 Engaging Carousels", "Content Planning & Uploading", "Free Awareness Campaign", "₹8,000 Ad Spend Included"]
               },
               {
-                name: "Enterprise",
-                price: "Custom",
+                name: "Premium",
+                price: "₹30,000",
+                period: "/month",
                 recommended: false,
-                features: ["Everything in Growth", "Dedicated Team", "Unlimited Revisions", "12-Month Retainer", "Priority Support"]
+                features: ["15 Professional Reels", "7 Engaging Carousels", "Content Planning & Uploading", "Free Awareness Campaign", "₹12,000 Ad Spend Included"]
               }
             ].map((pkg, i) => (
               <Card 
@@ -163,7 +148,10 @@ const Index = () => {
                 )}
                 <CardHeader className="text-center">
                   <CardTitle className="text-2xl font-poppins">{pkg.name}</CardTitle>
-                  <p className="text-4xl font-bold text-phoenix1 mt-4">{pkg.price}</p>
+                  <div className="mt-4">
+                    <p className="text-4xl font-bold text-phoenix1">{pkg.price}</p>
+                    <p className="text-sm text-muted-foreground">{pkg.period}</p>
+                  </div>
                 </CardHeader>
                 <CardContent className="space-y-4">
                   <ul className="space-y-3">
@@ -187,19 +175,23 @@ const Index = () => {
       </section>
 
       {/* Process Timeline */}
-      <section className="py-16 md:py-24 px-6 md:px-12 bg-charcoal/50">
+      <section className="py-16 md:py-24 px-6 md:px-12">
         <div className="container max-w-6xl mx-auto">
           <h2 className="font-poppins font-bold text-4xl md:text-5xl text-center mb-16">Our Process</h2>
-          <div className="grid md:grid-cols-4 gap-8">
+          <p className="text-center text-muted-foreground mb-12 max-w-3xl mx-auto">
+            We follow a proven methodology that transforms your vision into reality, ensuring every campaign delivers exceptional results through strategic planning and creative execution.
+          </p>
+          <div className="grid sm:grid-cols-2 lg:grid-cols-5 gap-8">
             {[
-              { step: "01", title: "Discovery", desc: "We learn your brand, goals, and audience" },
-              { step: "02", title: "Strategy", desc: "Custom roadmap tailored to your vision" },
-              { step: "03", title: "Execution", desc: "Design, develop, and deploy with precision" },
-              { step: "04", title: "Optimize", desc: "Measure, refine, and scale for growth" }
+              { step: "01", title: "Discovery", desc: "Understanding your goals, audience, and brand identity through in-depth research and consultation." },
+              { step: "02", title: "Strategy", desc: "Crafting a custom marketing and content plan aligned with your business objectives." },
+              { step: "03", title: "Creation", desc: "Producing engaging visuals, videos, and campaigns that capture attention." },
+              { step: "04", title: "Launch", desc: "Executing strategies across digital platforms with precision timing." },
+              { step: "05", title: "Growth", desc: "Monitoring results and optimizing for better ROI continuously." }
             ].map((phase, i) => (
               <div key={i} className="relative">
-                {i < 3 && (
-                  <div className="hidden md:block absolute top-8 left-full w-full h-0.5 bg-gradient-to-r from-phoenix1 to-transparent" />
+                {i < 4 && (
+                  <div className="hidden lg:block absolute top-8 left-full w-full h-0.5 bg-gradient-to-r from-phoenix1 to-transparent" />
                 )}
                 <div className="text-center space-y-3">
                   <div className="w-16 h-16 mx-auto rounded-full bg-phoenix1 flex items-center justify-center text-2xl font-bold font-poppins">
@@ -215,7 +207,7 @@ const Index = () => {
       </section>
 
       {/* Team Section - exact DOM structure as specified */}
-      <section className="py-16 md:py-24 px-6 md:px-12">
+      <section id="team" className="py-16 md:py-24 px-6 md:px-12 bg-charcoal/50">
         <div className="container max-w-6xl mx-auto">
           <h2 className="font-poppins font-bold text-4xl md:text-5xl text-center mb-16">Meet the Team</h2>
           <Card className="bg-charcoal border-phoenix1/20 max-w-4xl mx-auto">
@@ -274,7 +266,7 @@ const Index = () => {
       </section>
 
       {/* Contact / CTA */}
-      <section className="py-16 md:py-24 px-6 md:px-12 bg-charcoal/50">
+      <section id="contact" className="py-16 md:py-24 px-6 md:px-12">
         <div className="container max-w-6xl mx-auto">
           <h2 className="font-poppins font-bold text-4xl md:text-5xl text-center mb-16">Start Your Project</h2>
           <div className="grid md:grid-cols-2 gap-12">
@@ -316,14 +308,17 @@ const Index = () => {
                   <Phone className="w-6 h-6 text-phoenix1 mt-1" />
                   <div>
                     <p className="font-semibold">Phone</p>
-                    <p className="text-muted-foreground">+1 (555) 123-4567</p>
+                    <a href="tel:+919359554835" className="text-muted-foreground hover:text-phoenix1 transition-colors">+91 93595 54835</a>
                   </div>
                 </div>
                 <div className="flex items-start gap-4">
-                  <MapPin className="w-6 h-6 text-phoenix1 mt-1" />
+                  <Share2 className="w-6 h-6 text-phoenix1 mt-1" />
                   <div>
-                    <p className="font-semibold">Location</p>
-                    <p className="text-muted-foreground">Remote-First, Serving Globally</p>
+                    <p className="font-semibold">Social Media</p>
+                    <div className="flex flex-col gap-1 text-muted-foreground">
+                      <a href="https://instagram.com/brandlift.agency" target="_blank" rel="noopener noreferrer" className="hover:text-phoenix1 transition-colors">@brandlift.agency</a>
+                      <a href="https://linkedin.com/company/brandlift" target="_blank" rel="noopener noreferrer" className="hover:text-phoenix1 transition-colors">LinkedIn</a>
+                    </div>
                   </div>
                 </div>
               </div>
@@ -371,15 +366,6 @@ const Index = () => {
         </div>
       </footer>
 
-      {/* Mobile Sticky CTA */}
-      <div className="md:hidden fixed bottom-0 left-0 right-0 bg-charcoal border-t border-phoenix1 p-4 flex gap-3 z-50">
-        <Button className="flex-1 bg-phoenix1 hover:bg-phoenix2">
-          Start Project
-        </Button>
-        <Button size="icon" variant="outline" className="border-phoenix1 text-phoenix1">
-          <Phone className="w-5 h-5" />
-        </Button>
-      </div>
     </div>
   );
 };
