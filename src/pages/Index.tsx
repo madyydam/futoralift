@@ -1,18 +1,28 @@
+import { useState } from "react";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Textarea } from "@/components/ui/textarea";
-import { Target, Zap, TrendingUp, Palette, Share2, Mail, Phone } from "lucide-react";
+import { Target, Zap, TrendingUp, Palette, Mail, Phone, Instagram, Menu, X } from "lucide-react";
 
 const Index = () => {
+  const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+
+  const scrollToContact = () => {
+    const contactSection = document.getElementById("contact");
+    contactSection?.scrollIntoView({ behavior: "smooth" });
+  };
+
   return (
     <div className="min-h-screen bg-midnight text-offwhite font-inter">
       {/* Navigation */}
       <nav className="fixed top-0 left-0 right-0 bg-midnight/95 backdrop-blur-sm border-b border-border z-50">
         <div className="container max-w-6xl mx-auto px-6 md:px-12">
           <div className="flex items-center justify-between h-16">
-            <a href="#" className="font-poppins font-bold text-xl text-phoenix1">BRANDL1FT</a>
+            <a href="#home" className="font-poppins font-bold text-xl text-phoenix1">BRANDL1FT</a>
+            
+            {/* Desktop Navigation */}
             <div className="hidden md:flex items-center gap-8">
               <a href="#home" className="hover:text-phoenix1 transition-colors">Home</a>
               <a href="#why-choose-us" className="hover:text-phoenix1 transition-colors">Why Us</a>
@@ -20,8 +30,58 @@ const Index = () => {
               <a href="#team" className="hover:text-phoenix1 transition-colors">Team</a>
               <a href="#contact" className="hover:text-phoenix1 transition-colors">Contact</a>
             </div>
-            <Button className="bg-phoenix1 hover:bg-phoenix2">Get Started</Button>
+
+            {/* Mobile Menu Button */}
+            <button 
+              className="md:hidden text-offwhite"
+              onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
+            >
+              {mobileMenuOpen ? <X size={24} /> : <Menu size={24} />}
+            </button>
           </div>
+
+          {/* Mobile Navigation */}
+          {mobileMenuOpen && (
+            <div className="md:hidden absolute top-16 left-0 right-0 bg-midnight/98 border-b border-border">
+              <div className="flex flex-col py-4">
+                <a 
+                  href="#home" 
+                  className="px-6 py-3 hover:bg-phoenix1/10 hover:text-phoenix1 transition-colors"
+                  onClick={() => setMobileMenuOpen(false)}
+                >
+                  Home
+                </a>
+                <a 
+                  href="#why-choose-us" 
+                  className="px-6 py-3 hover:bg-phoenix1/10 hover:text-phoenix1 transition-colors"
+                  onClick={() => setMobileMenuOpen(false)}
+                >
+                  Why Us
+                </a>
+                <a 
+                  href="#packages" 
+                  className="px-6 py-3 hover:bg-phoenix1/10 hover:text-phoenix1 transition-colors"
+                  onClick={() => setMobileMenuOpen(false)}
+                >
+                  Packages
+                </a>
+                <a 
+                  href="#team" 
+                  className="px-6 py-3 hover:bg-phoenix1/10 hover:text-phoenix1 transition-colors"
+                  onClick={() => setMobileMenuOpen(false)}
+                >
+                  Team
+                </a>
+                <a 
+                  href="#contact" 
+                  className="px-6 py-3 hover:bg-phoenix1/10 hover:text-phoenix1 transition-colors"
+                  onClick={() => setMobileMenuOpen(false)}
+                >
+                  Contact
+                </a>
+              </div>
+            </div>
+          )}
         </div>
       </nav>
 
@@ -42,14 +102,15 @@ const Index = () => {
               Lifting Brands to New Heights 🚀
             </p>
             <p className="text-xl md:text-2xl text-muted-foreground font-poppins max-w-3xl mx-auto">
-              Where creativity meets strategy. We transform businesses through innovative marketing solutions that drive real, measurable growth.
+              A NAME YOUR BRAND NEEDS
             </p>
             <div className="flex flex-col sm:flex-row gap-4 justify-center pt-4">
-              <Button size="lg" className="bg-phoenix1 hover:bg-phoenix2 text-white shadow-lg hover:shadow-xl hover:shadow-phoenix1/50 transition-all active:scale-95">
+              <Button 
+                size="lg" 
+                className="bg-phoenix1 hover:bg-phoenix2 text-white shadow-lg hover:shadow-xl hover:shadow-phoenix1/50 transition-all active:scale-95"
+                onClick={scrollToContact}
+              >
                 Start Your Project
-              </Button>
-              <Button size="lg" variant="outline" className="border-phoenix2 text-phoenix1 hover:bg-phoenix1/10">
-                View Our Work
               </Button>
             </div>
           </div>
@@ -117,24 +178,24 @@ const Index = () => {
             {[
               {
                 name: "Basic",
-                price: "₹15,000",
+                price: "₹19,999",
                 period: "/month",
                 recommended: false,
-                features: ["5 Professional Reels", "2 Engaging Carousels", "Content Planning & Uploading", "Free Awareness Campaign", "₹5,000 Ad Spend Included"]
+                features: ["5 Reels + 2 Carousels", "Content Planning", "Free Awareness Campaign (₹5K ad spend)"]
               },
               {
                 name: "Growth",
-                price: "₹25,000",
+                price: "₹29,999",
                 period: "/month",
                 recommended: true,
-                features: ["10 Professional Reels", "5 Engaging Carousels", "Content Planning & Uploading", "Free Awareness Campaign", "₹8,000 Ad Spend Included"]
+                features: ["10 Reels + 5 Carousels", "Advanced Planning", "Free Awareness Campaign (₹8K ad spend)"]
               },
               {
                 name: "Premium",
-                price: "₹30,000",
+                price: "₹34,999",
                 period: "/month",
                 recommended: false,
-                features: ["15 Professional Reels", "7 Engaging Carousels", "Content Planning & Uploading", "Free Awareness Campaign", "₹12,000 Ad Spend Included"]
+                features: ["15 Reels + 7 Carousels", "Full Strategy", "Free Awareness Campaign (₹12K ad spend)"]
               }
             ].map((pkg, i) => (
               <Card 
@@ -223,7 +284,7 @@ const Index = () => {
                     <h3 className="font-poppins font-semibold text-xl">Madhur Dhadve</h3>
                     <p className="text-phoenix1 text-sm">Founder</p>
                     <p className="text-sm text-muted-foreground mt-2 max-w-sm">
-                      Visionary leader with a passion for building brands that resonate and drive real business growth.
+                      Visionary leader and full-stack creative mind who handles all technical aspects of client projects — from video editing and digital ads to websites, apps, and marketing systems. He ensures every campaign blends creativity with performance.
                     </p>
                   </div>
                 </div>
@@ -237,10 +298,10 @@ const Index = () => {
                     </div>
                   </div>
                   <div>
-                    <h3 className="font-poppins font-semibold text-xl">Shreeyash Mohodkar</h3>
+                    <h3 className="font-poppins font-semibold text-xl">Shreeyash Moholkar</h3>
                     <p className="text-cyan text-sm">Co-founder</p>
                     <p className="text-sm text-muted-foreground mt-2 max-w-sm">
-                      Creative strategist who transforms ideas into compelling campaigns that connect and convert.
+                      Client success and operations lead who manages client communication, project flow, and team coordination. Shreeyash bridges creativity with execution — making sure every project runs smoothly from concept to completion.
                     </p>
                   </div>
                 </div>
@@ -255,7 +316,7 @@ const Index = () => {
                     <h3 className="font-poppins font-semibold text-xl">Rushal Shinde</h3>
                     <p className="text-cyan text-sm">Co-founder</p>
                     <p className="text-sm text-muted-foreground mt-2 max-w-sm">
-                      Technical mastermind ensuring every project is delivered with precision and excellence.
+                      Creative strategist and design perfectionist focused on delivering visually stunning, high-impact campaigns. Rushal brings ideas to life with precision, passion, and attention to every detail.
                     </p>
                   </div>
                 </div>
@@ -301,23 +362,36 @@ const Index = () => {
                   <Mail className="w-6 h-6 text-phoenix1 mt-1" />
                   <div>
                     <p className="font-semibold">Email</p>
-                    <p className="text-muted-foreground">hello@brandl1ft.com</p>
+                    <a href="mailto:brandlift927@gmail.com" className="text-muted-foreground hover:text-phoenix1 transition-colors">brandlift927@gmail.com</a>
                   </div>
                 </div>
                 <div className="flex items-start gap-4">
                   <Phone className="w-6 h-6 text-phoenix1 mt-1" />
                   <div>
                     <p className="font-semibold">Phone</p>
-                    <a href="tel:+919359554835" className="text-muted-foreground hover:text-phoenix1 transition-colors">+91 93595 54835</a>
+                    <div className="flex flex-col gap-1">
+                      <a href="tel:+918263002481" className="text-muted-foreground hover:text-phoenix1 transition-colors">+91 82630 02481</a>
+                      <a href="tel:+919527575373" className="text-muted-foreground hover:text-phoenix1 transition-colors">+91 95275 75373</a>
+                      <a href="tel:+918452854044" className="text-muted-foreground hover:text-phoenix1 transition-colors">+91 84528 54044</a>
+                    </div>
                   </div>
                 </div>
                 <div className="flex items-start gap-4">
-                  <Share2 className="w-6 h-6 text-phoenix1 mt-1" />
+                  <Instagram className="w-6 h-6 text-phoenix1 mt-1" />
                   <div>
                     <p className="font-semibold">Social Media</p>
-                    <div className="flex flex-col gap-1 text-muted-foreground">
-                      <a href="https://instagram.com/brandlift.agency" target="_blank" rel="noopener noreferrer" className="hover:text-phoenix1 transition-colors">@brandlift.agency</a>
-                      <a href="https://linkedin.com/company/brandlift" target="_blank" rel="noopener noreferrer" className="hover:text-phoenix1 transition-colors">LinkedIn</a>
+                    <div className="flex flex-col gap-2 text-muted-foreground">
+                      <span>@brandl1ft</span>
+                      <a 
+                        href="https://www.instagram.com/brandl1ft?igsh=dGUyY3lvaHE4bWxh" 
+                        target="_blank" 
+                        rel="noopener noreferrer"
+                        className="inline-block"
+                      >
+                        <Button className="bg-phoenix1 hover:bg-phoenix2 text-white">
+                          DM on Insta
+                        </Button>
+                      </a>
                     </div>
                   </div>
                 </div>
@@ -361,7 +435,7 @@ const Index = () => {
             </div>
           </div>
           <div className="border-t border-border pt-8 text-center text-sm text-muted-foreground">
-            <p>&copy; 2025 BrandL1ft. All rights reserved. Lifting brands to new heights 🚀</p>
+            <p>&copy; 2025 BrandL1ft. All rights reserved</p>
           </div>
         </div>
       </footer>
