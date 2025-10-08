@@ -5,13 +5,52 @@ import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Textarea } from "@/components/ui/textarea";
 import { Target, Zap, TrendingUp, Palette, Mail, Phone, Instagram, Menu, X } from "lucide-react";
+import { supabase } from "@/integrations/supabase/client";
+import { useToast } from "@/hooks/use-toast";
 
 const Index = () => {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+  const [formData, setFormData] = useState({
+    name: "",
+    email: "",
+    phone: "",
+    message: ""
+  });
+  const [isSubmitting, setIsSubmitting] = useState(false);
+  const { toast } = useToast();
 
   const scrollToContact = () => {
     const contactSection = document.getElementById("contact");
     contactSection?.scrollIntoView({ behavior: "smooth" });
+  };
+
+  const handleSubmit = async (e: React.FormEvent) => {
+    e.preventDefault();
+    setIsSubmitting(true);
+
+    try {
+      const { error } = await supabase
+        .from("contact_submissions")
+        .insert([formData]);
+
+      if (error) throw error;
+
+      toast({
+        title: "Success!",
+        description: "Your message has been sent. We'll get back to you within 24 hours.",
+      });
+
+      setFormData({ name: "", email: "", phone: "", message: "" });
+    } catch (error) {
+      console.error("Error submitting form:", error);
+      toast({
+        title: "Error",
+        description: "Failed to send message. Please try again.",
+        variant: "destructive",
+      });
+    } finally {
+      setIsSubmitting(false);
+    }
   };
 
   return (
@@ -99,10 +138,10 @@ const Index = () => {
               BRAND<span className="text-phoenix1">L1FT</span>
             </h1>
             <p className="text-3xl md:text-4xl font-semibold text-cyan">
-              Lifting Brands to New Heights 🚀
+              A NAME YOUR BRAND NEEDS
             </p>
             <p className="text-xl md:text-2xl text-muted-foreground font-poppins max-w-3xl mx-auto">
-              A NAME YOUR BRAND NEEDS
+              Lifting Brands to New Heights 🚀
             </p>
             <div className="flex flex-col sm:flex-row gap-4 justify-center pt-4">
               <Button 
@@ -225,6 +264,7 @@ const Index = () => {
                   </ul>
                   <Button 
                     className={`w-full ${pkg.recommended ? 'bg-cyan text-midnight hover:bg-cyan/90' : 'bg-phoenix1 hover:bg-phoenix2'}`}
+                    onClick={scrollToContact}
                   >
                     Get Started
                   </Button>
@@ -337,21 +377,60 @@ const Index = () => {
                 <CardDescription>Fill out the form and we'll reach out within 24 hours</CardDescription>
               </CardHeader>
               <CardContent className="space-y-4">
-                <div className="space-y-2">
-                  <Label htmlFor="name">Name</Label>
-                  <Input id="name" placeholder="Your name" className="bg-midnight border-border focus:border-phoenix1 focus:ring-phoenix1" />
-                </div>
-                <div className="space-y-2">
-                  <Label htmlFor="email">Email</Label>
-                  <Input id="email" type="email" placeholder="your@email.com" className="bg-midnight border-border focus:border-phoenix1 focus:ring-phoenix1" />
-                </div>
-                <div className="space-y-2">
-                  <Label htmlFor="message">Message</Label>
-                  <Textarea id="message" placeholder="Tell us about your project..." className="bg-midnight border-border focus:border-phoenix1 focus:ring-phoenix1 min-h-32" />
-                </div>
-                <Button className="w-full bg-phoenix1 hover:bg-phoenix2 text-lg py-6">
-                  Start a Project
-                </Button>
+                <form onSubmit={handleSubmit} className="space-y-4">
+                  <div className="space-y-2">
+                    <Label htmlFor="name">Name</Label>
+                    <Input 
+                      id="name" 
+                      placeholder="Your name" 
+                      className="bg-midnight border-border focus:border-phoenix1 focus:ring-phoenix1"
+                      value={formData.name}
+                      onChange={(e) => setFormData({ ...formData, name: e.target.value })}
+                      required
+                    />
+                  </div>
+                  <div className="space-y-2">
+                    <Label htmlFor="email">Email</Label>
+                    <Input 
+                      id="email" 
+                      type="email" 
+                      placeholder="your@email.com" 
+                      className="bg-midnight border-border focus:border-phoenix1 focus:ring-phoenix1"
+                      value={formData.email}
+                      onChange={(e) => setFormData({ ...formData, email: e.target.value })}
+                      required
+                    />
+                  </div>
+                  <div className="space-y-2">
+                    <Label htmlFor="phone">Phone</Label>
+                    <Input 
+                      id="phone" 
+                      type="tel" 
+                      placeholder="+91 98765 43210" 
+                      className="bg-midnight border-border focus:border-phoenix1 focus:ring-phoenix1"
+                      value={formData.phone}
+                      onChange={(e) => setFormData({ ...formData, phone: e.target.value })}
+                    />
+                  </div>
+                  <div className="space-y-2">
+                    <Label htmlFor="message">Message</Label>
+                    <Textarea 
+                      id="message" 
+                      placeholder="Tell us about your project..." 
+                      className="bg-midnight border-border focus:border-phoenix1 focus:ring-phoenix1 min-h-32"
+                      value={formData.message}
+                      onChange={(e) => setFormData({ ...formData, message: e.target.value })}
+                      required
+                    />
+                  </div>
+                  <Button 
+                    type="submit" 
+                    className="w-full bg-phoenix1 hover:bg-phoenix2 text-lg py-6"
+                    disabled={isSubmitting}
+                  >
+                    {isSubmitting ? "Sending..." : "Start a Project"}
+                  </Button>
+                </form>
               </CardContent>
             </Card>
             
