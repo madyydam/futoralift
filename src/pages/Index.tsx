@@ -311,9 +311,9 @@ const Index = () => {
       <section id="team" className="py-16 md:py-24 px-6 md:px-12 bg-charcoal/50">
         <div className="container max-w-6xl mx-auto">
           <h2 className="font-poppins font-bold text-4xl md:text-5xl text-center mb-16">Meet the Team</h2>
-          <Card className="bg-charcoal border-phoenix1/20 max-w-4xl mx-auto">
-            <CardContent className="p-8 md:p-12 space-y-8">
-              <span className="team-founder block">
+          <Card className="bg-charcoal border-phoenix1/20 max-w-6xl mx-auto">
+            <CardContent className="p-8 md:p-12">
+              <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
                 <div className="member flex flex-col items-center text-center space-y-4 group">
                   <div className="w-32 h-32 rounded-full bg-gradient-to-br from-phoenix1 to-cyan p-1 group-hover:scale-105 group-hover:shadow-lg group-hover:shadow-phoenix1/50 transition-all">
                     <div className="w-full h-full rounded-full bg-charcoal flex items-center justify-center text-4xl font-bold">
@@ -328,9 +328,7 @@ const Index = () => {
                     </p>
                   </div>
                 </div>
-              </span>
-              
-              <span className="team-cofounders grid grid-cols-1 md:grid-cols-2 lg:grid-cols-2 gap-8">
+                
                 <div className="member flex flex-col items-center text-center space-y-4 group">
                   <div className="w-32 h-32 rounded-full bg-gradient-to-br from-phoenix1 to-cyan p-1 group-hover:scale-105 group-hover:shadow-lg group-hover:shadow-cyan/50 transition-all">
                     <div className="w-full h-full rounded-full bg-charcoal flex items-center justify-center text-4xl font-bold">
@@ -360,7 +358,7 @@ const Index = () => {
                     </p>
                   </div>
                 </div>
-              </span>
+              </div>
             </CardContent>
           </Card>
         </div>
