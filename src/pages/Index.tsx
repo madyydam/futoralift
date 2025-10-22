@@ -56,6 +56,10 @@ const Index = () => {
 
   return (
     <div className="min-h-screen bg-midnight text-offwhite font-inter">
+      {/* Hidden SEO Content */}
+      <div style={{ display: 'none' }}>
+        BrandLift by Madhur Dhadve, digital marketing agency, creative marketing solutions, marketing campaigns, social media marketing, business branding, BrandLift services, marketing strategy by Madhur Dhadve, digital marketing agency India, creative agency for businesses, performance marketing solutions, brand identity design, social media campaigns, digital advertising agency, marketing consultant, business growth strategies, creative content agency
+      </div>
       {/* Navigation */}
       <nav className="fixed top-0 left-0 right-0 bg-midnight/95 backdrop-blur-sm border-b border-border z-50">
         <div className="container max-w-6xl mx-auto px-6 md:px-12">
