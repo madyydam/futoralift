@@ -4,10 +4,13 @@ import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/com
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Textarea } from "@/components/ui/textarea";
-import { Target, Zap, TrendingUp, Palette, Mail, Phone, Instagram, Menu, X } from "lucide-react";
+import { Target, Zap, TrendingUp, Palette, Mail, Phone, Instagram, Menu, X, BarChart3, Calculator } from "lucide-react";
 import { supabase } from "@/integrations/supabase/client";
 import { useToast } from "@/hooks/use-toast";
 import blLogo from "@/assets/bl-logo.png";
+import GlowCharts from "@/components/GlowCharts";
+import ROICalculator from "@/components/ROICalculator";
+import ScrollProgress from "@/components/ScrollProgress";
 
 const Index = () => {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
@@ -56,6 +59,7 @@ const Index = () => {
 
   return (
     <div className="min-h-screen bg-midnight text-offwhite font-inter">
+      <ScrollProgress />
       {/* Hidden SEO Content */}
       <div style={{ display: 'none' }}>
         FutoraLift by Madhur Dhadve, digital marketing agency, creative marketing solutions, marketing campaigns, social media marketing, business branding, FutoraLift services, marketing strategy by Madhur Dhadve, digital marketing agency India, creative agency for businesses, performance marketing solutions, brand identity design, social media campaigns, digital advertising agency, marketing consultant, business growth strategies, creative content agency
@@ -175,9 +179,9 @@ const Index = () => {
         <div className="container max-w-6xl mx-auto">
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
             {[
-              { label: "Brands Elevated", value: "15+" },
-              { label: "Impressions", value: "250k+" },
-              { label: "Avg ROI", value: "285%" },
+              { label: "Reach", value: "206k+" },
+              { label: "Impressions", value: "338k+" },
+              { label: "Avg ROI", value: "480%+" },
               { label: "Client Satisfaction", value: "98%" }
             ].map((stat, i) => (
               <Card key={i} className="bg-charcoal border-phoenix1/20 hover:border-phoenix1 transition-colors text-center">
@@ -211,6 +215,38 @@ const Index = () => {
               </Card>
             ))}
           </div>
+        </div>
+      </section>
+
+      {/* ROI Calculator Section */}
+      <section className="py-16 md:py-24 px-6 md:px-12 bg-midnight">
+        <div className="container max-w-4xl mx-auto">
+          <div className="text-center mb-12">
+            <div className="p-3 rounded-2xl bg-phoenix1/10 text-phoenix1 mb-4 inline-block">
+              <Calculator className="w-8 h-8" />
+            </div>
+            <h2 className="font-poppins font-bold text-4xl md:text-5xl mb-4 text-white">Interactive Growth Estimator</h2>
+            <p className="text-lg text-muted-foreground">
+              See the direct impact of professional marketing on your brand's reach and lead generation.
+            </p>
+          </div>
+          <ROICalculator onButtonClick={scrollToContact} />
+        </div>
+      </section>
+
+      {/* Performance Analytics Section */}
+      <section className="py-16 md:py-24 px-6 md:px-12 bg-midnight/50">
+        <div className="container max-w-6xl mx-auto">
+          <div className="flex flex-col items-center text-center mb-12">
+            <div className="p-3 rounded-2xl bg-phoenix1/10 text-phoenix1 mb-4">
+              <BarChart3 className="w-8 h-8" />
+            </div>
+            <h2 className="font-poppins font-bold text-4xl md:text-5xl mb-4 text-white">Performance Analytics</h2>
+            <p className="text-lg text-muted-foreground max-w-2xl mx-auto">
+              Real-time data insights showing how we transform brand engagement and drive measurable growth for our partners.
+            </p>
+          </div>
+          <GlowCharts />
         </div>
       </section>
 

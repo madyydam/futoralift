@@ -46,7 +46,7 @@ All colors MUST be HSL.
     --sidebar-accent-foreground: 210 20% 98%;
     --sidebar-border: 215 12% 16%;
     --sidebar-ring: 204 94% 41%;
-    
+
     /* FutoraLift Custom Variables */
     --phoenix-primary: 204 94% 41%;
     --phoenix-secondary: 203 89% 34%;
@@ -64,5 +64,28 @@ All colors MUST be HSL.
 
   body {
     @apply bg-background text-foreground;
+  }
+
+  .glow-line {
+    filter: drop-shadow(0 0 8px rgba(0, 191, 255, 0.6));
+  }
+
+  .glow-area {
+    filter: drop-shadow(0 0 12px rgba(235, 94, 40, 0.4));
+  }
+
+  .glow-card {
+    box-shadow: 0 0 20px rgba(0, 191, 255, 0.15);
+  }
+
+  .glass-panel {
+    @apply bg-white/5 backdrop-blur-xl border border-white/10;
+  }
+
+  .glass-card {
+    background: rgba(255, 255, 255, 0.03);
+    backdrop-filter: blur(12px);
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.37);
   }
 }
