@@ -447,7 +447,7 @@ const Index = () => {
                   <Mail className="w-6 h-6 text-phoenix1 mt-1" />
                   <div>
                     <p className="font-semibold">Email</p>
-                    <a href="mailto:futoralift927@gmail.com" className="text-muted-foreground hover:text-phoenix1 transition-colors">futoralift927@gmail.com</a>
+                    <a href="mailto:futoralift@gmail.com" className="text-muted-foreground hover:text-phoenix1 transition-colors">futoralift@gmail.com</a>
                   </div>
                 </div>
                 <div className="flex items-start gap-4">
