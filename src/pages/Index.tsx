@@ -264,21 +264,21 @@ const Index = () => {
                 price: "₹19,999",
                 period: "/month",
                 recommended: false,
-                features: ["5 Reels + 2 Carousels", "Content Planning", "Free Awareness Campaign (₹5K ad spend)"]
+                features: ["5 Reels + 2 Carousels", "Content Planning", "Free Awareness Campaign"]
               },
               {
                 name: "Growth",
                 price: "₹29,999",
                 period: "/month",
                 recommended: true,
-                features: ["10 Reels + 5 Carousels", "Advanced Planning", "Free Awareness Campaign (₹8K ad spend)"]
+                features: ["10 Reels + 5 Carousels", "Advanced Planning", "Free Awareness Campaign"]
               },
               {
                 name: "Premium",
                 price: "₹34,999",
                 period: "/month",
                 recommended: false,
-                features: ["15 Reels + 7 Carousels", "Full Strategy", "Free Awareness Campaign (₹12K ad spend)"]
+                features: ["15 Reels + 7 Carousels", "Full Strategy", "Free Awareness Campaign"]
               }
             ].map((pkg, i) => (
               <Card
@@ -292,10 +292,6 @@ const Index = () => {
                 )}
                 <CardHeader className="text-center">
                   <CardTitle className="text-2xl font-poppins">{pkg.name}</CardTitle>
-                  <div className="mt-4">
-                    <p className="text-4xl font-bold text-phoenix1">{pkg.price}</p>
-                    <p className="text-sm text-muted-foreground">{pkg.period}</p>
-                  </div>
                 </CardHeader>
                 <CardContent className="space-y-4">
                   <ul className="space-y-3">
