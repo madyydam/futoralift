@@ -1,10 +1,11 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Textarea } from "@/components/ui/textarea";
-import { Target, Zap, TrendingUp, Palette, Mail, Phone, Instagram, Menu, X, BarChart3, Calculator } from "lucide-react";
+import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "@/components/ui/accordion";
+import { Target, Zap, TrendingUp, Palette, Mail, Phone, Instagram, Menu, X, BarChart3, Calculator, ChevronDown, Send } from "lucide-react";
 import { supabase } from "@/integrations/supabase/client";
 import { useToast } from "@/hooks/use-toast";
 import blLogo from "@/assets/bl-logo.png";
@@ -21,7 +22,54 @@ const Index = () => {
     message: ""
   });
   const [isSubmitting, setIsSubmitting] = useState(false);
+  const [newsletterEmail, setNewsletterEmail] = useState("");
+  const [isNewsletterSubmitting, setIsNewsletterSubmitting] = useState(false);
+  const [typingText, setTypingText] = useState("");
   const { toast } = useToast();
+
+  const phrases = [
+    "A NAME YOUR BRAND NEEDS",
+    "CREATIVE EXCELLENCE",
+    "STRATEGIC GROWTH",
+    "DIGITAL INNOVATION"
+  ];
+  const [phraseIndex, setPhraseIndex] = useState(0);
+
+  // Typing animation effect
+  useEffect(() => {
+    let currentText = "";
+    let currentIndex = 0;
+    let isDeleting = false;
+    let timeout: NodeJS.Timeout;
+
+    const type = () => {
+      const currentPhrase = phrases[phraseIndex];
+
+      if (!isDeleting && currentIndex <= currentPhrase.length) {
+        currentText = currentPhrase.substring(0, currentIndex);
+        setTypingText(currentText);
+        currentIndex++;
+        timeout = setTimeout(type, 100);
+      } else if (!isDeleting && currentIndex > currentPhrase.length) {
+        timeout = setTimeout(() => {
+          isDeleting = true;
+          type();
+        }, 2000);
+      } else if (isDeleting && currentIndex >= 0) {
+        currentText = currentPhrase.substring(0, currentIndex);
+        setTypingText(currentText);
+        currentIndex--;
+        timeout = setTimeout(type, 50);
+      } else if (isDeleting && currentIndex < 0) {
+        isDeleting = false;
+        currentIndex = 0;
+        setPhraseIndex((prev) => (prev + 1) % phrases.length);
+      }
+    };
+
+    type();
+    return () => clearTimeout(timeout);
+  }, [phraseIndex]);
 
   const scrollToContact = () => {
     const contactSection = document.getElementById("contact");
@@ -54,6 +102,37 @@ const Index = () => {
       });
     } finally {
       setIsSubmitting(false);
+    }
+  };
+
+  const handleNewsletterSubmit = async (e: React.FormEvent) => {
+    e.preventDefault();
+    setIsNewsletterSubmitting(true);
+
+    try {
+      const { error } = await supabase
+        .from("newsletter_subscribers")
+        .insert([{ email: newsletterEmail }]);
+
+      if (error) throw error;
+
+      toast({
+        title: "Success!",
+        description: "You've been subscribed to our newsletter.",
+      });
+
+      setNewsletterEmail("");
+    } catch (error: any) {
+      console.error("Error subscribing:", error);
+      toast({
+        title: "Error",
+        description: error.message?.includes("duplicate")
+          ? "You're already subscribed!"
+          : "Failed to subscribe. Please try again.",
+        variant: "destructive",
+      });
+    } finally {
+      setIsNewsletterSubmitting(false);
     }
   };
 
@@ -149,9 +228,12 @@ const Index = () => {
                 FUTORA<span className="text-phoenix1">LIFT</span>
               </h1>
             </div>
-            <p className="text-3xl md:text-4xl font-semibold text-cyan">
-              A NAME YOUR BRAND NEEDS
-            </p>
+            <div className="h-12 flex items-center justify-center">
+              <p className="text-3xl md:text-4xl font-semibold text-cyan">
+                {typingText}
+                <span className="animate-pulse">|</span>
+              </p>
+            </div>
             <p className="text-xl md:text-2xl text-muted-foreground font-poppins max-w-3xl mx-auto">
               Lifting Brands to New Heights 🚀
             </p>
@@ -514,6 +596,125 @@ const Index = () => {
                 </div>
               </div>
             </div>
+          </div>
+        </div>
+      </section>
+
+      {/* FAQ Section */}
+      <section className="py-16 md:py-24 px-6 md:px-12 bg-charcoal/50">
+        <div className="container max-w-4xl mx-auto">
+          <div className="text-center mb-12">
+            <h2 className="font-poppins font-bold text-4xl md:text-5xl mb-4">
+              Frequently Asked Questions
+            </h2>
+            <p className="text-lg text-muted-foreground">
+              Everything you need to know about working with FutoraLift
+            </p>
+          </div>
+          <Accordion type="single" collapsible className="space-y-4">
+            <AccordionItem value="item-1" className="bg-midnight border border-border rounded-lg px-6">
+              <AccordionTrigger className="text-left hover:text-phoenix1 transition-colors">
+                <span className="font-semibold">Why choose FutoraLift as a new agency?</span>
+              </AccordionTrigger>
+              <AccordionContent className="text-muted-foreground">
+                As a new agency, we bring fresh perspectives, cutting-edge strategies, and hungry dedication to your success. We're not set in our ways—we adapt quickly, innovate constantly, and treat every client like our first priority. Plus, our competitive pricing means you get premium quality without the premium price tag of established agencies.
+              </AccordionContent>
+            </AccordionItem>
+
+            <AccordionItem value="item-2" className="bg-midnight border border-border rounded-lg px-6">
+              <AccordionTrigger className="text-left hover:text-phoenix1 transition-colors">
+                <span className="font-semibold">What makes you different from other agencies?</span>
+              </AccordionTrigger>
+              <AccordionContent className="text-muted-foreground">
+                We combine strategic thinking with creative excellence. Our team handles everything in-house—from video editing and web development to social media and branding. This means seamless communication, faster turnarounds, and cohesive campaigns that actually work together. We're not just creatives; we're your growth partners.
+              </AccordionContent>
+            </AccordionItem>
+
+            <AccordionItem value="item-3" className="bg-midnight border border-border rounded-lg px-6">
+              <AccordionTrigger className="text-left hover:text-phoenix1 transition-colors">
+                <span className="font-semibold">How long does it take to see results?</span>
+              </AccordionTrigger>
+              <AccordionContent className="text-muted-foreground">
+                You'll see initial results within the first month—increased engagement, better content quality, and improved brand presence. Significant growth typically happens within 2-3 months as our strategies gain momentum. We provide weekly analytics so you can track progress every step of the way.
+              </AccordionContent>
+            </AccordionItem>
+
+            <AccordionItem value="item-4" className="bg-midnight border border-border rounded-lg px-6">
+              <AccordionTrigger className="text-left hover:text-phoenix1 transition-colors">
+                <span className="font-semibold">Do you work with startups and small businesses?</span>
+              </AccordionTrigger>
+              <AccordionContent className="text-muted-foreground">
+                Absolutely! We specialize in helping startups and small businesses punch above their weight. Our packages are designed to be affordable yet comprehensive. Whether you're launching your first campaign or scaling an existing business, we have solutions that fit your budget and goals.
+              </AccordionContent>
+            </AccordionItem>
+
+            <AccordionItem value="item-5" className="bg-midnight border border-border rounded-lg px-6">
+              <AccordionTrigger className="text-left hover:text-phoenix1 transition-colors">
+                <span className="font-semibold">What's included in the free awareness campaign?</span>
+              </AccordionTrigger>
+              <AccordionContent className="text-muted-foreground">
+                Every package includes a complimentary awareness campaign to jumpstart your brand's visibility. This includes strategic content planning, targeted social media posts, and community engagement tactics designed to build your initial audience and create buzz around your brand.
+              </AccordionContent>
+            </AccordionItem>
+
+            <AccordionItem value="item-6" className="bg-midnight border border-border rounded-lg px-6">
+              <AccordionTrigger className="text-left hover:text-phoenix1 transition-colors">
+                <span className="font-semibold">Can I upgrade or downgrade my package?</span>
+              </AccordionTrigger>
+              <AccordionContent className="text-muted-foreground">
+                Yes! We're flexible. You can upgrade to a higher tier anytime or adjust your package based on your needs and results. We'll work with you to find the perfect fit as your business evolves. No long-term contracts—just month-to-month partnerships built on results.
+              </AccordionContent>
+            </AccordionItem>
+
+            <AccordionItem value="item-7" className="bg-midnight border border-border rounded-lg px-6">
+              <AccordionTrigger className="text-left hover:text-phoenix1 transition-colors">
+                <span className="font-semibold">How do I get started?</span>
+              </AccordionTrigger>
+              <AccordionContent className="text-muted-foreground">
+                Simple! Fill out the contact form below or DM us on Instagram. We'll schedule a free consultation to understand your goals, discuss your brand vision, and recommend the best package for you. From there, we can have your first campaign live within 7-10 days.
+              </AccordionContent>
+            </AccordionItem>
+          </Accordion>
+        </div>
+      </section>
+
+      {/* Newsletter Section */}
+      <section className="py-16 md:py-24 px-6 md:px-12 bg-gradient-to-br from-phoenix1/10 via-midnight to-cyan/10">
+        <div className="container max-w-4xl mx-auto text-center">
+          <div className="space-y-6">
+            <div className="p-3 rounded-2xl bg-phoenix1/10 text-phoenix1 mb-4 inline-block">
+              <Send className="w-8 h-8" />
+            </div>
+            <h2 className="font-poppins font-bold text-4xl md:text-5xl">
+              Stay Ahead of the Curve
+            </h2>
+            <p className="text-lg text-muted-foreground max-w-2xl mx-auto">
+              Get exclusive marketing insights, growth strategies, and creative tips delivered straight to your inbox.
+            </p>
+            <Card className="bg-charcoal border-phoenix1/20 max-w-md mx-auto">
+              <CardContent className="pt-6">
+                <form onSubmit={handleNewsletterSubmit} className="flex gap-2">
+                  <Input
+                    type="email"
+                    placeholder="Enter your email"
+                    className="bg-midnight border-border focus:border-phoenix1 focus:ring-phoenix1"
+                    value={newsletterEmail}
+                    onChange={(e) => setNewsletterEmail(e.target.value)}
+                    required
+                  />
+                  <Button
+                    type="submit"
+                    className="bg-phoenix1 hover:bg-phoenix2"
+                    disabled={isNewsletterSubmitting}
+                  >
+                    {isNewsletterSubmitting ? "..." : "Subscribe"}
+                  </Button>
+                </form>
+                <p className="text-xs text-muted-foreground mt-3">
+                  Join 500+ marketers getting weekly insights. Unsubscribe anytime.
+                </p>
+              </CardContent>
+            </Card>
           </div>
         </div>
       </section>
