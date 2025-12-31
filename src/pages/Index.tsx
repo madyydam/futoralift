@@ -141,7 +141,7 @@ const Index = () => {
       <ScrollProgress />
       {/* Hidden SEO Content */}
       <div style={{ display: 'none' }}>
-        FutoraLift by Madhur Dhadve, digital marketing agency, creative marketing solutions, marketing campaigns, social media marketing, business branding, FutoraLift services, marketing strategy by Madhur Dhadve, digital marketing agency India, creative agency for businesses, performance marketing solutions, brand identity design, social media campaigns, digital advertising agency, marketing consultant, business growth strategies, creative content agency
+        FutoraLift by Madhur Dhadve, Futora Group of Companies, Futora Lift, Futora AI, digital marketing agency, creative marketing solutions, marketing campaigns, social media marketing, business branding, FutoraLift services, marketing strategy by Madhur Dhadve, digital marketing agency India, creative agency for businesses, performance marketing solutions, brand identity design, social media campaigns, digital advertising agency, marketing consultant, business growth strategies, creative content agency
       </div>
       {/* Navigation */}
       <nav className="fixed top-0 left-0 right-0 bg-midnight/95 backdrop-blur-sm border-b border-border z-50">
@@ -223,7 +223,7 @@ const Index = () => {
         <div className="container max-w-6xl mx-auto relative z-10">
           <div className="text-center space-y-6 animate-fade-in">
             <div className="flex flex-col items-center gap-4">
-              <img src={blLogo} alt="FutoraLift Logo" className="w-24 h-24 md:w-32 md:h-32 object-contain" />
+              <img src={blLogo} alt="FutoraLift - Futora Group of Companies Logo" className="w-24 h-24 md:w-32 md:h-32 object-contain" />
               <h1 className="font-poppins font-bold text-5xl md:text-6xl lg:text-7xl leading-tight">
                 FUTORA<span className="text-phoenix1">LIFT</span>
               </h1>
@@ -253,9 +253,9 @@ const Index = () => {
       {/* About Snapshot */}
       <section className="py-16 md:py-24 px-6 md:px-12 bg-charcoal/50">
         <div className="container max-w-6xl mx-auto text-center mb-12">
-          <h2 className="font-poppins font-bold text-4xl md:text-5xl mb-4">About FutoraLift</h2>
+          <h2 className="font-poppins font-bold text-4xl md:text-5xl mb-4">About FutoraLift & Futora Group</h2>
           <p className="text-lg text-muted-foreground max-w-4xl mx-auto leading-relaxed">
-            FutoraLift is a creative marketing agency that helps businesses grow through storytelling, strategy, and digital innovation. We build strong brand identities, design impactful visuals, and manage digital presence that delivers real results.
+            FutoraLift is a flagship agency under the <strong>Futora Group of Companies</strong>, founded by <strong>Madhur Dhadve</strong>. We specialize in creative marketing and <strong>Futora AI</strong> driven digital innovation, helping businesses scale with precision and storytelling.
           </p>
         </div>
         <div className="container max-w-6xl mx-auto">
@@ -444,7 +444,7 @@ const Index = () => {
                   </div>
                   <div>
                     <h3 className="font-poppins font-semibold text-xl">Madhur Dhadve</h3>
-                    <p className="text-phoenix1 text-sm">Founder</p>
+                    <p className="text-phoenix1 text-sm">Founder of Futora Group</p>
                     <p className="text-sm text-muted-foreground mt-2 max-w-sm">
                       Visionary leader and full-stack creative mind who handles all technical aspects of client projects from video editing and digital ads to websites, apps, and marketing systems. He ensures every campaign blends creativity with performance.
                     </p>
