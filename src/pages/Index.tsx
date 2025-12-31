@@ -24,52 +24,7 @@ const Index = () => {
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [newsletterEmail, setNewsletterEmail] = useState("");
   const [isNewsletterSubmitting, setIsNewsletterSubmitting] = useState(false);
-  const [typingText, setTypingText] = useState("");
   const { toast } = useToast();
-
-  const phrases = [
-    "A NAME YOUR BRAND NEEDS",
-    "CREATIVE EXCELLENCE",
-    "STRATEGIC GROWTH",
-    "DIGITAL INNOVATION"
-  ];
-  const [phraseIndex, setPhraseIndex] = useState(0);
-
-  // Typing animation effect
-  useEffect(() => {
-    let currentText = "";
-    let currentIndex = 0;
-    let isDeleting = false;
-    let timeout: NodeJS.Timeout;
-
-    const type = () => {
-      const currentPhrase = phrases[phraseIndex];
-
-      if (!isDeleting && currentIndex <= currentPhrase.length) {
-        currentText = currentPhrase.substring(0, currentIndex);
-        setTypingText(currentText);
-        currentIndex++;
-        timeout = setTimeout(type, 100);
-      } else if (!isDeleting && currentIndex > currentPhrase.length) {
-        timeout = setTimeout(() => {
-          isDeleting = true;
-          type();
-        }, 2000);
-      } else if (isDeleting && currentIndex >= 0) {
-        currentText = currentPhrase.substring(0, currentIndex);
-        setTypingText(currentText);
-        currentIndex--;
-        timeout = setTimeout(type, 50);
-      } else if (isDeleting && currentIndex < 0) {
-        isDeleting = false;
-        currentIndex = 0;
-        setPhraseIndex((prev) => (prev + 1) % phrases.length);
-      }
-    };
-
-    type();
-    return () => clearTimeout(timeout);
-  }, [phraseIndex]);
 
   const scrollToContact = () => {
     const contactSection = document.getElementById("contact");
@@ -141,7 +96,7 @@ const Index = () => {
       <ScrollProgress />
       {/* Hidden SEO Content */}
       <div style={{ display: 'none' }}>
-        FutoraLift by Madhur Dhadve, Futora Group of Companies, Futora Lift, Futora AI, digital marketing agency, creative marketing solutions, marketing campaigns, social media marketing, business branding, FutoraLift services, marketing strategy by Madhur Dhadve, digital marketing agency India, creative agency for businesses, performance marketing solutions, brand identity design, social media campaigns, digital advertising agency, marketing consultant, business growth strategies, creative content agency
+        Futoralift, FutoraLift, Futora Lift, Madhur Dhadve, Futora Group of Companies, Futora AI, Madhur Dhadve Futoralift, digital marketing agency by Madhur Dhadve, creative marketing solutions, marketing campaigns, social media marketing, business branding, FutoraLift services, marketing strategy by Madhur Dhadve, digital marketing agency India, creative agency for businesses, performance marketing solutions, brand identity design, social media campaigns, digital advertising agency, marketing consultant, business growth strategies, creative content agency
       </div>
       {/* Navigation */}
       <nav className="fixed top-0 left-0 right-0 bg-midnight/95 backdrop-blur-sm border-b border-border z-50">
@@ -223,15 +178,14 @@ const Index = () => {
         <div className="container max-w-6xl mx-auto relative z-10">
           <div className="text-center space-y-6 animate-fade-in">
             <div className="flex flex-col items-center gap-4">
-              <img src={blLogo} alt="FutoraLift - Futora Group of Companies Logo" className="w-24 h-24 md:w-32 md:h-32 object-contain" />
+              <img src={blLogo} alt="Futoralift by Madhur Dhadve - Futora Group of Companies Logo" className="w-24 h-24 md:w-32 md:h-32 object-contain" />
               <h1 className="font-poppins font-bold text-5xl md:text-6xl lg:text-7xl leading-tight">
                 FUTORA<span className="text-phoenix1">LIFT</span>
               </h1>
             </div>
-            <div className="h-12 flex items-center justify-center">
+            <div>
               <p className="text-3xl md:text-4xl font-semibold text-cyan">
-                {typingText}
-                <span className="animate-pulse">|</span>
+                A NAME YOUR BRAND NEEDS
               </p>
             </div>
             <p className="text-xl md:text-2xl text-muted-foreground font-poppins max-w-3xl mx-auto">
