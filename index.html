@@ -71,12 +71,18 @@
   <script type="application/ld+json">
     {
       "@context": "https://schema.org",
-      "@type": "Organization",
-      "name": "Futora Group of Companies",
+      "@type": "ProfessionalService",
+      "name": "FutoraLift",
       "alternateName": ["FutoraLift", "Futora Lift", "Futora AI", "Futora Group"],
       "url": "https://www.futoralift.in",
-      "logo": "https://www.futoralift.in/logo.png",
-      "description": "Futora Group of Companies is a multi-disciplinary conglomerate specializing in digital marketing (FutoraLift) and artificial intelligence (Futora AI).",
+      "logo": "https://www.futoralift.in/favicon.png",
+      "image": "https://www.futoralift.in/favicon.png",
+      "description": "FutoraLift, a flagship of Futora Group of Companies founded by Madhur Dhadve, provides cutting-edge marketing, AI solutions, and digital strategy. Specializing in Futora AI and digital innovation.",
+      "priceRange": "$$",
+      "address": {
+        "@type": "PostalAddress",
+        "addressCountry": "IN"
+      },
       "founder": {
         "@type": "Person",
         "name": "Madhur Dhadve"
@@ -87,7 +93,67 @@
         "https://www.youtube.com/@FutoraLift"
       ]
     }
-    </script>
+  </script>
+
+  <!-- JSON-LD Structured Data for FAQ -->
+  <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "FAQPage",
+      "mainEntity": [
+        {
+          "@type": "Question",
+          "name": "Why choose FutoraLift as a new agency?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "As a new agency, we bring fresh perspectives, cutting-edge strategies, and hungry dedication to your success. We adapt quickly, innovate constantly, and treat every client like our first priority."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "What makes FutoraLift different from other agencies?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "We combine strategic thinking with creative excellence. Our team handles everything in-house—from video editing and web development to social media and branding, ensuring seamless communication and cohesive campaigns."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "How long does it take to see results with FutoraLift?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Initial results like increased engagement and better content quality are visible within the first month. Significant growth typically happens within 2-3 months as strategies gain momentum."
+          }
+        }
+      ]
+    }
+  </script>
+
+  <!-- Breadcrumb Schema -->
+  <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "BreadcrumbList",
+      "itemListElement": [{
+        "@type": "ListItem",
+        "position": 1,
+        "name": "Home",
+        "item": "https://www.futoralift.in"
+      },
+      {
+        "@type": "ListItem",
+        "position": 2,
+        "name": "Services",
+        "item": "https://www.futoralift.in#packages"
+      },
+      {
+        "@type": "ListItem",
+        "position": 3,
+        "name": "About",
+        "item": "https://www.futoralift.in#home"
+      }]
+    }
+  </script>
 
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
