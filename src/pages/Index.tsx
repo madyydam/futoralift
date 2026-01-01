@@ -102,7 +102,10 @@ const Index = () => {
       <nav className="fixed top-0 left-0 right-0 bg-midnight/95 backdrop-blur-sm border-b border-border z-50">
         <div className="container max-w-6xl mx-auto px-6 md:px-12">
           <div className="flex items-center justify-between h-16">
-            <a href="#home" className="font-poppins font-bold text-xl text-phoenix1">FUTORALIFT</a>
+            <a href="#home" className="flex items-center gap-2 group">
+              <img src={blLogo} alt="Futoralift Logo" className="w-8 h-8 object-contain group-hover:scale-110 transition-transform" />
+              <span className="font-poppins font-bold text-xl text-phoenix1">FUTORALIFT</span>
+            </a>
 
             {/* Desktop Navigation */}
             <div className="hidden md:flex items-center gap-8">
