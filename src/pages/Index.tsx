@@ -1,17 +1,25 @@
-import { useState, useEffect } from "react";
-import { Button } from "@/components/ui/button";
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
-import { Input } from "@/components/ui/input";
-import { Label } from "@/components/ui/label";
-import { Textarea } from "@/components/ui/textarea";
-import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "@/components/ui/accordion";
-import { Target, Zap, TrendingUp, Palette, Mail, Phone, Instagram, Menu, X, BarChart3, Calculator, ChevronDown, Send } from "lucide-react";
+import { useState, useCallback, memo } from "react";
 import { supabase } from "@/integrations/supabase/client";
 import { useToast } from "@/hooks/use-toast";
 import blLogo from "@/assets/bl-logo.png";
+import ScrollProgress from "@/components/ScrollProgress";
+import BrandsWeLiftedPortfolio from "@/components/BrandsWeLiftedPortfolio";
 import GlowCharts from "@/components/GlowCharts";
 import ROICalculator from "@/components/ROICalculator";
-import ScrollProgress from "@/components/ScrollProgress";
+
+// Sections
+import Hero from "@/components/sections/Hero";
+import AboutSnapshot from "@/components/sections/AboutSnapshot";
+import WhyChooseUs from "@/components/sections/WhyChooseUs";
+import Packages from "@/components/sections/Packages";
+import Process from "@/components/sections/Process";
+import Team from "@/components/sections/Team";
+import Contact from "@/components/sections/Contact";
+import FAQ from "@/components/sections/FAQ";
+import Newsletter from "@/components/sections/Newsletter";
+
+// Icons for Nav
+import { Menu, X, Instagram } from "lucide-react";
 
 const Index = () => {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
@@ -26,12 +34,12 @@ const Index = () => {
   const [isNewsletterSubmitting, setIsNewsletterSubmitting] = useState(false);
   const { toast } = useToast();
 
-  const scrollToContact = () => {
+  const scrollToContact = useCallback(() => {
     const contactSection = document.getElementById("contact");
     contactSection?.scrollIntoView({ behavior: "smooth" });
-  };
+  }, []);
 
-  const handleSubmit = async (e: React.FormEvent) => {
+  const handleSubmit = useCallback(async (e: React.FormEvent) => {
     e.preventDefault();
     setIsSubmitting(true);
 
@@ -58,9 +66,9 @@ const Index = () => {
     } finally {
       setIsSubmitting(false);
     }
-  };
+  }, [formData, toast]);
 
-  const handleNewsletterSubmit = async (e: React.FormEvent) => {
+  const handleNewsletterSubmit = useCallback(async (e: React.FormEvent) => {
     e.preventDefault();
     setIsNewsletterSubmitting(true);
 
@@ -89,15 +97,12 @@ const Index = () => {
     } finally {
       setIsNewsletterSubmitting(false);
     }
-  };
+  }, [newsletterEmail, toast]);
 
   return (
     <div className="min-h-screen bg-midnight text-offwhite font-inter">
       <ScrollProgress />
-      {/* Hidden SEO Content */}
-      <div style={{ display: 'none' }}>
-        Futoralift, FutoraLift, Futora Lift, Madhur Dhadve, Futora Group of Companies, Futora AI, Madhur Dhadve Futoralift, digital marketing agency by Madhur Dhadve, creative marketing solutions, marketing campaigns, social media marketing, business branding, FutoraLift services, marketing strategy by Madhur Dhadve, digital marketing agency India, creative agency for businesses, performance marketing solutions, brand identity design, social media campaigns, digital advertising agency, marketing consultant, business growth strategies, creative content agency
-      </div>
+
       {/* Navigation */}
       <nav className="fixed top-0 left-0 right-0 bg-midnight/95 backdrop-blur-sm border-b border-border z-50">
         <div className="container max-w-6xl mx-auto px-6 md:px-12">
@@ -112,6 +117,7 @@ const Index = () => {
               <a href="#home" className="hover:text-phoenix1 transition-colors">Home</a>
               <a href="#why-choose-us" className="hover:text-phoenix1 transition-colors">Why Us</a>
               <a href="#packages" className="hover:text-phoenix1 transition-colors">Packages</a>
+              <a href="#portfolio" className="hover:text-phoenix1 transition-colors">Portfolio</a>
               <a href="#team" className="hover:text-phoenix1 transition-colors">Team</a>
               <a href="#contact" className="hover:text-phoenix1 transition-colors">Contact</a>
             </div>
@@ -129,592 +135,78 @@ const Index = () => {
           {mobileMenuOpen && (
             <div className="md:hidden absolute top-16 left-0 right-0 bg-midnight/98 border-b border-border">
               <div className="flex flex-col py-4">
-                <a
-                  href="#home"
-                  className="px-6 py-3 hover:bg-phoenix1/10 hover:text-phoenix1 transition-colors"
-                  onClick={() => setMobileMenuOpen(false)}
-                >
-                  Home
-                </a>
-                <a
-                  href="#why-choose-us"
-                  className="px-6 py-3 hover:bg-phoenix1/10 hover:text-phoenix1 transition-colors"
-                  onClick={() => setMobileMenuOpen(false)}
-                >
-                  Why Us
-                </a>
-                <a
-                  href="#packages"
-                  className="px-6 py-3 hover:bg-phoenix1/10 hover:text-phoenix1 transition-colors"
-                  onClick={() => setMobileMenuOpen(false)}
-                >
-                  Packages
-                </a>
-                <a
-                  href="#team"
-                  className="px-6 py-3 hover:bg-phoenix1/10 hover:text-phoenix1 transition-colors"
-                  onClick={() => setMobileMenuOpen(false)}
-                >
-                  Team
-                </a>
-                <a
-                  href="#contact"
-                  className="px-6 py-3 hover:bg-phoenix1/10 hover:text-phoenix1 transition-colors"
-                  onClick={() => setMobileMenuOpen(false)}
-                >
-                  Contact
-                </a>
+                {["home", "why-choose-us", "packages", "portfolio", "team", "contact"].map((item) => (
+                  <a
+                    key={item}
+                    href={`#${item}`}
+                    className="px-6 py-3 hover:bg-phoenix1/10 hover:text-phoenix1 transition-colors capitalize"
+                    onClick={() => setMobileMenuOpen(false)}
+                  >
+                    {item.replace("-", " ")}
+                  </a>
+                ))}
               </div>
             </div>
           )}
         </div>
       </nav>
 
-      {/* Hero Section */}
-      <section id="home" className="relative min-h-[90vh] flex items-center justify-center overflow-hidden px-6 md:px-12 pt-24">
-        <div className="absolute inset-0 bg-gradient-to-br from-phoenix1/20 via-midnight to-midnight" />
-        <div className="absolute inset-0 opacity-30">
-          <div className="absolute top-1/4 left-1/4 w-64 h-64 bg-cyan/20 rounded-full blur-3xl animate-pulse" />
-          <div className="absolute bottom-1/4 right-1/4 w-96 h-96 bg-phoenix1/20 rounded-full blur-3xl animate-pulse" style={{ animationDelay: "1s" }} />
-        </div>
+      <main>
+        <Hero scrollToContact={scrollToContact} />
 
-        <div className="container max-w-6xl mx-auto relative z-10">
-          <div className="text-center space-y-6 animate-fade-in">
-            <div className="flex flex-col items-center gap-4">
-              <img src={blLogo} alt="Futoralift by Madhur Dhadve - Futora Group of Companies Logo" className="w-24 h-24 md:w-32 md:h-32 object-contain" />
-              <h1 className="font-poppins font-bold text-5xl md:text-6xl lg:text-7xl leading-tight">
-                FUTORA<span className="text-phoenix1">LIFT</span>
-              </h1>
-            </div>
-            <div>
-              <p className="text-3xl md:text-4xl font-semibold text-cyan">
-                A NAME YOUR BRAND NEEDS
-              </p>
-            </div>
-            <p className="text-xl md:text-2xl text-muted-foreground font-poppins max-w-3xl mx-auto">
-              Lifting Brands to New Heights 🚀
-            </p>
-            <div className="flex flex-col sm:flex-row gap-4 justify-center pt-4">
-              <Button
-                size="lg"
-                className="bg-phoenix1 hover:bg-phoenix2 text-white shadow-lg hover:shadow-xl hover:shadow-phoenix1/50 transition-all active:scale-95"
-                onClick={scrollToContact}
-              >
-                Start Your Project
-              </Button>
-            </div>
-          </div>
-        </div>
-      </section>
+        <AboutSnapshot />
 
-      {/* About Snapshot */}
-      <section className="py-16 md:py-24 px-6 md:px-12 bg-charcoal/50">
-        <div className="container max-w-6xl mx-auto text-center mb-12">
-          <h2 className="font-poppins font-bold text-4xl md:text-5xl mb-4">About FutoraLift & Futora Group</h2>
-          <p className="text-lg text-muted-foreground max-w-4xl mx-auto leading-relaxed">
-            FutoraLift is a flagship agency under the <strong>Futora Group of Companies</strong>, founded by <strong>Madhur Dhadve</strong>. We specialize in creative marketing and <strong>Futora AI</strong> driven digital innovation, helping businesses scale with precision and storytelling.
-          </p>
-        </div>
-        <div className="container max-w-6xl mx-auto">
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
-            {[
-              { label: "Reach", value: "206k+" },
-              { label: "Impressions", value: "338k+" },
-              { label: "Avg ROI", value: "480%+" },
-              { label: "Client Satisfaction", value: "98%" }
-            ].map((stat, i) => (
-              <Card key={i} className="bg-charcoal border-phoenix1/20 hover:border-phoenix1 transition-colors text-center">
-                <CardContent className="pt-6">
-                  <p className="text-3xl md:text-4xl font-bold text-phoenix1 font-poppins">{stat.value}</p>
-                  <p className="text-sm text-muted-foreground mt-2">{stat.label}</p>
-                </CardContent>
-              </Card>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      {/* Why Choose Us */}
-      <section id="why-choose-us" className="py-16 md:py-24 px-6 md:px-12">
-        <div className="container max-w-6xl mx-auto">
-          <h2 className="font-poppins font-bold text-4xl md:text-5xl text-center mb-16">Why Choose Us</h2>
-          <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
-            {[
-              { icon: Target, title: "Strategic Focus", desc: "Data-driven decisions that hit the mark" },
-              { icon: Zap, title: "Rapid Execution", desc: "From concept to launch in record time" },
-              { icon: TrendingUp, title: "Growth Mindset", desc: "Scalable solutions that evolve with you" },
-              { icon: Palette, title: "Creative Excellence", desc: "Designs that captivate and convert" }
-            ].map((item, i) => (
-              <Card key={i} className="bg-charcoal border-border hover:border-phoenix1 hover:-translate-y-2 hover:shadow-xl hover:shadow-phoenix1/20 transition-all group">
-                <CardHeader>
-                  <item.icon className="w-12 h-12 text-cyan mb-4 group-hover:scale-110 transition-transform" />
-                  <CardTitle className="text-xl font-poppins">{item.title}</CardTitle>
-                  <CardDescription className="text-muted-foreground">{item.desc}</CardDescription>
-                </CardHeader>
-              </Card>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      {/* ROI Calculator Section */}
-      <section className="py-16 md:py-24 px-6 md:px-12 bg-midnight">
-        <div className="container max-w-4xl mx-auto">
-          <div className="text-center mb-12">
-            <div className="p-3 rounded-2xl bg-phoenix1/10 text-phoenix1 mb-4 inline-block">
-              <Calculator className="w-8 h-8" />
-            </div>
-            <h2 className="font-poppins font-bold text-4xl md:text-5xl mb-4 text-white">Interactive Growth Estimator</h2>
-            <p className="text-lg text-muted-foreground">
-              See the direct impact of professional marketing on your brand's reach and lead generation.
-            </p>
-          </div>
-          <ROICalculator onButtonClick={scrollToContact} />
-        </div>
-      </section>
-
-      {/* Performance Analytics Section */}
-      <section className="py-16 md:py-24 px-6 md:px-12 bg-midnight/50">
-        <div className="container max-w-6xl mx-auto">
-          <div className="flex flex-col items-center text-center mb-12">
-            <div className="p-3 rounded-2xl bg-phoenix1/10 text-phoenix1 mb-4">
-              <BarChart3 className="w-8 h-8" />
-            </div>
-            <h2 className="font-poppins font-bold text-4xl md:text-5xl mb-4 text-white">Performance Analytics</h2>
-            <p className="text-lg text-muted-foreground max-w-2xl mx-auto">
-              Real-time data insights showing how we transform brand engagement and drive measurable growth for our partners.
-            </p>
-          </div>
+        <div className="py-12 bg-midnight overflow-hidden">
           <GlowCharts />
         </div>
-      </section>
 
-      {/* Packages */}
-      <section id="packages" className="py-16 md:py-24 px-6 md:px-12 bg-charcoal/50">
-        <div className="container max-w-6xl mx-auto">
-          <h2 className="font-poppins font-bold text-4xl md:text-5xl text-center mb-16">Packages & Pricing</h2>
-          <p className="text-center text-muted-foreground mb-12 max-w-3xl mx-auto">
-            Choose the perfect package for your business goals. All plans include professional content creation, strategic planning, and a complimentary awareness campaign to jumpstart your growth.
+        <WhyChooseUs />
+
+        <div className="py-16 md:py-24 px-6 md:px-12 bg-charcoal/50">
+          <ROICalculator />
+        </div>
+
+        <Packages scrollToContact={scrollToContact} />
+
+        <Process />
+
+        <BrandsWeLiftedPortfolio />
+
+        <Team />
+
+        <Contact
+          formData={formData}
+          setFormData={setFormData}
+          handleSubmit={handleSubmit}
+          isSubmitting={isSubmitting}
+        />
+
+        <FAQ />
+
+        <Newsletter
+          newsletterEmail={newsletterEmail}
+          setNewsletterEmail={setNewsletterEmail}
+          handleNewsletterSubmit={handleNewsletterSubmit}
+          isNewsletterSubmitting={isNewsletterSubmitting}
+        />
+      </main>
+
+      <footer className="py-12 px-6 md:px-12 border-t border-border bg-midnight">
+        <div className="container max-w-6xl mx-auto flex flex-col md:flex-row justify-between items-center gap-6">
+          <div className="flex items-center gap-2">
+            <img src={blLogo} alt="Logo" className="w-6 h-6 object-contain" />
+            <span className="font-poppins font-bold text-lg text-phoenix1 uppercase">Futoralift</span>
+          </div>
+          <p className="text-muted-foreground text-sm">
+            © {new Date().getFullYear()} Futoralift | Futora Group of Companies. Founded by Madhur Dhadve.
           </p>
-          <div className="grid md:grid-cols-3 gap-6 lg:gap-8">
-            {[
-              {
-                name: "Basic",
-                price: "₹19,999",
-                period: "/month",
-                recommended: false,
-                features: ["5 Reels + 2 Carousels", "Content Planning", "Free Awareness Campaign"]
-              },
-              {
-                name: "Growth",
-                price: "₹29,999",
-                period: "/month",
-                recommended: true,
-                features: ["10 Reels + 5 Carousels", "Advanced Planning", "Free Awareness Campaign"]
-              },
-              {
-                name: "Premium",
-                price: "₹34,999",
-                period: "/month",
-                recommended: false,
-                features: ["15 Reels + 7 Carousels", "Full Strategy", "Free Awareness Campaign"]
-              }
-            ].map((pkg, i) => (
-              <Card
-                key={i}
-                className={`relative ${pkg.recommended ? 'border-cyan shadow-xl shadow-cyan/20 scale-105' : 'border-border'} bg-charcoal hover:-translate-y-2 transition-all`}
-              >
-                {pkg.recommended && (
-                  <div className="absolute -top-4 left-1/2 -translate-x-1/2 bg-cyan text-midnight px-4 py-1 rounded-full text-sm font-semibold">
-                    Recommended
-                  </div>
-                )}
-                <CardHeader className="text-center">
-                  <CardTitle className="text-2xl font-poppins">{pkg.name}</CardTitle>
-                </CardHeader>
-                <CardContent className="space-y-4">
-                  <ul className="space-y-3">
-                    {pkg.features.map((feature, j) => (
-                      <li key={j} className="flex items-start gap-2 text-sm">
-                        <span className="text-cyan mt-0.5">✓</span>
-                        <span>{feature}</span>
-                      </li>
-                    ))}
-                  </ul>
-                  <Button
-                    className={`w-full ${pkg.recommended ? 'bg-cyan text-midnight hover:bg-cyan/90' : 'bg-phoenix1 hover:bg-phoenix2'}`}
-                    onClick={scrollToContact}
-                  >
-                    Get Started
-                  </Button>
-                </CardContent>
-              </Card>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      {/* Process Timeline */}
-      <section className="py-16 md:py-24 px-6 md:px-12">
-        <div className="container max-w-6xl mx-auto">
-          <h2 className="font-poppins font-bold text-4xl md:text-5xl text-center mb-16">Our Process</h2>
-          <p className="text-center text-muted-foreground mb-12 max-w-3xl mx-auto">
-            We follow a proven methodology that transforms your vision into reality, ensuring every campaign delivers exceptional results through strategic planning and creative execution.
-          </p>
-          <div className="grid sm:grid-cols-2 lg:grid-cols-5 gap-8">
-            {[
-              { step: "01", title: "Discovery", desc: "Understanding your goals, audience, and brand identity through in-depth research and consultation." },
-              { step: "02", title: "Strategy", desc: "Crafting a custom marketing and content plan aligned with your business objectives." },
-              { step: "03", title: "Creation", desc: "Producing engaging visuals, videos, and campaigns that capture attention." },
-              { step: "04", title: "Launch", desc: "Executing strategies across digital platforms with precision timing." },
-              { step: "05", title: "Growth", desc: "Monitoring results and optimizing for better ROI continuously." }
-            ].map((phase, i) => (
-              <div key={i} className="relative">
-                {i < 4 && (
-                  <div className="hidden lg:block absolute top-8 left-full w-full h-0.5 bg-gradient-to-r from-phoenix1 to-transparent" />
-                )}
-                <div className="text-center space-y-3">
-                  <div className="w-16 h-16 mx-auto rounded-full bg-phoenix1 flex items-center justify-center text-2xl font-bold font-poppins">
-                    {phase.step}
-                  </div>
-                  <h3 className="font-poppins font-semibold text-xl">{phase.title}</h3>
-                  <p className="text-sm text-muted-foreground">{phase.desc}</p>
-                </div>
-              </div>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      {/* Team Section - exact DOM structure as specified */}
-      <section id="team" className="py-16 md:py-24 px-6 md:px-12 bg-charcoal/50">
-        <div className="container max-w-6xl mx-auto">
-          <h2 className="font-poppins font-bold text-4xl md:text-5xl text-center mb-16">Meet the Team</h2>
-          <Card className="bg-charcoal border-phoenix1/20 max-w-6xl mx-auto">
-            <CardContent className="p-8 md:p-12">
-              <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-                <div className="member flex flex-col items-center text-center space-y-4 group">
-                  <div className="w-32 h-32 rounded-full bg-gradient-to-br from-phoenix1 to-cyan p-1 group-hover:scale-105 group-hover:shadow-lg group-hover:shadow-phoenix1/50 transition-all">
-                    <div className="w-full h-full rounded-full bg-charcoal flex items-center justify-center text-4xl font-bold">
-                      MD
-                    </div>
-                  </div>
-                  <div>
-                    <h3 className="font-poppins font-semibold text-xl">Madhur Dhadve</h3>
-                    <p className="text-phoenix1 text-sm">Founder of Futora Group</p>
-                    <p className="text-sm text-muted-foreground mt-2 max-w-sm">
-                      Visionary leader and full-stack creative mind who handles all technical aspects of client projects from video editing and digital ads to websites, apps, and marketing systems. He ensures every campaign blends creativity with performance.
-                    </p>
-                  </div>
-                </div>
-
-                <div className="member flex flex-col items-center text-center space-y-4 group">
-                  <div className="w-32 h-32 rounded-full bg-gradient-to-br from-phoenix1 to-cyan p-1 group-hover:scale-105 group-hover:shadow-lg group-hover:shadow-cyan/50 transition-all">
-                    <div className="w-full h-full rounded-full bg-charcoal flex items-center justify-center text-4xl font-bold">
-                      YG
-                    </div>
-                  </div>
-                  <div>
-                    <h3 className="font-poppins font-semibold text-xl">Yuvraj Gour</h3>
-                    <p className="text-cyan text-sm">Co-founder</p>
-                    <p className="text-sm text-muted-foreground mt-2 max-w-sm">
-                      Creative strategist and design perfectionist focused on video editing, shoots, and delivering visually stunning, high-impact campaigns. Yuvraj brings ideas to life with precision, passion, and attention to every detail.
-                    </p>
-                  </div>
-                </div>
-
-                <div className="member flex flex-col items-center text-center space-y-4 group">
-                  <div className="w-32 h-32 rounded-full bg-gradient-to-br from-phoenix1 to-cyan p-1 group-hover:scale-105 group-hover:shadow-lg group-hover:shadow-cyan/50 transition-all">
-                    <div className="w-full h-full rounded-full bg-charcoal flex items-center justify-center text-4xl font-bold">
-                      AM
-                    </div>
-                  </div>
-                  <div>
-                    <h3 className="font-poppins font-semibold text-xl">Aditya Mahure</h3>
-                    <p className="text-cyan text-sm">Co-founder</p>
-                    <p className="text-sm text-muted-foreground mt-2 max-w-sm">
-                      Client success and operations lead who manages client communication, project flow, and team coordination. Aditya bridges creativity with execution making sure every project runs smoothly from concept to completion.
-                    </p>
-                  </div>
-                </div>
-              </div>
-            </CardContent>
-          </Card>
-        </div>
-      </section>
-
-      {/* Contact / CTA */}
-      <section id="contact" className="py-16 md:py-24 px-6 md:px-12">
-        <div className="container max-w-6xl mx-auto">
-          <h2 className="font-poppins font-bold text-4xl md:text-5xl text-center mb-16">Start Your Project</h2>
-          <div className="grid md:grid-cols-2 gap-12">
-            <Card className="bg-charcoal border-border">
-              <CardHeader>
-                <CardTitle className="font-poppins">Get in Touch</CardTitle>
-                <CardDescription>Fill out the form and we'll reach out within 24 hours</CardDescription>
-              </CardHeader>
-              <CardContent className="space-y-4">
-                <form onSubmit={handleSubmit} className="space-y-4">
-                  <div className="space-y-2">
-                    <Label htmlFor="name">Name</Label>
-                    <Input
-                      id="name"
-                      placeholder="Your name"
-                      className="bg-midnight border-border focus:border-phoenix1 focus:ring-phoenix1"
-                      value={formData.name}
-                      onChange={(e) => setFormData({ ...formData, name: e.target.value })}
-                      required
-                    />
-                  </div>
-                  <div className="space-y-2">
-                    <Label htmlFor="email">Email</Label>
-                    <Input
-                      id="email"
-                      type="email"
-                      placeholder="your@email.com"
-                      className="bg-midnight border-border focus:border-phoenix1 focus:ring-phoenix1"
-                      value={formData.email}
-                      onChange={(e) => setFormData({ ...formData, email: e.target.value })}
-                      required
-                    />
-                  </div>
-                  <div className="space-y-2">
-                    <Label htmlFor="phone">Phone</Label>
-                    <Input
-                      id="phone"
-                      type="tel"
-                      placeholder="+91 98765 43210"
-                      className="bg-midnight border-border focus:border-phoenix1 focus:ring-phoenix1"
-                      value={formData.phone}
-                      onChange={(e) => setFormData({ ...formData, phone: e.target.value })}
-                    />
-                  </div>
-                  <div className="space-y-2">
-                    <Label htmlFor="message">Message</Label>
-                    <Textarea
-                      id="message"
-                      placeholder="Tell us about your project..."
-                      className="bg-midnight border-border focus:border-phoenix1 focus:ring-phoenix1 min-h-32"
-                      value={formData.message}
-                      onChange={(e) => setFormData({ ...formData, message: e.target.value })}
-                      required
-                    />
-                  </div>
-                  <Button
-                    type="submit"
-                    className="w-full bg-phoenix1 hover:bg-phoenix2 text-lg py-6"
-                    disabled={isSubmitting}
-                  >
-                    {isSubmitting ? "Sending..." : "Start a Project"}
-                  </Button>
-                </form>
-              </CardContent>
-            </Card>
-
-            <div className="space-y-6 flex flex-col justify-center">
-              <h3 className="font-poppins font-semibold text-2xl">Contact Information</h3>
-              <div className="space-y-4">
-                <div className="flex items-start gap-4">
-                  <Mail className="w-6 h-6 text-phoenix1 mt-1" />
-                  <div>
-                    <p className="font-semibold">Email</p>
-                    <a href="mailto:futoralift@gmail.com" className="text-muted-foreground hover:text-phoenix1 transition-colors">futoralift@gmail.com</a>
-                  </div>
-                </div>
-                <div className="flex items-start gap-4">
-                  <Phone className="w-6 h-6 text-phoenix1 mt-1" />
-                  <div>
-                    <p className="font-semibold">Phone</p>
-                    <div className="flex flex-col gap-1">
-                      <a href="tel:+919309312359" className="text-muted-foreground hover:text-phoenix1 transition-colors">+91 93093 12359</a>
-                      <a href="tel:+917887578006" className="text-muted-foreground hover:text-phoenix1 transition-colors">+91 78875 78006</a>
-                      <a href="tel:+918452854044" className="text-muted-foreground hover:text-phoenix1 transition-colors">+91 84528 54044</a>
-                    </div>
-                  </div>
-                </div>
-                <div className="flex items-start gap-4">
-                  <Instagram className="w-6 h-6 text-phoenix1 mt-1" />
-                  <div>
-                    <p className="font-semibold">Social Media</p>
-                    <div className="flex flex-col gap-2 text-muted-foreground">
-                      <span>@futoralift</span>
-                      <a
-                        href="https://www.instagram.com/futoralift?igsh=dGUyY3lvaHE4bWxh"
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        className="inline-block"
-                      >
-                        <Button className="bg-phoenix1 hover:bg-phoenix2 text-white">
-                          DM on Insta
-                        </Button>
-                      </a>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      {/* FAQ Section */}
-      <section className="py-16 md:py-24 px-6 md:px-12 bg-charcoal/50">
-        <div className="container max-w-4xl mx-auto">
-          <div className="text-center mb-12">
-            <h2 className="font-poppins font-bold text-4xl md:text-5xl mb-4">
-              Frequently Asked Questions
-            </h2>
-            <p className="text-lg text-muted-foreground">
-              Everything you need to know about working with FutoraLift
-            </p>
-          </div>
-          <Accordion type="single" collapsible className="space-y-4">
-            <AccordionItem value="item-1" className="bg-midnight border border-border rounded-lg px-6">
-              <AccordionTrigger className="text-left hover:text-phoenix1 transition-colors">
-                <span className="font-semibold">Why choose FutoraLift as a new agency?</span>
-              </AccordionTrigger>
-              <AccordionContent className="text-muted-foreground">
-                As a new agency, we bring fresh perspectives, cutting-edge strategies, and hungry dedication to your success. We're not set in our ways—we adapt quickly, innovate constantly, and treat every client like our first priority. Plus, our competitive pricing means you get premium quality without the premium price tag of established agencies.
-              </AccordionContent>
-            </AccordionItem>
-
-            <AccordionItem value="item-2" className="bg-midnight border border-border rounded-lg px-6">
-              <AccordionTrigger className="text-left hover:text-phoenix1 transition-colors">
-                <span className="font-semibold">What makes you different from other agencies?</span>
-              </AccordionTrigger>
-              <AccordionContent className="text-muted-foreground">
-                We combine strategic thinking with creative excellence. Our team handles everything in-house—from video editing and web development to social media and branding. This means seamless communication, faster turnarounds, and cohesive campaigns that actually work together. We're not just creatives; we're your growth partners.
-              </AccordionContent>
-            </AccordionItem>
-
-            <AccordionItem value="item-3" className="bg-midnight border border-border rounded-lg px-6">
-              <AccordionTrigger className="text-left hover:text-phoenix1 transition-colors">
-                <span className="font-semibold">How long does it take to see results?</span>
-              </AccordionTrigger>
-              <AccordionContent className="text-muted-foreground">
-                You'll see initial results within the first month—increased engagement, better content quality, and improved brand presence. Significant growth typically happens within 2-3 months as our strategies gain momentum. We provide weekly analytics so you can track progress every step of the way.
-              </AccordionContent>
-            </AccordionItem>
-
-            <AccordionItem value="item-4" className="bg-midnight border border-border rounded-lg px-6">
-              <AccordionTrigger className="text-left hover:text-phoenix1 transition-colors">
-                <span className="font-semibold">Do you work with startups and small businesses?</span>
-              </AccordionTrigger>
-              <AccordionContent className="text-muted-foreground">
-                Absolutely! We specialize in helping startups and small businesses punch above their weight. Our packages are designed to be affordable yet comprehensive. Whether you're launching your first campaign or scaling an existing business, we have solutions that fit your budget and goals.
-              </AccordionContent>
-            </AccordionItem>
-
-            <AccordionItem value="item-5" className="bg-midnight border border-border rounded-lg px-6">
-              <AccordionTrigger className="text-left hover:text-phoenix1 transition-colors">
-                <span className="font-semibold">What's included in the free awareness campaign?</span>
-              </AccordionTrigger>
-              <AccordionContent className="text-muted-foreground">
-                Every package includes a complimentary awareness campaign to jumpstart your brand's visibility. This includes strategic content planning, targeted social media posts, and community engagement tactics designed to build your initial audience and create buzz around your brand.
-              </AccordionContent>
-            </AccordionItem>
-
-            <AccordionItem value="item-6" className="bg-midnight border border-border rounded-lg px-6">
-              <AccordionTrigger className="text-left hover:text-phoenix1 transition-colors">
-                <span className="font-semibold">Can I upgrade or downgrade my package?</span>
-              </AccordionTrigger>
-              <AccordionContent className="text-muted-foreground">
-                Yes! We're flexible. You can upgrade to a higher tier anytime or adjust your package based on your needs and results. We'll work with you to find the perfect fit as your business evolves. No long-term contracts—just month-to-month partnerships built on results.
-              </AccordionContent>
-            </AccordionItem>
-
-            <AccordionItem value="item-7" className="bg-midnight border border-border rounded-lg px-6">
-              <AccordionTrigger className="text-left hover:text-phoenix1 transition-colors">
-                <span className="font-semibold">How do I get started?</span>
-              </AccordionTrigger>
-              <AccordionContent className="text-muted-foreground">
-                Simple! Fill out the contact form below or DM us on Instagram. We'll schedule a free consultation to understand your goals, discuss your brand vision, and recommend the best package for you. From there, we can have your first campaign live within 7-10 days.
-              </AccordionContent>
-            </AccordionItem>
-          </Accordion>
-        </div>
-      </section>
-
-      {/* Newsletter Section */}
-      <section className="py-16 md:py-24 px-6 md:px-12 bg-gradient-to-br from-phoenix1/10 via-midnight to-cyan/10">
-        <div className="container max-w-4xl mx-auto text-center">
-          <div className="space-y-6">
-            <div className="p-3 rounded-2xl bg-phoenix1/10 text-phoenix1 mb-4 inline-block">
-              <Send className="w-8 h-8" />
-            </div>
-            <h2 className="font-poppins font-bold text-4xl md:text-5xl">
-              Stay Ahead of the Curve
-            </h2>
-            <p className="text-lg text-muted-foreground max-w-2xl mx-auto">
-              Get exclusive marketing insights, growth strategies, and creative tips delivered straight to your inbox.
-            </p>
-            <Card className="bg-charcoal border-phoenix1/20 max-w-md mx-auto">
-              <CardContent className="pt-6">
-                <form onSubmit={handleNewsletterSubmit} className="flex gap-2">
-                  <Input
-                    type="email"
-                    placeholder="Enter your email"
-                    className="bg-midnight border-border focus:border-phoenix1 focus:ring-phoenix1"
-                    value={newsletterEmail}
-                    onChange={(e) => setNewsletterEmail(e.target.value)}
-                    required
-                  />
-                  <Button
-                    type="submit"
-                    className="bg-phoenix1 hover:bg-phoenix2"
-                    disabled={isNewsletterSubmitting}
-                  >
-                    {isNewsletterSubmitting ? "..." : "Subscribe"}
-                  </Button>
-                </form>
-                <p className="text-xs text-muted-foreground mt-3">
-                  Join 500+ marketers getting weekly insights. Unsubscribe anytime.
-                </p>
-              </CardContent>
-            </Card>
-          </div>
-        </div>
-      </section>
-
-      {/* Footer */}
-      <footer className="py-12 px-6 md:px-12 bg-midnight border-t border-border">
-        <div className="container max-w-6xl mx-auto">
-          <div className="grid md:grid-cols-4 gap-8 mb-8">
-            <div>
-              <h4 className="font-poppins font-bold text-xl text-phoenix1 mb-4">FUTORALIFT</h4>
-              <p className="text-sm text-muted-foreground">Lifting brands to new heights</p>
-            </div>
-            <div>
-              <h5 className="font-semibold mb-4">Services</h5>
-              <ul className="space-y-2 text-sm text-muted-foreground">
-                <li><a href="#" className="hover:text-phoenix1 transition-colors">Brand Identity</a></li>
-                <li><a href="#" className="hover:text-phoenix1 transition-colors">Web Development</a></li>
-                <li><a href="#" className="hover:text-phoenix1 transition-colors">Social Media</a></li>
-              </ul>
-            </div>
-            <div>
-              <h5 className="font-semibold mb-4">Company</h5>
-              <ul className="space-y-2 text-sm text-muted-foreground">
-                <li><a href="#" className="hover:text-phoenix1 transition-colors">About</a></li>
-                <li><a href="#" className="hover:text-phoenix1 transition-colors">Team</a></li>
-                <li><a href="#" className="hover:text-phoenix1 transition-colors">Contact</a></li>
-              </ul>
-            </div>
-            <div>
-              <h5 className="font-semibold mb-4">Connect</h5>
-              <div className="flex gap-4">
-                <a href="#" className="text-muted-foreground hover:text-phoenix1 transition-colors">Twitter</a>
-                <a href="#" className="text-muted-foreground hover:text-phoenix1 transition-colors">LinkedIn</a>
-                <a href="#" className="text-muted-foreground hover:text-phoenix1 transition-colors">Instagram</a>
-              </div>
-            </div>
-          </div>
-          <div className="border-t border-border pt-8 text-center text-sm text-muted-foreground">
-            <p>&copy; 2025 FutoraLift. All rights reserved</p>
+          <div className="flex gap-6">
+            <a href="https://www.instagram.com/futoralift?igsh=dGUyY3lvaHE4bWxh" target="_blank" rel="noopener noreferrer" className="text-muted-foreground hover:text-phoenix1 transition-colors">
+              <Instagram className="w-5 h-5" />
+            </a>
           </div>
         </div>
       </footer>
-
     </div>
   );
 };
