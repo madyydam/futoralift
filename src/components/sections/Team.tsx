@@ -1,6 +1,9 @@
 import { motion } from "framer-motion";
 import { Card, CardContent } from "@/components/ui/card";
 import { memo } from "react";
+import { Button } from "@/components/ui/button";
+import { Link } from "react-router-dom";
+import { ArrowRight } from "lucide-react";
 
 const team = [
     {
@@ -14,19 +17,13 @@ const team = [
         role: "Co-founder",
         initials: "YG",
         desc: "Creative strategist and design perfectionist focused on video editing, shoots, and delivering visually stunning, high-impact campaigns. Yuvraj brings ideas to life with precision, passion, and attention to every detail."
-    },
-    {
-        name: "Aditya Mahure",
-        role: "Co-founder",
-        initials: "AM",
-        desc: "Client success and operations lead who manages client communication, project flow, and team coordination. Aditya bridges creativity with execution making sure every project runs smoothly from concept to completion."
     }
 ];
 
 const Team = memo(() => {
     return (
         <section id="team" className="py-16 md:py-24 px-6 md:px-12 bg-charcoal/50">
-            <div className="container max-w-6xl mx-auto">
+            <div className="container max-w-4xl mx-auto">
                 <motion.h2
                     initial={{ opacity: 0, y: 20 }}
                     whileInView={{ opacity: 1, y: 0 }}
@@ -35,9 +32,9 @@ const Team = memo(() => {
                 >
                     Meet the Team
                 </motion.h2>
-                <Card className="bg-charcoal border-phoenix1/20 max-w-6xl mx-auto">
+                <Card className="bg-charcoal border-phoenix1/20 max-w-4xl mx-auto">
                     <CardContent className="p-8 md:p-12">
-                        <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+                        <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
                             {team.map((member, i) => (
                                 <motion.div
                                     key={i}
@@ -61,6 +58,13 @@ const Team = memo(() => {
                                     </div>
                                 </motion.div>
                             ))}
+                        </div>
+                        <div className="mt-12 flex justify-center">
+                            <Button asChild variant="outline" className="border-phoenix1 text-phoenix1 hover:bg-phoenix1 hover:text-white group">
+                                <Link to="/team" className="flex items-center gap-2">
+                                    See full team <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
+                                </Link>
+                            </Button>
                         </div>
                     </CardContent>
                 </Card>

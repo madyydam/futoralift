@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useMemo, memo } from "react";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Slider } from "@/components/ui/slider";
 import { Button } from "@/components/ui/button";
@@ -8,16 +8,24 @@ interface ROICalculatorProps {
     onButtonClick?: () => void;
 }
 
-const ROICalculator = ({ onButtonClick }: ROICalculatorProps) => {
+const ROICalculator = memo(({ onButtonClick }: ROICalculatorProps) => {
     const [adSpend, setAdSpend] = useState([5000]);
     const [currentEngagement, setCurrentEngagement] = useState([1000]);
 
-    // Based on latest data: ~80 reach per ₹1 spent (conservative average from data)
-    const projectedReach = adSpend[0] * 80;
-    // Lead/Follower conversion around 1.2% of reach + 10% of existing engagement
-    const projectedFollowers = Math.round(projectedReach * 0.012 + currentEngagement[0] * 0.1);
-    // Value per lead estimated at ₹45
-    const projectedROI = Math.round(((projectedFollowers * 45) / adSpend[0]) * 100);
+    const { projectedReach, projectedFollowers, projectedROI } = useMemo(() => {
+        // Based on latest data: ~80 reach per ₹1 spent (conservative average from data)
+        const reach = adSpend[0] * 80;
+        // Lead/Follower conversion around 1.2% of reach + 10% of existing engagement
+        const followers = Math.round(reach * 0.012 + currentEngagement[0] * 0.1);
+        // Value per lead estimated at ₹45
+        const roi = Math.round(((followers * 45) / adSpend[0]) * 100);
+
+        return {
+            projectedReach: reach,
+            projectedFollowers: followers,
+            projectedROI: roi
+        };
+    }, [adSpend, currentEngagement]);
 
     return (
         <Card className="bg-charcoal/60 backdrop-blur-xl border-phoenix1/20 glow-card overflow-hidden">
@@ -93,6 +101,8 @@ const ROICalculator = ({ onButtonClick }: ROICalculatorProps) => {
             </CardContent>
         </Card>
     );
-};
+});
+
+ROICalculator.displayName = "ROICalculator";
 
 export default ROICalculator;

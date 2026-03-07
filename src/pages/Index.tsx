@@ -1,103 +1,33 @@
-import { useState, useCallback, memo } from "react";
-import { supabase } from "@/integrations/supabase/client";
-import { useToast } from "@/hooks/use-toast";
+import { useState, useCallback, lazy, Suspense } from "react";
 import blLogo from "@/assets/bl-logo.png";
 import ScrollProgress from "@/components/ScrollProgress";
-import BrandsWeLiftedPortfolio from "@/components/BrandsWeLiftedPortfolio";
-import GlowCharts from "@/components/GlowCharts";
-import ROICalculator from "@/components/ROICalculator";
 
-// Sections
+// Essential Sections
 import Hero from "@/components/sections/Hero";
-import AboutSnapshot from "@/components/sections/AboutSnapshot";
-import WhyChooseUs from "@/components/sections/WhyChooseUs";
-import Packages from "@/components/sections/Packages";
-import Process from "@/components/sections/Process";
-import Team from "@/components/sections/Team";
-import Contact from "@/components/sections/Contact";
-import FAQ from "@/components/sections/FAQ";
-import Newsletter from "@/components/sections/Newsletter";
+
+// Lazy Loaded Sections
+const AboutSnapshot = lazy(() => import("@/components/sections/AboutSnapshot"));
+const WhyChooseUs = lazy(() => import("@/components/sections/WhyChooseUs"));
+const Packages = lazy(() => import("@/components/sections/Packages"));
+const Process = lazy(() => import("@/components/sections/Process"));
+const Team = lazy(() => import("@/components/sections/Team"));
+const Contact = lazy(() => import("@/components/sections/Contact"));
+const FAQ = lazy(() => import("@/components/sections/FAQ"));
+const Newsletter = lazy(() => import("@/components/sections/Newsletter"));
+const BrandsWeLiftedPortfolio = lazy(() => import("@/components/BrandsWeLiftedPortfolio"));
+const GlowCharts = lazy(() => import("@/components/GlowCharts"));
+const ROICalculator = lazy(() => import("@/components/ROICalculator"));
 
 // Icons for Nav
 import { Menu, X, Instagram } from "lucide-react";
 
 const Index = () => {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
-  const [formData, setFormData] = useState({
-    name: "",
-    email: "",
-    phone: "",
-    message: ""
-  });
-  const [isSubmitting, setIsSubmitting] = useState(false);
-  const [newsletterEmail, setNewsletterEmail] = useState("");
-  const [isNewsletterSubmitting, setIsNewsletterSubmitting] = useState(false);
-  const { toast } = useToast();
 
   const scrollToContact = useCallback(() => {
     const contactSection = document.getElementById("contact");
     contactSection?.scrollIntoView({ behavior: "smooth" });
   }, []);
-
-  const handleSubmit = useCallback(async (e: React.FormEvent) => {
-    e.preventDefault();
-    setIsSubmitting(true);
-
-    try {
-      const { error } = await supabase
-        .from("contact_submissions")
-        .insert([formData]);
-
-      if (error) throw error;
-
-      toast({
-        title: "Success!",
-        description: "Your message has been sent. We'll get back to you within 24 hours.",
-      });
-
-      setFormData({ name: "", email: "", phone: "", message: "" });
-    } catch (error) {
-      console.error("Error submitting form:", error);
-      toast({
-        title: "Error",
-        description: "Failed to send message. Please try again.",
-        variant: "destructive",
-      });
-    } finally {
-      setIsSubmitting(false);
-    }
-  }, [formData, toast]);
-
-  const handleNewsletterSubmit = useCallback(async (e: React.FormEvent) => {
-    e.preventDefault();
-    setIsNewsletterSubmitting(true);
-
-    try {
-      const { error } = await supabase
-        .from("newsletter_subscribers")
-        .insert([{ email: newsletterEmail }]);
-
-      if (error) throw error;
-
-      toast({
-        title: "Success!",
-        description: "You've been subscribed to our newsletter.",
-      });
-
-      setNewsletterEmail("");
-    } catch (error: any) {
-      console.error("Error subscribing:", error);
-      toast({
-        title: "Error",
-        description: error.message?.includes("duplicate")
-          ? "You're already subscribed!"
-          : "Failed to subscribe. Please try again.",
-        variant: "destructive",
-      });
-    } finally {
-      setIsNewsletterSubmitting(false);
-    }
-  }, [newsletterEmail, toast]);
 
   return (
     <div className="min-h-screen bg-midnight text-offwhite font-inter">
@@ -124,8 +54,9 @@ const Index = () => {
 
             {/* Mobile Menu Button */}
             <button
-              className="md:hidden text-offwhite"
+              className="md:hidden text-offwhite p-2"
               onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
+              aria-label="Toggle Menu"
             >
               {mobileMenuOpen ? <X size={24} /> : <Menu size={24} />}
             </button>
@@ -133,13 +64,13 @@ const Index = () => {
 
           {/* Mobile Navigation */}
           {mobileMenuOpen && (
-            <div className="md:hidden absolute top-16 left-0 right-0 bg-midnight/98 border-b border-border">
+            <div className="md:hidden absolute top-16 left-0 right-0 bg-midnight/98 border-b border-border shadow-xl">
               <div className="flex flex-col py-4">
                 {["home", "why-choose-us", "packages", "portfolio", "team", "contact"].map((item) => (
                   <a
                     key={item}
                     href={`#${item}`}
-                    className="px-6 py-3 hover:bg-phoenix1/10 hover:text-phoenix1 transition-colors capitalize"
+                    className="px-6 py-3 hover:bg-phoenix1/10 hover:text-phoenix1 transition-colors capitalize text-lg"
                     onClick={() => setMobileMenuOpen(false)}
                   >
                     {item.replace("-", " ")}
@@ -154,41 +85,33 @@ const Index = () => {
       <main>
         <Hero scrollToContact={scrollToContact} />
 
-        <AboutSnapshot />
+        <Suspense fallback={<div className="h-64 flex items-center justify-center">Loading...</div>}>
+          <AboutSnapshot />
 
-        <div className="py-12 bg-midnight overflow-hidden">
-          <GlowCharts />
-        </div>
+          <div className="py-12 bg-midnight overflow-hidden min-h-[400px]">
+            <GlowCharts />
+          </div>
 
-        <WhyChooseUs />
+          <WhyChooseUs />
 
-        <div className="py-16 md:py-24 px-6 md:px-12 bg-charcoal/50">
-          <ROICalculator />
-        </div>
+          <div className="py-16 md:py-24 px-6 md:px-12 bg-charcoal/50 min-h-[400px]">
+            <ROICalculator />
+          </div>
 
-        <Packages scrollToContact={scrollToContact} />
+          <Packages scrollToContact={scrollToContact} />
 
-        <Process />
+          <Process />
 
-        <BrandsWeLiftedPortfolio />
+          <BrandsWeLiftedPortfolio />
 
-        <Team />
+          <Team />
 
-        <Contact
-          formData={formData}
-          setFormData={setFormData}
-          handleSubmit={handleSubmit}
-          isSubmitting={isSubmitting}
-        />
+          <Contact />
 
-        <FAQ />
+          <FAQ />
 
-        <Newsletter
-          newsletterEmail={newsletterEmail}
-          setNewsletterEmail={setNewsletterEmail}
-          handleNewsletterSubmit={handleNewsletterSubmit}
-          isNewsletterSubmitting={isNewsletterSubmitting}
-        />
+          <Newsletter />
+        </Suspense>
       </main>
 
       <footer className="py-12 px-6 md:px-12 border-t border-border bg-midnight">

@@ -1,4 +1,5 @@
 import { useNavigate } from "react-router-dom";
+import { memo } from "react";
 import { Card, CardContent } from "@/components/ui/card";
 import { ArrowUpRight, Dumbbell, Coffee, Cake } from "lucide-react";
 import { motion } from "framer-motion";
@@ -30,7 +31,7 @@ const categories = [
   },
 ];
 
-const BrandsWeLiftedPortfolio = () => {
+const BrandsWeLiftedPortfolio = memo(() => {
   const navigate = useNavigate();
 
   return (
@@ -85,6 +86,8 @@ const BrandsWeLiftedPortfolio = () => {
       </div>
     </section>
   );
-};
+});
+
+BrandsWeLiftedPortfolio.displayName = "BrandsWeLiftedPortfolio";
 
 export default BrandsWeLiftedPortfolio;

@@ -2,16 +2,45 @@ import { motion } from "framer-motion";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Send } from "lucide-react";
-import { memo } from "react";
+import { useState, memo, useCallback } from "react";
+import { supabase } from "@/integrations/supabase/client";
+import { useToast } from "@/hooks/use-toast";
 
-interface NewsletterProps {
-    newsletterEmail: string;
-    setNewsletterEmail: (email: string) => void;
-    handleNewsletterSubmit: (e: React.FormEvent) => void;
-    isNewsletterSubmitting: boolean;
-}
+const Newsletter = memo(() => {
+    const [newsletterEmail, setNewsletterEmail] = useState("");
+    const [isNewsletterSubmitting, setIsNewsletterSubmitting] = useState(false);
+    const { toast } = useToast();
 
-const Newsletter = memo(({ newsletterEmail, setNewsletterEmail, handleNewsletterSubmit, isNewsletterSubmitting }: NewsletterProps) => {
+    const handleNewsletterSubmit = useCallback(async (e: React.FormEvent) => {
+        e.preventDefault();
+        setIsNewsletterSubmitting(true);
+
+        try {
+            const { error } = await supabase
+                .from("newsletter_subscribers")
+                .insert([{ email: newsletterEmail }]);
+
+            if (error) throw error;
+
+            toast({
+                title: "Success!",
+                description: "You've been subscribed to our newsletter.",
+            });
+
+            setNewsletterEmail("");
+        } catch (error: any) {
+            console.error("Error subscribing:", error);
+            toast({
+                title: "Error",
+                description: error.message?.includes("duplicate")
+                    ? "You're already subscribed!"
+                    : "Failed to subscribe. Please try again.",
+                variant: "destructive",
+            });
+        } finally {
+            setIsNewsletterSubmitting(false);
+        }
+    }, [newsletterEmail, toast]);
     return (
         <section className="py-16 md:py-24 px-6 md:px-12 bg-midnight border-t border-border">
             <div className="container max-w-4xl mx-auto">

@@ -5,21 +5,48 @@ import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Textarea } from "@/components/ui/textarea";
 import { Mail, Phone, Instagram } from "lucide-react";
-import { memo } from "react";
+import { useState, memo, useCallback } from "react";
+import { supabase } from "@/integrations/supabase/client";
+import { useToast } from "@/hooks/use-toast";
 
-interface ContactProps {
-    formData: {
-        name: string;
-        email: string;
-        phone: string;
-        message: string;
-    };
-    setFormData: (data: any) => void;
-    handleSubmit: (e: React.FormEvent) => void;
-    isSubmitting: boolean;
-}
+const Contact = memo(() => {
+    const [formData, setFormData] = useState({
+        name: "",
+        email: "",
+        phone: "",
+        message: ""
+    });
+    const [isSubmitting, setIsSubmitting] = useState(false);
+    const { toast } = useToast();
 
-const Contact = memo(({ formData, setFormData, handleSubmit, isSubmitting }: ContactProps) => {
+    const handleSubmit = useCallback(async (e: React.FormEvent) => {
+        e.preventDefault();
+        setIsSubmitting(true);
+
+        try {
+            const { error } = await supabase
+                .from("contact_submissions")
+                .insert([formData]);
+
+            if (error) throw error;
+
+            toast({
+                title: "Success!",
+                description: "Your message has been sent. We'll get back to you within 24 hours.",
+            });
+
+            setFormData({ name: "", email: "", phone: "", message: "" });
+        } catch (error) {
+            console.error("Error submitting form:", error);
+            toast({
+                title: "Error",
+                description: "Failed to send message. Please try again.",
+                variant: "destructive",
+            });
+        } finally {
+            setIsSubmitting(false);
+        }
+    }, [formData, toast]);
     return (
         <section id="contact" className="py-16 md:py-24 px-6 md:px-12">
             <div className="container max-w-6xl mx-auto">
@@ -123,7 +150,7 @@ const Contact = memo(({ formData, setFormData, handleSubmit, isSubmitting }: Con
                                 <div>
                                     <p className="font-semibold">Phone</p>
                                     <div className="flex flex-col gap-1">
-                                        <a href="tel:+919309312359" className="text-muted-foreground hover:text-phoenix1 transition-colors">+91 93093 12359</a>
+                                        <a href="tel:+918446653644" className="text-muted-foreground hover:text-phoenix1 transition-colors">+91 84466 53644</a>
                                         <a href="tel:+917887578006" className="text-muted-foreground hover:text-phoenix1 transition-colors">+91 78875 78006</a>
                                         <a href="tel:+918452854044" className="text-muted-foreground hover:text-phoenix1 transition-colors">+91 84528 54044</a>
                                     </div>

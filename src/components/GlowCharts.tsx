@@ -1,3 +1,4 @@
+import { memo } from "react";
 import {
     LineChart,
     Line,
@@ -19,7 +20,7 @@ const performanceData = [
     { name: "Today", reach: 206135, impressions: 338187 },
 ];
 
-const GlowCharts = () => {
+const GlowCharts = memo(() => {
     return (
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 w-full mt-8 pb-12 px-2 md:px-4">
             {/* Reach Growth Chart */}
@@ -117,6 +118,8 @@ const GlowCharts = () => {
             </div>
         </div>
     );
-};
+});
+
+GlowCharts.displayName = "GlowCharts";
 
 export default GlowCharts;
