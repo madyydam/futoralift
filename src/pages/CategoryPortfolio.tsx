@@ -6,6 +6,7 @@ import { ArrowLeft, Instagram, Globe } from "lucide-react";
 import { motion } from "framer-motion";
 import blLogo from "@/assets/bl-logo.png";
 import stories12am from "@/assets/12am-stories.jpg";
+import fitnessTouch from "@/assets/fitness-touch.webp";
 
 // ─────────────────────────────────────────────
 //  Types
@@ -40,14 +41,20 @@ const categoryData: Record<string, CategoryConfig> = {
         accent: "text-phoenix1",
         accentBg: "bg-phoenix1/10",
         clients: [
-            // {
-            //   id: 1, name: "Gym Name", initials: "GN",
-            //   location: "City, MH",
-            //   services: ["Meta Ads", "Reels"],
-            //   whatWeDid: ["Meta Ads – Lead Gen", "Instagram Reels – 10/month"],
-            //   instagramUrl: "https://instagram.com/handle",
-            //   websiteUrl: "https://website.com",
-            // },
+            {
+                id: 1,
+                name: "FITNESS TOUCH GYM",
+                initials: "FT",
+                location: "Jadhav Nagar, Vadgaon BK, Pune, Maharashtra 411041",
+                services: ["4 Reels", "1 Ad Campaign", "100 Leads Generation", "4 Carousels"],
+                whatWeDid: [
+                    "4 Reels",
+                    "1 Ad Campaign",
+                    "100 Leads Generation",
+                    "4 Carousels"
+                ],
+                image: fitnessTouch
+            }
         ],
     },
     cafes: {
