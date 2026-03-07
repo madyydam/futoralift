@@ -6,7 +6,7 @@ import { ArrowLeft, Instagram, Globe } from "lucide-react";
 import { motion } from "framer-motion";
 import blLogo from "@/assets/bl-logo.png";
 import stories12am from "@/assets/12am-stories.jpg";
-import fitnessTouch from "@/assets/fitness-touch.webp";
+import fitnessTouch from "@/assets/fitness-touch.png";
 
 // ─────────────────────────────────────────────
 //  Types
