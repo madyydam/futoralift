@@ -46,12 +46,12 @@ const categoryData: Record<string, CategoryConfig> = {
                 name: "FITNESS TOUCH GYM",
                 initials: "FT",
                 location: "Jadhav Nagar, Vadgaon BK, Pune, Maharashtra 411041",
-                services: ["4 Reels", "1 Ad Campaign", "100 Leads Generation", "4 Carousels"],
+                services: ["4 Reels", "4 Carousels", "2 Ad Campaigns", "100 Leads Generation"],
                 whatWeDid: [
                     "4 Reels",
-                    "1 Ad Campaign",
-                    "100 Leads Generation",
-                    "4 Carousels"
+                    "4 Carousels",
+                    "2 Ad Campaigns",
+                    "100 Leads Generation"
                 ],
                 image: fitnessTouch
             }
