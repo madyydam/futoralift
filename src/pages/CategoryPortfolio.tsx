@@ -53,7 +53,8 @@ const categoryData: Record<string, CategoryConfig> = {
                     "2 Ad Campaigns",
                     "100 Leads Generation"
                 ],
-                image: fitnessTouch
+                image: fitnessTouch,
+                instagramUrl: "https://www.instagram.com/fitnesstouchgym82?utm_source=ig_web_button_share_sheet&igsh=ZDNlZDc0MzIxNw=="
             }
         ],
     },
