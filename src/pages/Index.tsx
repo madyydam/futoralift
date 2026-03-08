@@ -1,6 +1,8 @@
 import { useState, useCallback, lazy, Suspense } from "react";
+import { motion } from "framer-motion";
 import blLogo from "@/assets/bl-logo.png";
 import ScrollProgress from "@/components/ScrollProgress";
+import Preloader from "@/components/Preloader";
 
 // Essential Sections
 import Hero from "@/components/sections/Hero";
@@ -31,6 +33,7 @@ const Index = () => {
 
   return (
     <div className="min-h-screen bg-midnight text-offwhite font-inter">
+      <Preloader />
       <ScrollProgress />
 
       {/* Navigation */}
@@ -38,8 +41,14 @@ const Index = () => {
         <div className="container max-w-6xl mx-auto px-6 md:px-12">
           <div className="flex items-center justify-between h-16">
             <a href="#home" className="flex items-center gap-2 group">
-              <img src={blLogo} alt="Futoralift Logo" className="w-8 h-8 object-contain group-hover:scale-110 transition-transform" />
-              <span className="font-poppins font-bold text-xl text-phoenix1">FUTORALIFT</span>
+              <motion.img
+                src={blLogo}
+                alt="Futoralift Logo"
+                className="w-10 h-10 md:w-12 md:h-12 object-contain group-hover:scale-110 transition-transform"
+                animate={{ y: [0, -4, 0] }}
+                transition={{ duration: 3, repeat: Infinity, ease: "easeInOut" }}
+              />
+              <span className="font-poppins font-bold text-xl text-phoenix1 group-hover:tracking-wider transition-all duration-300">FUTORALIFT</span>
             </a>
 
             {/* Desktop Navigation */}
@@ -117,8 +126,14 @@ const Index = () => {
       <footer className="py-12 px-6 md:px-12 border-t border-border bg-midnight">
         <div className="container max-w-6xl mx-auto flex flex-col md:flex-row justify-between items-center gap-6">
           <div className="flex items-center gap-2">
-            <img src={blLogo} alt="Logo" className="w-6 h-6 object-contain" />
-            <span className="font-poppins font-bold text-lg text-phoenix1 uppercase">Futoralift</span>
+            <motion.img
+              src={blLogo}
+              alt="Logo"
+              className="w-8 h-8 object-contain"
+              animate={{ y: [0, -3, 0] }}
+              transition={{ duration: 4, repeat: Infinity, ease: "easeInOut" }}
+            />
+            <span className="font-poppins font-bold text-lg text-phoenix1 uppercase hover:tracking-widest transition-all duration-300 cursor-default">Futoralift</span>
           </div>
           <p className="text-muted-foreground text-sm">
             © {new Date().getFullYear()} Futoralift | Futora Group of Companies. Founded by Madhur Dhadve.
