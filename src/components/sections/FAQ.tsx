@@ -22,11 +22,11 @@ const FAQ = memo(() => {
                     viewport={{ once: true }}
                     className="text-center mb-12"
                 >
-                    <h2 className="font-poppins font-bold text-4xl md:text-5xl mb-4">
+                    <h2 className="font-poppins font-bold text-3xl md:text-5xl mb-4 px-4 text-balance uppercase tracking-tight">
                         Frequently Asked Questions
                     </h2>
-                    <p className="text-lg text-muted-foreground">
-                        Everything you need to know about working with FutoraLift
+                    <p className="text-lg text-muted-foreground px-4">
+                        Everything you need to know about working with <span className="text-phoenix1 font-bold">FUTORALIFT</span>
                     </p>
                 </motion.div>
                 <motion.div

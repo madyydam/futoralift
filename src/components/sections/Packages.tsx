@@ -56,8 +56,8 @@ const Packages = memo(({ scrollToContact }: PackagesProps) => {
                     viewport={{ once: true }}
                     className="text-center mb-16"
                 >
-                    <h2 className="font-poppins font-bold text-4xl md:text-5xl mb-4">Packages & Pricing</h2>
-                    <p className="text-lg text-muted-foreground max-w-2xl mx-auto">
+                    <h2 className="font-poppins font-bold text-3xl md:text-5xl mb-4 uppercase tracking-tight">Packages & Pricing</h2>
+                    <p className="text-lg text-muted-foreground max-w-2xl mx-auto px-4">
                         Transparent solutions designed to lift your brand and drive results.
                     </p>
                 </motion.div>

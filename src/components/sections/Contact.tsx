@@ -54,7 +54,7 @@ const Contact = memo(() => {
                     initial={{ opacity: 0, y: 20 }}
                     whileInView={{ opacity: 1, y: 0 }}
                     viewport={{ once: true }}
-                    className="font-poppins font-bold text-4xl md:text-5xl text-center mb-16"
+                    className="font-poppins font-bold text-3xl md:text-5xl text-center mb-16 px-4"
                 >
                     Start Your Project
                 </motion.h2>

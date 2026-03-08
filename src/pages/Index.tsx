@@ -38,17 +38,17 @@ const Index = () => {
 
       {/* Navigation */}
       <nav className="fixed top-0 left-0 right-0 bg-midnight/95 backdrop-blur-sm border-b border-border z-50">
-        <div className="container max-w-6xl mx-auto px-6 md:px-12">
+        <div className="container max-w-6xl mx-auto px-4 md:px-12">
           <div className="flex items-center justify-between h-16">
             <a href="#home" className="flex items-center gap-2 group">
               <motion.img
                 src={blLogo}
                 alt="Futoralift Logo"
-                className="w-10 h-10 md:w-12 md:h-12 object-contain group-hover:scale-110 transition-transform"
+                className="w-8 h-8 md:w-12 md:h-12 object-contain group-hover:scale-110 transition-transform"
                 animate={{ y: [0, -4, 0] }}
                 transition={{ duration: 3, repeat: Infinity, ease: "easeInOut" }}
               />
-              <span className="font-poppins font-bold text-xl text-phoenix1 group-hover:tracking-wider transition-all duration-300">FUTORALIFT</span>
+              <span className="font-poppins font-bold text-lg md:text-xl text-phoenix1 group-hover:tracking-wider transition-all duration-300 uppercase">FUTORALIFT</span>
             </a>
 
             {/* Desktop Navigation */}
@@ -133,10 +133,10 @@ const Index = () => {
               animate={{ y: [0, -3, 0] }}
               transition={{ duration: 4, repeat: Infinity, ease: "easeInOut" }}
             />
-            <span className="font-poppins font-bold text-lg text-phoenix1 uppercase hover:tracking-widest transition-all duration-300 cursor-default">Futoralift</span>
+            <span className="font-poppins font-bold text-lg text-phoenix1 uppercase hover:tracking-widest transition-all duration-300 cursor-default">FUTORALIFT</span>
           </div>
-          <p className="text-muted-foreground text-sm">
-            © {new Date().getFullYear()} Futoralift | Futora Group of Companies. Founded by Madhur Dhadve.
+          <p className="text-muted-foreground text-xs md:text-sm text-center md:text-left">
+            © {new Date().getFullYear()} FUTORALIFT | Futora Group of Companies. Founded by Madhur Dhadve.
           </p>
           <div className="flex gap-6">
             <a href="https://www.instagram.com/futoralift?igsh=dGUyY3lvaHE4bWxh" target="_blank" rel="noopener noreferrer" className="text-muted-foreground hover:text-phoenix1 transition-colors">

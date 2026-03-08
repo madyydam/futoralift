@@ -53,20 +53,21 @@ const Hero = memo(({ scrollToContact }: HeroProps) => {
                             }}
                         />
                         <motion.h1
-                            className="font-poppins font-bold text-5xl md:text-6xl lg:text-7xl leading-tight flex flex-wrap justify-center cursor-default gap-0"
+                            className="font-poppins font-bold text-3xl sm:text-5xl md:text-6xl lg:text-7xl leading-tight flex flex-wrap justify-center cursor-default gap-0 items-center"
                             initial="hidden"
                             animate="visible"
                             variants={{
                                 visible: {
                                     transition: {
-                                        staggerChildren: 0.1,
+                                        staggerChildren: 0.05,
                                     }
                                 }
                             }}
                         >
-                            {"FUTORA".split("").map((char, i) => (
+                            {"FUTORALIFT".split("").map((char, i) => (
                                 <motion.span
                                     key={i}
+                                    className={i >= 6 ? "text-phoenix1" : ""}
                                     variants={{
                                         hidden: { opacity: 0, y: 30, filter: "blur(10px)" },
                                         visible: { opacity: 1, y: 0, filter: "blur(0px)" }
@@ -74,39 +75,19 @@ const Hero = memo(({ scrollToContact }: HeroProps) => {
                                     transition={{ duration: 0.6, ease: "easeOut" }}
                                     whileHover={{
                                         scale: 1.15,
-                                        color: "#FF6B00",
-                                        textShadow: "0 0 20px rgba(255,107,0,0.6)",
+                                        color: i >= 6 ? "#00E5FF" : "#FF6B00",
+                                        textShadow: `0 0 20px ${i >= 6 ? "rgba(0,229,255,0.6)" : "rgba(255,107,0,0.6)"}`,
                                         transition: { duration: 0.2 }
                                     }}
                                 >
                                     {char}
                                 </motion.span>
                             ))}
-                            <span className="text-phoenix1 flex">
-                                {"LIFT".split("").map((char, i) => (
-                                    <motion.span
-                                        key={i}
-                                        variants={{
-                                            hidden: { opacity: 0, y: 30, filter: "blur(10px)" },
-                                            visible: { opacity: 1, y: 0, filter: "blur(0px)" }
-                                        }}
-                                        transition={{ duration: 0.6, ease: "easeOut" }}
-                                        whileHover={{
-                                            scale: 1.15,
-                                            color: "#00E5FF",
-                                            textShadow: "0 0 20px rgba(0,229,255,0.6)",
-                                            transition: { duration: 0.2 }
-                                        }}
-                                    >
-                                        {char}
-                                    </motion.span>
-                                ))}
-                            </span>
                         </motion.h1>
                     </div>
                     <div>
                         <motion.p
-                            className="text-3xl md:text-4xl font-semibold text-cyan relative inline-block"
+                            className="text-lg sm:text-2xl md:text-4xl font-semibold text-cyan relative inline-block px-2"
                             animate={{
                                 opacity: [0.8, 1, 0.8],
                                 textShadow: [
@@ -127,8 +108,8 @@ const Hero = memo(({ scrollToContact }: HeroProps) => {
                     <motion.p
                         initial={{ opacity: 0, y: 10 }}
                         animate={{ opacity: 1, y: 0 }}
-                        transition={{ delay: 2, duration: 1 }}
-                        className="text-xl md:text-2xl text-muted-foreground font-poppins max-w-3xl mx-auto"
+                        transition={{ delay: 1.5, duration: 1 }}
+                        className="text-base md:text-2xl text-muted-foreground font-poppins max-w-3xl mx-auto px-4"
                     >
                         Skyrocketing your brand to digital dominance 🚀
                     </motion.p>
