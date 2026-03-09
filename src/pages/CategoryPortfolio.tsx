@@ -7,6 +7,8 @@ import { motion } from "framer-motion";
 import blLogo from "@/assets/bl-logo.png";
 import stories12am from "@/assets/12am-stories.jpg";
 import fitnessTouch from "@/assets/fitness-touch.png";
+import tcwLogo from "@/assets/tcw-logo.png";
+
 
 // ─────────────────────────────────────────────
 //  Types
@@ -91,15 +93,19 @@ const categoryData: Record<string, CategoryConfig> = {
                 name: "The Creamy Walnut",
                 initials: "CW",
                 location: "Vetal Baba Chowk, Narhe, Pune, Maharashtra 411041",
-                services: ["Instagram Reels ×4", "Instagram Carousels/Posts ×10", "Website Development"],
+                services: ["Instagram Reels ×4", "Instagram Carousels/Posts ×10", "Website Development", "2 Meta Ad Creative Setup"],
                 whatWeDid: [
                     "Instagram Reels – 4 per month",
                     "Instagram Carousels / Posts – 10 per month",
                     "Website Development",
+                    "2 Meta Ad Creative Setup with ₹4000 budget",
                 ],
+
                 instagramUrl: "https://www.instagram.com/thecreamywalnut?utm_source=ig_web_button_share_sheet&igsh=ZDNlZDc0MzIxNw==",
                 websiteUrl: "https://TheCreamyWalnut.vercel.app",
+                image: tcwLogo,
             },
+
         ],
     },
 };
