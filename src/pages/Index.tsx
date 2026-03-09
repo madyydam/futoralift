@@ -2,7 +2,6 @@ import { useState, useCallback, lazy, Suspense } from "react";
 import { motion } from "framer-motion";
 import blLogo from "@/assets/bl-logo.png";
 import ScrollProgress from "@/components/ScrollProgress";
-import Preloader from "@/components/Preloader";
 
 // Essential Sections
 import Hero from "@/components/sections/Hero";
@@ -33,8 +32,8 @@ const Index = () => {
 
   return (
     <div className="min-h-screen bg-midnight text-offwhite font-inter">
-      <Preloader />
       <ScrollProgress />
+
 
       {/* Navigation */}
       <nav className="fixed top-0 left-0 right-0 bg-midnight/95 backdrop-blur-sm border-b border-border z-50">

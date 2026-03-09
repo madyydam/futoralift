@@ -12,7 +12,7 @@ const Preloader = () => {
     const [isVisible, setIsVisible] = useState(true);
 
     // Memoize animation curve to prevent recalculation
-    const zoomCurve = useMemo(() => [0.6, 0.05, 0.01, 0.9], []);
+    const zoomCurve = useMemo(() => [0.6, 0.05, 0.01, 0.9] as const, []);
 
     // Scroll management with error boundary
     const setScroll = useCallback((hidden: boolean) => {
@@ -27,7 +27,9 @@ const Preloader = () => {
         setScroll(true);
 
         const verifiedTimer = setTimeout(() => setStatus("verified"), 2500);
-        const closeTimer = setTimeout(() => setIsVisible(false), 5500);
+        const closeTimer = setTimeout(() => {
+            setIsVisible(false);
+        }, 5500);
 
         return () => {
             setScroll(false);
@@ -38,7 +40,9 @@ const Preloader = () => {
 
     // Cleanup scroll specifically when visibility changes
     useEffect(() => {
-        if (!isVisible) setScroll(false);
+        if (!isVisible) {
+            setScroll(false);
+        }
     }, [isVisible, setScroll]);
 
     if (!isVisible) return null;
@@ -102,8 +106,8 @@ const Preloader = () => {
                             src={blLogo}
                             alt="Company Logo"
                             className={`w-48 h-48 md:w-64 md:h-64 object-contain select-none pointer-events-none ${status === "verified"
-                                    ? "drop-shadow-[0_0_30px_rgba(34,197,94,0.4)]"
-                                    : "drop-shadow-[0_0_20px_rgba(239,68,68,0.2)]"
+                                ? "drop-shadow-[0_0_30px_rgba(34,197,94,0.4)]"
+                                : "drop-shadow-[0_0_20px_rgba(239,68,68,0.2)]"
                                 }`}
                         />
                     </motion.div>
