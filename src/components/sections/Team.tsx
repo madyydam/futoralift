@@ -10,20 +10,26 @@ const team = [
         name: "Madhur Dhadve",
         role: "Founder of Futora Group",
         initials: "MD",
-        desc: "Visionary leader and full-stack creative mind who handles all technical aspects of client projects from video editing and digital ads to websites, apps, and marketing systems. He ensures every campaign blends creativity with performance."
+        desc: "Leads technology and marketing systems, managing everything from websites and apps to ads and creative campaigns."
     },
     {
         name: "Yuvraj Gour",
         role: "Co-founder",
         initials: "YG",
-        desc: "Creative strategist and design perfectionist focused on video editing, shoots, and delivering visually stunning, high-impact campaigns. Yuvraj brings ideas to life with precision, passion, and attention to every detail."
+        desc: "Creative strategist focused on video shoots, editing, and delivering visually powerful campaigns."
+    },
+    {
+        name: "Rishi Gadakh",
+        role: "Co-founder",
+        initials: "RG",
+        desc: "Operations manager and video editor ensuring smooth project workflow and high-quality content delivery."
     }
 ];
 
 const Team = memo(() => {
     return (
         <section id="team" className="py-16 md:py-24 px-6 md:px-12 bg-charcoal/50">
-            <div className="container max-w-4xl mx-auto">
+            <div className="container max-w-6xl mx-auto">
                 <motion.h2
                     initial={{ opacity: 0, y: 20 }}
                     whileInView={{ opacity: 1, y: 0 }}
@@ -32,9 +38,9 @@ const Team = memo(() => {
                 >
                     Meet the Team
                 </motion.h2>
-                <Card className="bg-charcoal border-phoenix1/20 max-w-4xl mx-auto">
+                <Card className="bg-charcoal border-phoenix1/20 max-w-6xl mx-auto">
                     <CardContent className="p-8 md:p-12">
-                        <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+                        <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
                             {team.map((member, i) => (
                                 <motion.div
                                     key={i}

@@ -11,13 +11,19 @@ const founders = [
         name: "Madhur Dhadve",
         role: "Founder of Futora Group",
         initials: "MD",
-        desc: "Visionary leader and full-stack creative mind who handles all technical aspects of client projects. He ensures every campaign blends creativity with performance."
+        desc: "Leads technology and marketing systems, managing everything from websites and apps to ads and creative campaigns."
     },
     {
         name: "Yuvraj Gour",
         role: "Co-founder",
         initials: "YG",
-        desc: "Creative strategist and design perfectionist focused on video editing, shoots, and delivering visually stunning, high-impact campaigns."
+        desc: "Creative strategist focused on video shoots, editing, and delivering visually powerful campaigns."
+    },
+    {
+        name: "Rishi Gadakh",
+        role: "Co-founder",
+        initials: "RG",
+        desc: "Operations manager and video editor ensuring smooth project workflow and high-quality content delivery."
     }
 ];
 
@@ -27,7 +33,6 @@ const departments = [
         members: [
             { name: "Bhushan", role: "Sales", initials: "B", desc: "Dedicated to client acquisition and driving strategic growth for partners." },
             { name: "Varun", role: "Sales", initials: "V", desc: "Expert in relationship management and market opportunity identification." },
-            { name: "Aditya", role: "Sales", initials: "A", desc: "Focuses on delivering tailored solutions and ensuring client satisfaction." },
             { name: "Rohit", role: "Sales", initials: "R", desc: "Streamlining communication and optimizing sales workflows for efficiency." },
         ]
     },
@@ -86,7 +91,7 @@ const FullTeam = memo(() => {
                         Leadership
                         <span className="h-px flex-1 bg-border/30"></span>
                     </h2>
-                    <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+                    <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
                         {founders.map((member, i) => (
                             <motion.div
                                 key={i}
@@ -97,7 +102,7 @@ const FullTeam = memo(() => {
                                 <Card className="bg-charcoal border-phoenix1/20 overflow-hidden relative group">
                                     <div className="absolute inset-0 bg-gradient-to-br from-phoenix1/5 to-cyan/5 opacity-0 group-hover:opacity-100 transition-opacity" />
                                     <CardContent className="p-8 relative">
-                                        <div className="flex flex-col md:flex-row items-center gap-8 text-center md:text-left">
+                                        <div className="flex flex-col items-center gap-8 text-center">
                                             <div className="w-32 h-32 flex-shrink-0 rounded-full bg-gradient-to-br from-phoenix1 to-cyan p-1 shadow-lg shadow-phoenix1/20 transition-transform group-hover:scale-105">
                                                 <div className="w-full h-full rounded-full bg-charcoal flex items-center justify-center text-4xl font-bold font-poppins">
                                                     {member.initials}
