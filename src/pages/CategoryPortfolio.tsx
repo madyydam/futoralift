@@ -1,114 +1,11 @@
 import { useState, memo } from "react";
 import { useParams, useNavigate } from "react-router-dom";
 import { Button } from "@/components/ui/button";
-import { Card, CardContent } from "@/components/ui/card";
 import { ArrowLeft, Instagram, Globe } from "lucide-react";
 import { motion } from "framer-motion";
 import blLogo from "@/assets/bl-logo.png";
-import stories12am from "@/assets/12am-stories.jpg";
-import fitnessTouch from "@/assets/fitness-touch.png";
-import tcwLogo from "@/assets/tcw-logo.png";
-
-
-// ─────────────────────────────────────────────
-//  Types
-// ─────────────────────────────────────────────
-
-interface Client {
-    id: number;
-    name: string;
-    initials: string;
-    location: string;
-    services: string[];
-    whatWeDid: string[];
-    image?: string;
-    instagramUrl?: string;
-    websiteUrl?: string;
-}
-
-interface CategoryConfig {
-    label: string;
-    accent: string;
-    accentBg: string;
-    clients: Client[];
-}
-
-// ─────────────────────────────────────────────
-//  ⬇️  ADD YOUR CLIENTS HERE
-// ─────────────────────────────────────────────
-
-const categoryData: Record<string, CategoryConfig> = {
-    gyms: {
-        label: "Gyms",
-        accent: "text-phoenix1",
-        accentBg: "bg-phoenix1/10",
-        clients: [
-            {
-                id: 1,
-                name: "FITNESS TOUCH GYM",
-                initials: "FT",
-                location: "Jadhav Nagar, Vadgaon BK, Pune, Maharashtra 411041",
-                services: ["4 Reels", "4 Carousels", "2 Ad Campaigns", "100 Leads Generation"],
-                whatWeDid: [
-                    "4 Reels",
-                    "4 Carousels",
-                    "2 Ad Campaigns",
-                    "100 Leads Generation"
-                ],
-                image: fitnessTouch,
-                instagramUrl: "https://www.instagram.com/fitnesstouchgym82?utm_source=ig_web_button_share_sheet&igsh=ZDNlZDc0MzIxNw=="
-            }
-        ],
-    },
-    cafes: {
-        label: "Cafés",
-        accent: "text-cyan",
-        accentBg: "bg-cyan/10",
-        clients: [
-            // Add café clients here
-        ],
-    },
-    "cake-shops": {
-        label: "Cake Shops",
-        accent: "text-phoenix1",
-        accentBg: "bg-phoenix1/10",
-        clients: [
-            {
-                id: 1,
-                name: "12AM Stories",
-                initials: "12",
-                location: "Choudhary Heights, Warje Malwadi Rd, Giridhar Nagar, Warje",
-                services: ["Instagram Reels ×15", "Instagram Carousels/Posts ×5", "Website Development"],
-                whatWeDid: [
-                    "Instagram Reels – 15 per month",
-                    "Instagram Carousels / Posts – 5 per month",
-                    "Website Development",
-                ],
-                image: stories12am,
-                instagramUrl: "https://www.instagram.com/12am_stories_/",
-                websiteUrl: "https://12amstories.vercel.app/",
-            },
-            {
-                id: 2,
-                name: "The Creamy Walnut",
-                initials: "CW",
-                location: "Vetal Baba Chowk, Narhe, Pune, Maharashtra 411041",
-                services: ["Instagram Reels ×4", "Instagram Carousels/Posts ×10", "Website Development", "2 Meta Ad Creative Setup"],
-                whatWeDid: [
-                    "Instagram Reels – 4 per month",
-                    "Instagram Carousels / Posts – 10 per month",
-                    "Website Development",
-                    "2 Meta Ad Creative Setup with ₹4000 budget",
-                ],
-
-                instagramUrl: "https://www.instagram.com/thecreamywalnut?utm_source=ig_web_button_share_sheet&igsh=ZDNlZDc0MzIxNw==",
-                websiteUrl: "https://TheCreamyWalnut.vercel.app",
-                image: tcwLogo,
-            },
-
-        ],
-    },
-};
+import { categoryData } from "@/data/clients";
+import type { Client } from "@/data/clients";
 
 // ─────────────────────────────────────────────
 //  Client Card — all info visible, no click needed
@@ -150,17 +47,31 @@ const ClientCard = memo(({ client, accent, accentBg, index }: { client: Client; 
                 </div>
             )}
 
-            {/* What We Did */}
+            {/* What We Did / Total Amount */}
             <div>
-                <p className={`text-xs font-semibold uppercase tracking-widest ${accent} mb-2.5`}>What FutoraLift Did</p>
-                <ul className="space-y-1.5">
-                    {client.whatWeDid.map((item, i) => (
-                        <li key={i} className="flex items-start gap-2 text-sm text-muted-foreground">
-                            <span className="text-cyan mt-0.5 flex-shrink-0 font-bold">✓</span>
-                            {item}
-                        </li>
-                    ))}
-                </ul>
+                <p className={`text-xs font-semibold uppercase tracking-widest ${accent} mb-2.5`}>
+                    {client.totalAmount ? (
+                        client.totalAmount.includes(" - ") ? (
+                            <>
+                                {client.totalAmount.split(" - ")[0]} - <span className="text-green-500 font-bold">{client.totalAmount.split(" - ")[1]}</span>
+                            </>
+                        ) : (
+                            client.totalAmount
+                        )
+                    ) : (
+                        "What FutoraLift Did"
+                    )}
+                </p>
+                {client.whatWeDid.length > 0 && (
+                    <ul className="space-y-1.5">
+                        {client.whatWeDid.map((item, i) => (
+                            <li key={i} className="flex items-start gap-2 text-sm text-muted-foreground">
+                                <span className="text-cyan mt-0.5 flex-shrink-0 font-bold">✓</span>
+                                {item}
+                            </li>
+                        ))}
+                    </ul>
+                )}
             </div>
 
             {/* Links */}
