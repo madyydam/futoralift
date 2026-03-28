@@ -8,91 +8,91 @@ import { categoryData } from "@/data/clients";
 import type { Client } from "@/data/clients";
 
 // ─────────────────────────────────────────────
-//  Client Card — all info visible, no click needed
+//  Client Card — ORIGINAL DESIGN (REVERTED)
 // ─────────────────────────────────────────────
 
-const ClientCard = memo(({ client, accent, accentBg, index }: { client: Client; accent: string; accentBg: string; index: number }) => (
+const ClientCard = memo(({ client, accent, index }: { client: Client; accent: string; accentBg: string; index: number }) => (
     <motion.div
         initial={{ opacity: 0, y: 20 }}
         whileInView={{ opacity: 1, y: 0 }}
         viewport={{ once: true }}
         transition={{ duration: 0.5, delay: index * 0.1 }}
-        className="rounded-xl border border-border bg-charcoal overflow-hidden hover:border-phoenix1/60 hover:-translate-y-1 hover:shadow-xl hover:shadow-phoenix1/20 transition-all duration-300 group"
+        className="rounded-2xl border border-white/5 bg-[#0D0D0F]/80 backdrop-blur-xl overflow-hidden hover:border-phoenix1/40 hover:-translate-y-2 hover:shadow-[0_20px_40px_rgba(0,0,0,0.4)] transition-all duration-500 group flex flex-col"
     >
-        {/* Gradient top accent bar */}
-        <div className="h-0.5 w-full bg-gradient-to-r from-phoenix1 to-cyan" />
-
-        <div className="p-5 flex flex-col gap-4">
-            {/* Initials + Name + Location */}
-            <div className="flex items-start gap-3">
-                <div className="w-11 h-11 rounded-xl bg-gradient-to-br from-phoenix1 to-cyan flex items-center justify-center font-poppins font-bold text-sm text-white shadow-lg flex-shrink-0">
-                    {client.initials}
-                </div>
-                <div>
-                    <h3 className="font-poppins font-bold text-base leading-tight group-hover:text-phoenix1 transition-colors">
-                        {client.name}
-                    </h3>
-                    <p className="text-xs text-muted-foreground mt-0.5 leading-snug">{client.location}</p>
-                </div>
-            </div>
-
-            {/* Image Placeholder or Actual Image */}
+        <div className="p-5 flex flex-col gap-4 flex-grow">
+            {/* Image Section */}
             {client.image && (
-                <div className="w-full h-48 rounded-lg overflow-hidden border border-border shadow-inner bg-midnight/50">
+                <div className="relative w-full aspect-video rounded-xl overflow-hidden border border-white/5 shadow-2xl bg-black/40 group-hover:border-phoenix1/20 transition-colors">
                     <img
                         src={client.image}
                         alt={client.name}
-                        className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
+                        className="w-full h-full object-cover object-top group-hover:scale-105 transition-transform duration-700"
                     />
+                    <div className="absolute inset-0 bg-gradient-to-t from-black/20 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500 flex items-end p-3">
+                        <span className="text-[8px] font-bold tracking-tighter text-white/50 uppercase">Project Spotlight</span>
+                    </div>
                 </div>
             )}
 
-            {/* What We Did / Total Amount */}
-            <div>
-                <p className={`text-xs font-semibold uppercase tracking-widest ${accent} mb-2.5`}>
-                    {client.totalAmount ? (
-                        client.totalAmount.includes(" - ") ? (
-                            <>
-                                {client.totalAmount.split(" - ")[0]} - <span className="text-green-500 font-bold">{client.totalAmount.split(" - ")[1]}</span>
-                            </>
-                        ) : (
-                            client.totalAmount
-                        )
-                    ) : (
-                        "What FutoraLift Did"
+            {/* Content Section */}
+            <div className="flex flex-col gap-4 flex-grow">
+                <div className="flex items-start justify-between gap-3">
+                    <div className="flex gap-3">
+                        <div className="w-10 h-10 rounded-xl bg-gradient-to-br from-phoenix1 to-cyan flex items-center justify-center font-poppins font-bold text-sm text-white shadow-xl shadow-phoenix1/20 flex-shrink-0 group-hover:scale-110 transition-transform">
+                            {client.initials}
+                        </div>
+                        <div className="min-w-0">
+                            <h3 className="font-poppins font-bold text-base leading-tight group-hover:text-phoenix1 transition-colors truncate">
+                                {client.name}
+                            </h3>
+                            <p className="text-[10px] text-muted-foreground mt-0.5 flex items-center gap-1.5 truncate">
+                                <span className="w-1 h-1 rounded-full bg-cyan animate-pulse" />
+                                {client.location}
+                            </p>
+                        </div>
+                    </div>
+                </div>
+
+                <div className="space-y-3">
+                    <div className="flex items-center gap-2">
+                         <div className={`h-[1px] flex-grow bg-gradient-to-r from-phoenix1/20 to-transparent`} />
+                         <p className={`text-[9px] font-bold uppercase tracking-[0.2em] ${client.totalAmount ? "text-[#27C93F]" : accent} whitespace-nowrap`}>
+                            {client.totalAmount ? client.totalAmount : "Strategic Execution"}
+                         </p>
+                    </div>
+                     
+                    {client.whatWeDid.length > 0 && (
+                        <ul className="grid grid-cols-1 gap-2">
+                            {client.whatWeDid.map((item, i) => (
+                                <li key={i} className="flex items-start gap-2.5 text-[11px] text-offwhite/80 leading-relaxed font-medium group/item hover:text-white transition-colors">
+                                    <span className="text-phoenix1 mt-1 flex-shrink-0 group-hover/item:scale-125 transition-transform items-center justify-center flex">
+                                        <div className="w-1 h-1 rounded-full bg-phoenix1 shadow-[0_0_8px_rgba(255,107,0,0.8)]" />
+                                    </span>
+                                    {item}
+                                </li>
+                            ))}
+                        </ul>
                     )}
-                </p>
-                {client.whatWeDid.length > 0 && (
-                    <ul className="space-y-1.5">
-                        {client.whatWeDid.map((item, i) => (
-                            <li key={i} className="flex items-start gap-2 text-sm text-muted-foreground">
-                                <span className="text-cyan mt-0.5 flex-shrink-0 font-bold">✓</span>
-                                {item}
-                            </li>
-                        ))}
-                    </ul>
-                )}
+                </div>
             </div>
 
-            {/* Links */}
-            {(client.instagramUrl || client.websiteUrl) && (
-                <div className="flex flex-wrap gap-2 pt-1">
-                    {client.instagramUrl && (
-                        <a href={client.instagramUrl} target="_blank" rel="noopener noreferrer">
-                            <Button size="sm" className="gap-1.5 bg-phoenix1 hover:bg-phoenix2 text-white text-xs h-8 shadow-md hover:shadow-phoenix1/40 transition-shadow">
-                                <Instagram className="w-3.5 h-3.5" /> Instagram
-                            </Button>
-                        </a>
-                    )}
-                    {client.websiteUrl && (
-                        <a href={client.websiteUrl} target="_blank" rel="noopener noreferrer">
-                            <Button size="sm" variant="outline" className="gap-1.5 border-border hover:border-phoenix1 hover:text-phoenix1 text-xs h-8 transition-colors">
-                                <Globe className="w-3.5 h-3.5" /> Website
-                            </Button>
-                        </a>
-                    )}
-                </div>
-            )}
+            {/* Action Buttons */}
+            <div className="mt-auto pt-3 flex flex-row gap-2.5">
+                {client.websiteUrl && (
+                    <a href={client.websiteUrl} target="_blank" rel="noopener noreferrer" className="flex-1">
+                        <Button className="w-full gap-2 bg-phoenix1 hover:bg-phoenix2 text-white font-bold h-10 rounded-xl shadow-lg shadow-phoenix1/20 transition-all hover:shadow-phoenix2/40 active:scale-95 px-2 text-[10px]">
+                            <Globe className="w-3.5 h-3.5" /> Live Demo
+                        </Button>
+                    </a>
+                )}
+                {client.instagramUrl && (
+                    <a href={client.instagramUrl} target="_blank" rel="noopener noreferrer" className="flex-1">
+                        <Button variant="outline" className="w-full gap-2 border-white/10 hover:border-phoenix1/40 hover:bg-phoenix1/5 hover:text-phoenix1 font-semibold h-10 rounded-xl transition-all active:scale-95 px-2 text-[10px]">
+                            <Instagram className="w-3.5 h-3.5" /> Social
+                        </Button>
+                    </a>
+                )}
+            </div>
         </div>
     </motion.div>
 ));
@@ -121,6 +121,7 @@ const CategoryPortfolio = () => {
     }
 
     const { label, accent, accentBg, clients } = config;
+    const isResort = categoryId === "restaurants-resorts";
 
     return (
         <div className="min-h-screen bg-midnight text-offwhite font-inter">
@@ -167,7 +168,7 @@ const CategoryPortfolio = () => {
 
             {/* Cards */}
             <div className="px-6 md:px-12 py-8">
-                <div className="container max-w-6xl mx-auto">
+                <div className={`container ${isResort ? "max-w-[1600px]" : "max-w-6xl"} mx-auto`}>
                     {clients.length === 0 ? (
                         <motion.div
                             initial={{ opacity: 0 }}
@@ -182,7 +183,7 @@ const CategoryPortfolio = () => {
                             </p>
                         </motion.div>
                     ) : (
-                        <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-5">
+                        <div className={`grid grid-cols-1 md:grid-cols-2 lg:grid-cols-2 ${isResort ? "xl:grid-cols-4 gap-6" : "xl:grid-cols-3 gap-8"}`}>
                             {clients.map((client, index) => (
                                 <ClientCard key={client.id} client={client} accent={accent} accentBg={accentBg} index={index} />
                             ))}

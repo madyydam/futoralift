@@ -12,18 +12,6 @@ const Hero = memo(({ scrollToContact }: HeroProps) => {
         <section id="home" className="relative min-h-screen flex items-center justify-center overflow-hidden px-6 md:px-12 pt-24">
             <div className="absolute inset-0 bg-gradient-to-br from-phoenix1/20 via-midnight to-midnight" />
 
-            {/* Moving Scan Line Effect */}
-            <motion.div
-                className="absolute inset-0 bg-gradient-to-b from-transparent via-phoenix1/5 to-transparent h-[200px] w-full z-0 pointer-events-none"
-                animate={{
-                    top: ["-200px", "100%"]
-                }}
-                transition={{
-                    duration: 8,
-                    repeat: Infinity,
-                    ease: "linear"
-                }}
-            />
 
             <div className="absolute inset-0 opacity-30">
                 <div className="absolute top-1/4 left-1/4 w-64 h-64 bg-cyan/20 rounded-full blur-3xl animate-pulse" />

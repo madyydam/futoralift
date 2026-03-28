@@ -1,10 +1,18 @@
 import { useNavigate } from "react-router-dom";
 import { memo } from "react";
 import { Card, CardContent } from "@/components/ui/card";
-import { ArrowUpRight, Dumbbell, Coffee, Cake } from "lucide-react";
+import { ArrowUpRight, Dumbbell, Coffee, Cake, Hotel } from "lucide-react";
 import { motion } from "framer-motion";
 
 const categories = [
+  {
+    id: "restaurants-resorts",
+    label: "Restaurants & Resorts",
+    icon: Hotel,
+    description: "Premium dining & luxury stays we've helped reach and delight more guests.",
+    color: "text-emerald-400",
+    borderHover: "hover:border-emerald-500/60 hover:shadow-emerald-500/20",
+  },
   {
     id: "gyms",
     label: "Gyms",
@@ -54,7 +62,7 @@ const BrandsWeLiftedPortfolio = memo(() => {
         </motion.div>
 
         {/* Category Cards */}
-        <div className="grid md:grid-cols-3 gap-6">
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
           {categories.map((cat, i) => (
             <motion.div
               key={cat.id}

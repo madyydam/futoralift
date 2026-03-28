@@ -1,7 +1,7 @@
 import { motion, AnimatePresence } from "framer-motion";
 import { useEffect, useState, useMemo, useCallback } from "react";
 import blLogo from "@/assets/bl-logo.png";
-import { Check } from "lucide-react";
+
 
 /**
  * Preloader - Performance Optimized Cinematic Splash Screen.
@@ -26,10 +26,10 @@ const Preloader = () => {
     useEffect(() => {
         setScroll(true);
 
-        const verifiedTimer = setTimeout(() => setStatus("verified"), 2500);
+        const verifiedTimer = setTimeout(() => setStatus("verified"), 1200);
         const closeTimer = setTimeout(() => {
             setIsVisible(false);
-        }, 5500);
+        }, 2800);
 
         return () => {
             setScroll(false);
@@ -54,8 +54,8 @@ const Preloader = () => {
                 backgroundColor: status === "verified" ? "rgba(10, 10, 12, 0)" : "rgba(10, 10, 12, 1)"
             }}
             transition={{
-                duration: 1.2,
-                delay: status === "verified" ? 0.8 : 0,
+                duration: 0.8,
+                delay: status === "verified" ? 0.2 : 0,
                 ease: "easeOut"
             }}
             className="fixed inset-0 z-[9999] bg-[#0A0A0C] flex flex-col items-center justify-center overflow-hidden pointer-events-auto"
@@ -88,10 +88,10 @@ const Preloader = () => {
                         transition={
                             status === "verified"
                                 ? {
-                                    duration: 2.2,
+                                    duration: 1.2,
                                     ease: zoomCurve,
                                     times: [0, 0.15, 1],
-                                    delay: 0.8
+                                    delay: 0.2
                                 }
                                 : {
                                     duration: 2.5,
@@ -105,76 +105,15 @@ const Preloader = () => {
                         <img
                             src={blLogo}
                             alt="Company Logo"
-                            className={`w-48 h-48 md:w-64 md:h-64 object-contain select-none pointer-events-none ${status === "verified"
-                                ? "drop-shadow-[0_0_30px_rgba(34,197,94,0.4)]"
-                                : "drop-shadow-[0_0_20px_rgba(239,68,68,0.2)]"
-                                }`}
+                            className="w-48 h-48 md:w-64 md:h-64 object-contain select-none pointer-events-none drop-shadow-[0_0_30px_rgba(0,229,255,0.3)]"
                         />
                     </motion.div>
 
-                    {/* Laser Scan - Only active during verification */}
-                    <AnimatePresence>
-                        {status === "verifying" && (
-                            <motion.div
-                                key="scan-bar"
-                                exit={{ opacity: 0 }}
-                                className="absolute left-0 w-full h-[2px] z-20 bg-red-500 shadow-[0_0_12px_#ef4444] pointer-events-none"
-                                animate={{ top: ["0%", "100%", "0%"] }}
-                                transition={{
-                                    top: { duration: 1.8, repeat: Infinity, ease: "linear" },
-                                    opacity: { duration: 0.05 }
-                                }}
-                            />
-                        )}
-                    </AnimatePresence>
 
-                    {/* Green Checkmark Layer */}
-                    <AnimatePresence>
-                        {status === "verified" && (
-                            <motion.div
-                                initial={{ scale: 0, opacity: 0 }}
-                                animate={{ scale: 1.2, opacity: [0, 1, 0] }}
-                                transition={{ duration: 1.2 }}
-                                className="absolute inset-0 flex items-center justify-center pointer-events-none"
-                            >
-                                <div className="bg-green-500 rounded-full p-6 shadow-[0_0_40px_rgba(34,197,94,0.6)] backdrop-blur-sm">
-                                    <Check className="w-16 h-16 text-white stroke-[4px]" aria-hidden="true" />
-                                </div>
-                            </motion.div>
-                        )}
-                    </AnimatePresence>
+
                 </div>
 
-                {/* Status HUD Container */}
-                <div className="h-14 flex items-center">
-                    <AnimatePresence mode="wait">
-                        {status === "verifying" ? (
-                            <motion.div
-                                key="verifying"
-                                initial={{ opacity: 0, y: 5 }}
-                                animate={{ opacity: 1, y: 0 }}
-                                exit={{ opacity: 0, scale: 0.95 }}
-                                className="bg-red-500/10 border border-red-500/30 px-8 py-3 rounded-md backdrop-blur-md"
-                            >
-                                <span className="text-red-500 font-poppins font-semibold tracking-[0.2em] text-sm">
-                                    Verifying Identity
-                                </span>
-                            </motion.div>
-                        ) : (
-                            <motion.div
-                                key="verified"
-                                initial={{ opacity: 0, scale: 0.9 }}
-                                animate={{ opacity: [0, 1, 0] }}
-                                transition={{ duration: 1.5 }}
-                                className="bg-green-500/10 border border-green-500/30 px-8 py-3 rounded-md backdrop-blur-md"
-                            >
-                                <span className="text-green-500 font-poppins font-semibold tracking-[0.2em] text-sm">
-                                    Verified
-                                </span>
-                            </motion.div>
-                        )}
-                    </AnimatePresence>
-                </div>
+
             </div>
         </motion.div>
     );
