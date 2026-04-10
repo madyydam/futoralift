@@ -11,9 +11,9 @@ const AboutSnapshot = lazy(() => import("@/components/sections/AboutSnapshot"));
 const WhyChooseUs = lazy(() => import("@/components/sections/WhyChooseUs"));
 const BrandsWeLiftedPortfolio = lazy(() => import("@/components/BrandsWeLiftedPortfolio"));
 const Process = lazy(() => import("@/components/sections/Process"));
+const ReelsGallery = lazy(() => import("@/components/sections/ReelsGallery"));
 const Team = lazy(() => import("@/components/sections/Team"));
 const Contact = lazy(() => import("@/components/sections/Contact"));
-const Dashboard = lazy(() => import("@/components/sections/Dashboard"));
 const GlowCharts = lazy(() => import("@/components/GlowCharts"));
 const ROICalculator = lazy(() => import("@/components/ROICalculator"));
 
@@ -120,6 +120,8 @@ const Index = () => {
 
           <BrandsWeLiftedPortfolio />
 
+          <ReelsGallery />
+
           <div className="py-16 md:py-24 px-6 md:px-12 bg-charcoal/50 min-h-[400px]">
             <ROICalculator />
           </div>
@@ -129,8 +131,6 @@ const Index = () => {
           <Team />
 
           <Contact />
-
-          <Dashboard />
         </Suspense>
       </main>
 

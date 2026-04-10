@@ -13,16 +13,19 @@ const ROICalculator = memo(({ onButtonClick }: ROICalculatorProps) => {
     const [currentEngagement, setCurrentEngagement] = useState([1000]);
 
     const { projectedReach, projectedFollowers, projectedROI } = useMemo(() => {
-        // Based on latest data: ~80 reach per ₹1 spent (conservative average from data)
-        const reach = adSpend[0] * 80;
-        // Lead/Follower conversion around 1.2% of reach + 10% of existing engagement
-        const followers = Math.round(reach * 0.012 + currentEngagement[0] * 0.1);
-        // Value per lead estimated at ₹45
-        const roi = Math.round(((followers * 45) / adSpend[0]) * 100);
+        // Data-driven Reach: 17,764 reach for ₹94.70 spent
+        // Ratio: ~187.5 reach per ₹1 spent (Excellent efficiency from provide data)
+        const reach = Math.round(adSpend[0] * 187.5);
+        
+        // Lead conversion: Based on high-quality reach, assuming ~1% cold conversion + 15% from engagement
+        const potentialLeads = Math.round(reach * 0.01 + currentEngagement[0] * 0.15);
+        
+        // Value per lead estimated at ₹50 given the high targeting quality
+        const roi = Math.round(((potentialLeads * 50) / adSpend[0]) * 100);
 
         return {
             projectedReach: reach,
-            projectedFollowers: followers,
+            projectedFollowers: potentialLeads,
             projectedROI: roi
         };
     }, [adSpend, currentEngagement]);

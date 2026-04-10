@@ -1,4 +1,4 @@
-import { useState, memo } from "react";
+import { useState, memo, useMemo } from "react";
 import { useParams, useNavigate } from "react-router-dom";
 import { Button } from "@/components/ui/button";
 import { ArrowLeft, Instagram, Globe } from "lucide-react";
@@ -105,7 +105,9 @@ const CategoryPortfolio = () => {
     const { categoryId } = useParams<{ categoryId: string }>();
     const navigate = useNavigate();
 
-    const config = categoryData[categoryId ?? ""];
+    const config = useMemo(() => categoryData[categoryId ?? ""], [categoryId]);
+
+    const isResort = categoryId === "restaurants-resorts";
 
     if (!config) {
         return (
@@ -121,7 +123,6 @@ const CategoryPortfolio = () => {
     }
 
     const { label, accent, accentBg, clients } = config;
-    const isResort = categoryId === "restaurants-resorts";
 
     return (
         <div className="min-h-screen bg-midnight text-offwhite font-inter">

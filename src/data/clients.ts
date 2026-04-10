@@ -6,6 +6,7 @@ import ripplees from "@/assets/portfolio/ripplees.png";
 import gurudev from "@/assets/portfolio/gurudev.png";
 import shivratna from "@/assets/portfolio/shivratna.png";
 import brew from "@/assets/portfolio/brew.png";
+import blackHeart from "@/assets/portfolio/black-heart.png";
 
 export interface Client {
     id: number;
@@ -131,7 +132,24 @@ export const categoryData: Record<string, CategoryConfig> = {
         label: "Cafés",
         accent: "text-cyan",
         accentBg: "bg-cyan/10",
-        clients: [],
+        clients: [
+            {
+                id: 1,
+                name: "Cafe Black Heart",
+                initials: "BH",
+                location: "Level 3, Pune, Maharashtra, India",
+                services: ["Cafe Branding", "Web Development", "Digital Menu"],
+                whatWeDid: [
+                    "Premium Cafe Branding & Visual Identity",
+                    "Custom Web Development for Online Presence",
+                    "Interactive Digital Menu Design",
+                ],
+                image: blackHeart,
+                websiteUrl: "https://blackheartcafe.vercel.app/",
+                serviceCharge: 12000,
+                adBudget: 3000,
+            }
+        ],
     },
     "cake-shops": {
         label: "Cake Shops",
