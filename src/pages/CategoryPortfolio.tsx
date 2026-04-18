@@ -22,14 +22,16 @@ const ClientCard = memo(({ client, accent, index }: { client: Client; accent: st
         <div className="p-5 flex flex-col gap-4 flex-grow">
             {/* Image Section */}
             {client.image && (
-                <div className="relative w-full aspect-video rounded-xl overflow-hidden border border-white/5 shadow-2xl bg-black/40 group-hover:border-phoenix1/20 transition-colors">
+                <div className="relative w-full aspect-video rounded-xl overflow-hidden border border-white/5 shadow-2xl bg-white group-hover:border-phoenix1/20 transition-colors p-6">
                     <img
                         src={client.image}
                         alt={client.name}
-                        className="w-full h-full object-cover object-top group-hover:scale-105 transition-transform duration-700"
+                        className="w-full h-full object-contain object-center group-hover:scale-105 transition-transform duration-700"
+                        decoding="async"
+                        style={{ willChange: "transform" }}
                     />
-                    <div className="absolute inset-0 bg-gradient-to-t from-black/20 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500 flex items-end p-3">
-                        <span className="text-[8px] font-bold tracking-tighter text-white/50 uppercase">Project Spotlight</span>
+                    <div className="absolute inset-0 bg-gradient-to-t from-black/5 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500 flex items-end p-3">
+                        <span className="text-[8px] font-bold tracking-tighter text-black/40 uppercase">Project Spotlight</span>
                     </div>
                 </div>
             )}
@@ -152,8 +154,9 @@ const CategoryPortfolio = () => {
                     <button
                         onClick={() => navigate("/#portfolio")}
                         className="flex items-center gap-1.5 text-xs text-muted-foreground hover:text-phoenix1 transition-colors mb-3 group"
+                        aria-label="Navigate back to portfolio section"
                     >
-                        <ArrowLeft className="w-3.5 h-3.5 group-hover:-translate-x-0.5 transition-transform" />
+                        <ArrowLeft className="w-3.5 h-3.5 group-hover:-translate-x-0.5 transition-transform" aria-hidden="true" />
                         Back to Portfolio
                     </button>
                     <div className="flex items-baseline gap-3">

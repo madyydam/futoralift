@@ -79,16 +79,16 @@ const ROICalculator = memo(({ onButtonClick }: ROICalculatorProps) => {
                 </div>
 
                 <div className="grid grid-cols-1 md:grid-cols-3 gap-4 pt-4">
-                    {[
+                    {useMemo(() => [
                         { label: "Est. New Reach", value: projectedReach.toLocaleString() + "+", icon: Target, color: "text-cyan" },
                         { label: "Est. New Leads", value: projectedFollowers.toLocaleString() + "+", icon: Users, color: "text-phoenix1" },
                         { label: "Potential ROI", value: projectedROI + "%", icon: TrendingUp, color: "text-green-400" }
-                    ].map((stat, i) => (
+                    ], [projectedReach, projectedFollowers, projectedROI]).map((stat, i) => (
                         <div
                             key={i}
                             className="bg-midnight/40 p-4 rounded-xl border border-white/5 text-center"
                         >
-                            <stat.icon className={`w-6 h-6 mx-auto mb-2 ${stat.color}`} />
+                            <stat.icon className={`w-6 h-6 mx-auto mb-2 ${stat.color}`} aria-hidden="true" />
                             <p className="text-xs text-muted-foreground uppercase tracking-wider">{stat.label}</p>
                             <p className={`text-xl font-bold mt-1 ${stat.color}`}>{stat.value}</p>
                         </div>

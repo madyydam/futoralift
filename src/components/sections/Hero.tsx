@@ -30,6 +30,7 @@ const Hero = memo(({ scrollToContact }: HeroProps) => {
                             src={blLogo}
                             alt="Futoralift by Madhur Dhadve - Futora Group of Companies Logo"
                             className="w-32 h-32 md:w-48 md:h-48 object-contain"
+                            decoding="async"
                             animate={{
                                 y: [0, -20, 0],
                                 rotate: [0, -5, 5, 0],
@@ -39,6 +40,7 @@ const Hero = memo(({ scrollToContact }: HeroProps) => {
                                 repeat: Infinity,
                                 ease: "easeInOut",
                             }}
+                            style={{ willChange: "transform" }}
                         />
                         <motion.h1
                             className="font-poppins font-bold text-3xl sm:text-5xl md:text-6xl lg:text-7xl leading-tight flex flex-wrap justify-center cursor-default gap-0 items-center"

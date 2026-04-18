@@ -52,6 +52,7 @@ const Index = () => {
                 animate={{ y: [0, -4, 0] }}
                 transition={{ duration: 3, repeat: Infinity, ease: "easeInOut" }}
                 loading="eager"
+                decoding="async"
               />
               <span className="font-poppins font-bold text-lg md:text-xl text-phoenix1 group-hover:tracking-wider transition-all duration-300 uppercase">FUTORALIFT</span>
             </a>
@@ -74,9 +75,9 @@ const Index = () => {
             <button
               className="md:hidden text-offwhite p-2 hover:bg-white/5 rounded-lg transition-colors"
               onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
-              aria-label="Toggle Menu"
+              aria-label={mobileMenuOpen ? "Close menu" : "Open menu"}
             >
-              {mobileMenuOpen ? <X size={24} /> : <Menu size={24} />}
+              {mobileMenuOpen ? <X size={24} aria-hidden="true" /> : <Menu size={24} aria-hidden="true" />}
             </button>
           </div>
 
@@ -144,6 +145,7 @@ const Index = () => {
               animate={{ y: [0, -3, 0] }}
               transition={{ duration: 4, repeat: Infinity, ease: "easeInOut" }}
               loading="lazy"
+              decoding="async"
             />
             <span className="font-poppins font-bold text-xl text-phoenix1 uppercase hover:tracking-widest transition-all duration-300 cursor-default">FUTORALIFT</span>
           </div>

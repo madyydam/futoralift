@@ -1,7 +1,7 @@
 import { useNavigate } from "react-router-dom";
 import { memo } from "react";
 import { Card, CardContent } from "@/components/ui/card";
-import { ArrowUpRight, Dumbbell, Coffee, Cake, Hotel } from "lucide-react";
+import { ArrowUpRight, Dumbbell, Coffee, Cake, Hotel, Zap } from "lucide-react";
 import { motion } from "framer-motion";
 
 const categories = [
@@ -37,6 +37,14 @@ const categories = [
     color: "text-pink-400",
     borderHover: "hover:border-pink-500/60 hover:shadow-pink-500/20",
   },
+  {
+    id: "d2c-startups",
+    label: "D2C Brands & Startups",
+    icon: Zap,
+    description: "From FMCG to tech startups, we help modern brands scale with performance marketing, creative strategy & high-converting funnels.",
+    color: "text-violet-400",
+    borderHover: "hover:border-violet-500/60 hover:shadow-violet-500/20",
+  },
 ];
 
 const BrandsWeLiftedPortfolio = memo(() => {
@@ -44,7 +52,7 @@ const BrandsWeLiftedPortfolio = memo(() => {
 
   return (
     <section id="portfolio" className="py-16 md:py-24 px-6 md:px-12 bg-midnight">
-      <div className="container max-w-6xl mx-auto">
+      <div className="container max-w-7xl mx-auto">
 
         {/* Header */}
         <motion.div
@@ -62,7 +70,7 @@ const BrandsWeLiftedPortfolio = memo(() => {
         </motion.div>
 
         {/* Category Cards */}
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-6">
           {categories.map((cat, i) => (
             <motion.div
               key={cat.id}
@@ -75,15 +83,15 @@ const BrandsWeLiftedPortfolio = memo(() => {
                 className={`bg-charcoal border-border h-full ${cat.borderHover} hover:-translate-y-2 hover:shadow-xl transition-all duration-300 cursor-pointer group`}
                 onClick={() => navigate(`/portfolio/${cat.id}`)}
               >
-                <CardContent className="pt-8 pb-8 px-6 flex flex-col items-center text-center gap-4">
-                  <div className={`p-4 rounded-2xl bg-charcoal border border-border group-hover:border-phoenix1/40 transition-colors`}>
-                    <cat.icon className={`w-10 h-10 ${cat.color}`} />
+                <CardContent className="py-5 px-4 flex flex-col items-center text-center gap-3">
+                  <div className={`p-2.5 rounded-2xl bg-charcoal border border-border group-hover:border-phoenix1/40 transition-colors`}>
+                    <cat.icon className={`w-7 h-7 ${cat.color}`} />
                   </div>
-                  <h3 className="font-poppins font-semibold text-2xl">{cat.label}</h3>
-                  <p className="text-sm text-muted-foreground leading-relaxed">{cat.description}</p>
-                  <div className="flex items-center gap-1 text-phoenix1 text-sm font-semibold mt-2 group-hover:gap-2 transition-all">
+                  <h3 className="font-poppins font-semibold text-lg leading-tight">{cat.label}</h3>
+                  <p className="text-[12px] text-muted-foreground leading-relaxed line-clamp-3">{cat.description}</p>
+                  <div className="flex items-center gap-1 text-phoenix1 text-[10px] font-bold mt-auto pt-1 group-hover:gap-2 transition-all">
                     View Clients
-                    <ArrowUpRight className="w-4 h-4" />
+                    <ArrowUpRight className="w-3 h-3" />
                   </div>
                 </CardContent>
               </Card>

@@ -7,6 +7,8 @@ import gurudev from "@/assets/portfolio/gurudev.png";
 import shivratna from "@/assets/portfolio/shivratna.png";
 import brew from "@/assets/portfolio/brew.png";
 import blackHeart from "@/assets/portfolio/black-heart.png";
+import gadgetdash from "@/assets/portfolio/gadgetdash.png";
+import proshakti from "@/assets/portfolio/proshakti.png";
 
 export interface Client {
     id: number;
@@ -214,6 +216,47 @@ export const categoryData: Record<string, CategoryConfig> = {
             },
         ],
     },
+    "d2c-startups": {
+        label: "D2C Brands & Startups",
+        accent: "text-violet-400",
+        accentBg: "bg-violet-400/10",
+        clients: [
+            {
+                id: 1,
+                name: "Proshakti",
+                initials: "PS",
+                location: "India",
+                services: ["Performance Ads", "Creative Strategy", "Brand Positioning"],
+                whatWeDid: [
+                    "Performance Meta Ads Campaigns",
+                    "High-Converting Creative Strategy",
+                    "Brand Positioning for FMCG Growth",
+                ],
+                image: proshakti,
+                websiteUrl: "https://proshakti.com/",
+                instagramUrl: "https://www.instagram.com/proshakti_dairy?utm_source=ig_web_button_share_sheet&igsh=ZDNlZDc0MzIxNw==",
+                serviceCharge: 20000,
+                adBudget: 10000,
+            },
+            {
+                id: 2,
+                name: "GadgetDash",
+                initials: "GD",
+                location: "India",
+                services: ["Growth Strategy", "Ads Funnels", "Creative Campaigns"],
+                whatWeDid: [
+                    "Startup Growth Strategy",
+                    "Paid Ads Funnel Setup",
+                    "Product-Focused Creative Campaigns",
+                ],
+                image: gadgetdash,
+                websiteUrl: "https://www.gadgetdash.in/",
+                instagramUrl: "https://www.instagram.com/gadgetdash_01?utm_source=ig_web_button_share_sheet&igsh=ZDNlZDc0MzIxNw==",
+                serviceCharge: 15000,
+                adBudget: 5000,
+            }
+        ],
+    },
 };
 
 // Compute Dynamic Metrics
@@ -242,6 +285,7 @@ export const dashboardMetrics = {
         gyms: getCatMetrics("gyms"),
         cafes: getCatMetrics("cafes"),
         cakeShops: getCatMetrics("cake-shops"),
-        restaurantsResorts: getCatMetrics("restaurants-resorts")
+        restaurantsResorts: getCatMetrics("restaurants-resorts"),
+        d2cStartups: getCatMetrics("d2c-startups")
     }
 };
