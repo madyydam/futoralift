@@ -1,5 +1,5 @@
 import { useNavigate } from "react-router-dom";
-import { memo } from "react";
+import { memo, useCallback } from "react";
 import { Card, CardContent } from "@/components/ui/card";
 import { ArrowUpRight, Dumbbell, Coffee, Cake, Hotel, Zap } from "lucide-react";
 import { motion } from "framer-motion";
@@ -50,6 +50,10 @@ const categories = [
 const BrandsWeLiftedPortfolio = memo(() => {
   const navigate = useNavigate();
 
+  const handleCategoryClick = useCallback((id: string) => {
+    navigate(`/portfolio/${id}`);
+  }, [navigate]);
+
   return (
     <section id="portfolio" className="py-16 md:py-24 px-6 md:px-12 bg-midnight">
       <div className="container max-w-7xl mx-auto">
@@ -77,21 +81,25 @@ const BrandsWeLiftedPortfolio = memo(() => {
               initial={{ opacity: 0, y: 30 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
-              transition={{ duration: 0.5, delay: i * 0.1 }}
+              transition={{ duration: 0.5, delay: Math.min(i * 0.1, 0.4) }}
             >
               <Card
+                role="button"
+                tabIndex={0}
+                aria-label={`View ${cat.label} portfolio`}
                 className={`bg-charcoal border-border h-full ${cat.borderHover} hover:-translate-y-2 hover:shadow-xl transition-all duration-300 cursor-pointer group`}
-                onClick={() => navigate(`/portfolio/${cat.id}`)}
+                onClick={() => handleCategoryClick(cat.id)}
+                onKeyDown={(e) => e.key === 'Enter' && handleCategoryClick(cat.id)}
               >
                 <CardContent className="py-5 px-4 flex flex-col items-center text-center gap-3">
                   <div className={`p-2.5 rounded-2xl bg-charcoal border border-border group-hover:border-phoenix1/40 transition-colors`}>
-                    <cat.icon className={`w-7 h-7 ${cat.color}`} />
+                    <cat.icon className={`w-7 h-7 ${cat.color}`} aria-hidden="true" />
                   </div>
                   <h3 className="font-poppins font-semibold text-lg leading-tight">{cat.label}</h3>
                   <p className="text-[12px] text-muted-foreground leading-relaxed line-clamp-3">{cat.description}</p>
                   <div className="flex items-center gap-1 text-phoenix1 text-[10px] font-bold mt-auto pt-1 group-hover:gap-2 transition-all">
                     View Clients
-                    <ArrowUpRight className="w-3 h-3" />
+                    <ArrowUpRight className="w-3 h-3" aria-hidden="true" />
                   </div>
                 </CardContent>
               </Card>

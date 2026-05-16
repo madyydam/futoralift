@@ -23,6 +23,14 @@ import { Menu, X, Instagram } from "lucide-react";
 const Index = () => {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
 
+  const toggleMobileMenu = useCallback(() => {
+    setMobileMenuOpen(prev => !prev);
+  }, []);
+
+  const closeMobileMenu = useCallback(() => {
+    setMobileMenuOpen(false);
+  }, []);
+
   const scrollToContact = useCallback(() => {
     const contactSection = document.getElementById("contact");
     contactSection?.scrollIntoView({ behavior: "smooth" });
@@ -74,8 +82,9 @@ const Index = () => {
             {/* Mobile Menu Button */}
             <button
               className="md:hidden text-offwhite p-2 hover:bg-white/5 rounded-lg transition-colors"
-              onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
+              onClick={toggleMobileMenu}
               aria-label={mobileMenuOpen ? "Close menu" : "Open menu"}
+              aria-expanded={mobileMenuOpen}
             >
               {mobileMenuOpen ? <X size={24} aria-hidden="true" /> : <Menu size={24} aria-hidden="true" />}
             </button>
@@ -86,6 +95,7 @@ const Index = () => {
             <motion.div 
               initial={{ opacity: 0, y: -10 }}
               animate={{ opacity: 1, y: 0 }}
+              exit={{ opacity: 0, y: -10 }}
               className="md:hidden absolute top-16 left-0 right-0 bg-midnight/98 border-b border-border shadow-2xl backdrop-blur-xl"
             >
               <div className="flex flex-col py-6 px-4 space-y-2">
@@ -94,7 +104,7 @@ const Index = () => {
                     key={link.id}
                     href={`#${link.id}`}
                     className="px-6 py-4 rounded-xl hover:bg-phoenix1/10 hover:text-phoenix1 transition-all capitalize text-lg font-medium"
-                    onClick={() => setMobileMenuOpen(false)}
+                    onClick={closeMobileMenu}
                   >
                     {link.label}
                   </a>

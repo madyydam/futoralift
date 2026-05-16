@@ -14,16 +14,16 @@ const founders = [
         desc: "Leads technology and marketing systems, managing everything from websites and apps to ads and creative campaigns."
     },
     {
-        name: "Yuvraj Gour",
-        role: "Co-founder",
-        initials: "YG",
-        desc: "Creative strategist focused on video shoots, editing, and delivering visually powerful campaigns."
+        name: "Ayush Borkar",
+        role: "Manager",
+        initials: "AB",
+        desc: "Oversees all client relations and ensures seamless communication between the team and partners."
     },
     {
-        name: "Rishi Gadakh",
-        role: "Co-founder",
-        initials: "RG",
-        desc: "Operations manager and video editor ensuring smooth project workflow and high-quality content delivery."
+        name: "Yuvraj Gour",
+        role: "Media Team",
+        initials: "YG",
+        desc: "Creative strategist focused on video shoots, editing, and delivering visually powerful campaigns."
     }
 ];
 
@@ -39,16 +39,15 @@ const departments = [
     {
         title: "Videography",
         members: [
-            { name: "Sandeep", role: "Videographer", initials: "S", desc: "Captures high-quality cinematic footage with technical excellence." },
             { name: "Yuvraj", role: "Videographer", initials: "Y", desc: "Specializes in dynamic shoots and creative visual storytelling." },
         ]
     },
     {
         title: "Video Editing",
         members: [
+            { name: "Rishi Gadakh", role: "Editor Team", initials: "RG", desc: "Operations manager and video editor ensuring smooth project workflow and high-quality content delivery." },
             { name: "Sandeep", role: "Video Editor", initials: "S", desc: "Refining visual narratives with precision and creative flair." },
             { name: "Rohan", role: "Video Editor", initials: "R", desc: "Expert in post-production, color grading, and visual effects." },
-            { name: "Varun", role: "Video Editor", initials: "V", desc: "Crafting seamless edits that maintain high energy and engagement." },
             { name: "Yuvraj", role: "Video Editor", initials: "Y", desc: "Ensuring every frame aligns perfectly with the brand's vision." },
         ]
     }

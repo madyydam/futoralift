@@ -11,12 +11,20 @@ import type { Client } from "@/data/clients";
 //  Client Card — ORIGINAL DESIGN (REVERTED)
 // ─────────────────────────────────────────────
 
-const ClientCard = memo(({ client, accent, index, isD2C }: { client: Client; accent: string; accentBg: string; index: number; isD2C: boolean }) => (
+interface ClientCardProps {
+    client: Client;
+    accent: string;
+    accentBg: string;
+    index: number;
+    isD2C: boolean;
+}
+
+const ClientCard = memo(({ client, accent, index, isD2C }: ClientCardProps) => (
     <motion.div
         initial={{ opacity: 0, y: 20 }}
         whileInView={{ opacity: 1, y: 0 }}
-        viewport={{ once: true }}
-        transition={{ duration: 0.5, delay: index * 0.1 }}
+        viewport={{ once: true, margin: "-50px" }}
+        transition={{ duration: 0.4, delay: Math.min(index * 0.05, 0.3) }}
         className="rounded-2xl border border-white/5 bg-[#0D0D0F]/80 backdrop-blur-xl overflow-hidden hover:border-phoenix1/40 hover:-translate-y-2 hover:shadow-[0_20px_40px_rgba(0,0,0,0.4)] transition-all duration-500 group flex flex-col"
     >
         <div className="p-5 flex flex-col gap-4 flex-grow">
@@ -25,8 +33,9 @@ const ClientCard = memo(({ client, accent, index, isD2C }: { client: Client; acc
                 <div className={`relative w-full aspect-video rounded-xl overflow-hidden border border-white/5 shadow-2xl transition-colors ${isD2C ? 'bg-white p-6 group-hover:border-phoenix1/20' : ''}`}>
                     <img
                         src={client.image}
-                        alt={client.name}
+                        alt={`${client.name} project showcase`}
                         className={`w-full h-full object-center group-hover:scale-105 transition-transform duration-700 ${isD2C ? 'object-contain' : 'object-cover'}`}
+                        loading="lazy"
                         decoding="async"
                         style={{ willChange: "transform" }}
                     />
@@ -48,7 +57,7 @@ const ClientCard = memo(({ client, accent, index, isD2C }: { client: Client; acc
                                 {client.name}
                             </h3>
                             <p className="text-[10px] text-muted-foreground mt-0.5 flex items-center gap-1.5 truncate">
-                                <span className="w-1 h-1 rounded-full bg-cyan animate-pulse" />
+                                <span className="w-1 h-1 rounded-full bg-cyan animate-pulse" aria-hidden="true" />
                                 {client.location}
                             </p>
                         </div>
@@ -66,8 +75,8 @@ const ClientCard = memo(({ client, accent, index, isD2C }: { client: Client; acc
                     {client.whatWeDid.length > 0 && (
                         <ul className="grid grid-cols-1 gap-2">
                             {client.whatWeDid.map((item, i) => (
-                                <li key={i} className="flex items-start gap-2.5 text-[11px] text-offwhite/80 leading-relaxed font-medium group/item hover:text-white transition-colors">
-                                    <span className="text-phoenix1 mt-1 flex-shrink-0 group-hover/item:scale-125 transition-transform items-center justify-center flex">
+                                <li key={`${client.id}-task-${i}`} className="flex items-start gap-2.5 text-[11px] text-offwhite/80 leading-relaxed font-medium group/item hover:text-white transition-colors">
+                                    <span className="text-phoenix1 mt-1 flex-shrink-0 group-hover/item:scale-125 transition-transform items-center justify-center flex" aria-hidden="true">
                                         <div className="w-1 h-1 rounded-full bg-phoenix1 shadow-[0_0_8px_rgba(255,107,0,0.8)]" />
                                     </span>
                                     {item}
@@ -81,14 +90,14 @@ const ClientCard = memo(({ client, accent, index, isD2C }: { client: Client; acc
             {/* Action Buttons */}
             <div className="mt-auto pt-3 flex flex-row gap-2.5">
                 {client.websiteUrl && (
-                    <a href={client.websiteUrl} target="_blank" rel="noopener noreferrer" className="flex-1">
+                    <a href={client.websiteUrl} target="_blank" rel="noopener noreferrer" className="flex-1" aria-label={`Visit ${client.name} website`}>
                         <Button className="w-full gap-2 bg-phoenix1 hover:bg-phoenix2 text-white font-bold h-10 rounded-xl shadow-lg shadow-phoenix1/20 transition-all hover:shadow-phoenix2/40 active:scale-95 px-2 text-[10px]">
                             <Globe className="w-3.5 h-3.5" /> Live Demo
                         </Button>
                     </a>
                 )}
                 {client.instagramUrl && (
-                    <a href={client.instagramUrl} target="_blank" rel="noopener noreferrer" className="flex-1">
+                    <a href={client.instagramUrl} target="_blank" rel="noopener noreferrer" className="flex-1" aria-label={`Visit ${client.name} Instagram`}>
                         <Button variant="outline" className="w-full gap-2 border-white/10 hover:border-phoenix1/40 hover:bg-phoenix1/5 hover:text-phoenix1 font-semibold h-10 rounded-xl transition-all active:scale-95 px-2 text-[10px]">
                             <Instagram className="w-3.5 h-3.5" /> Social
                         </Button>

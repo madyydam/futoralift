@@ -9,6 +9,7 @@ import brew from "@/assets/portfolio/brew.png";
 import blackHeart from "@/assets/portfolio/black-heart.png";
 import gadgetdash from "@/assets/portfolio/gadgetdash.png";
 import proshakti from "@/assets/portfolio/proshakti.png";
+import radhaPureVeg from "@/assets/portfolio/radha-pure-veg.png";
 
 export interface Client {
     id: number;
@@ -41,7 +42,24 @@ export const categoryData: Record<string, CategoryConfig> = {
         clients: [
             {
                 id: 1,
-                name: "Ripplees Family Lake Resort",
+                name: "Radha Pure Veg",
+                initials: "RPV",
+                location: "Sinhgad Rd, beside Natural Ice-Cream, Manik Baug, Anand Nagar, Pune, Maharashtra 411051",
+                services: ["8 Reels", "10 Carousels", "Restaurant Website", "Digital Menu"],
+                whatWeDid: [
+                    "8 Reels (4 Industry-grade Ads + 4 Cinematic Ambience Reels)",
+                    "10 Professional Carousel Posts & Strategic Content",
+                    "Full-Stack Restaurant Website & Digital Menu",
+                ],
+                image: radhaPureVeg,
+                websiteUrl: "https://radhapureveg.vercel.app/",
+                instagramUrl: "https://www.instagram.com/radha.pureveg?utm_source=ig_web_button_share_sheet&igsh=ZDNlZDc0MzIxNw==",
+                serviceCharge: 10000,
+                adBudget: 2000,
+            },
+            {
+                id: 2,
+                name: "Ripplees Resort",
                 initials: "RL",
                 location: "Ambegaon Khurd, Pune, Maharashtra, India",
                 services: ["Lakeside Booking UI", "Premium Logo Design", "Meta Ad Creative"],
@@ -56,7 +74,7 @@ export const categoryData: Record<string, CategoryConfig> = {
                 adBudget: 5000,
             },
             {
-                id: 2,
+                id: 3,
                 name: "Gurudev Restaurant",
                 initials: "GR",
                 location: "Aston Plaza, Narhe Ambegaon Road, Ambegaon, Pune",
@@ -72,8 +90,8 @@ export const categoryData: Record<string, CategoryConfig> = {
                 adBudget: 3000,
             },
             {
-                id: 3,
-                name: "Shivratna Hospitality",
+                id: 4,
+                name: "Shivratna Restaurant",
                 initials: "SH",
                 location: "Manaji Nagar Road, Narhe, Pune",
                 services: ["Hospitality UI", "Booking Flow", "Instagram Growth"],
@@ -86,22 +104,6 @@ export const categoryData: Record<string, CategoryConfig> = {
                 websiteUrl: "https://shivratna.lovable.app",
                 serviceCharge: 10000,
                 adBudget: 2000,
-            },
-            {
-                id: 4,
-                name: "Cafe Cheers",
-                initials: "CC",
-                location: "Nahre, Pune, Maharashtra, India",
-                services: ["Cafe Landing Page", "Menu Card Design", "Customer Loyalty Program"],
-                whatWeDid: [
-                    "Modern Bistro Landing Page Design",
-                    "Creative Digital Menu Card Layout",
-                    "Customer Loyalty & Referral Program Setup",
-                ],
-                image: brew,
-                websiteUrl: "https://brew-site-designer.lovable.app",
-                serviceCharge: 8000,
-                adBudget: 1500,
             }
         ],
     },
@@ -115,16 +117,14 @@ export const categoryData: Record<string, CategoryConfig> = {
                 name: "FITNESS TOUCH GYM",
                 initials: "FT",
                 location: "Jadhav Nagar, Vadgaon BK, Pune, Maharashtra 411041",
-                services: ["4 Reels", "4 Carousels", "2 Meta Ad Creative Setup", "₹25,000 Service Charge"],
+                services: ["4 Reels", "4 Carousels", "2 Meta Ad Creative Setup", "Service Fee Included"],
                 whatWeDid: [
                     "Instagram Reels – 4 per month",
                     "Instagram Carousels / Posts – 4 per month",
                     "2 Meta Ad Creative Setup with ₹10000 budget",
-                    "₹25,000 - Service Charge",
                 ],
                 image: fitnessTouch,
                 instagramUrl: "https://www.instagram.com/fitnesstouchgym82?utm_source=ig_web_button_share_sheet&igsh=ZDNlZDc0MzIxNw==",
-                totalAmount: "₹35,000",
                 serviceCharge: 25000,
                 adBudget: 10000,
             }
@@ -150,6 +150,38 @@ export const categoryData: Record<string, CategoryConfig> = {
                 websiteUrl: "https://blackheartcafe.vercel.app/",
                 serviceCharge: 12000,
                 adBudget: 3000,
+            },
+            {
+                id: 2,
+                name: "Cafe Cheers",
+                initials: "CC",
+                location: "Narhe, Pune, Maharashtra, India",
+                services: ["Cafe Landing Page", "Menu Card Design", "Customer Loyalty Program"],
+                whatWeDid: [
+                    "Modern Bistro Landing Page Design",
+                    "Creative Digital Menu Card Layout",
+                    "Customer Loyalty & Referral Program Setup",
+                ],
+                image: brew,
+                websiteUrl: "https://brew-site-designer.lovable.app",
+                serviceCharge: 8000,
+                adBudget: 1500,
+            },
+            {
+                id: 3,
+                name: "Futora",
+                initials: "FC",
+                location: "Pune, Maharashtra, India",
+                services: ["Cafe Website", "Brand Identity", "Digital Presence"],
+                whatWeDid: [
+                    "Full-Stack Cafe Website Development",
+                    "Premium Brand Identity & Visual Design",
+                    "Digital Presence & Online Ordering Setup",
+                ],
+                image: brew,
+                websiteUrl: "https://futoracafe.vercel.app/",
+                serviceCharge: 10000,
+                adBudget: 2000,
             }
         ],
     },
@@ -168,9 +200,7 @@ export const categoryData: Record<string, CategoryConfig> = {
                     "Instagram Reels – 15 per month",
                     "Instagram Carousels / Posts – 5 per month",
                     "Website Development",
-                    "₹13,000 - Service Charge",
                 ],
-                totalAmount: "Total Project Cost - ₹13,000",
                 image: stories12am,
                 instagramUrl: "https://www.instagram.com/12am_stories_/",
                 websiteUrl: "https://12amstories.vercel.app/",
@@ -188,9 +218,7 @@ export const categoryData: Record<string, CategoryConfig> = {
                     "Instagram Carousels / Posts – 10 per month",
                     "Website Development",
                     "2 Meta Ad Creative Setup with ₹4000 budget",
-                    "₹9,000 - Service Charge",
                 ],
-                totalAmount: "Total Project Cost - ₹13,000",
                 instagramUrl: "https://www.instagram.com/thecreamywalnut?utm_source=ig_web_button_share_sheet&igsh=ZDNlZDc0MzIxNw==",
                 websiteUrl: "https://TheCreamyWalnut.vercel.app",
                 image: tcwLogo,
@@ -207,9 +235,7 @@ export const categoryData: Record<string, CategoryConfig> = {
                     "Instagram Reels – 5 per month",
                     "Instagram Carousels / Posts – 10 per month",
                     "1 Meta Ad Creative Setup with ₹4000 budget",
-                    "₹4,000 - Service Charge",
                 ],
-                totalAmount: "Total Project Cost - ₹8,000",
                 image: cakeCarnival,
                 serviceCharge: 4000,
                 adBudget: 4000,

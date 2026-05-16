@@ -1,19 +1,21 @@
 import { motion } from "framer-motion";
 import { Button } from "@/components/ui/button";
 import blLogo from "@/assets/bl-logo.png";
-import { memo } from "react";
+import { memo, useMemo } from "react";
 
 interface HeroProps {
     scrollToContact: () => void;
 }
 
 const Hero = memo(({ scrollToContact }: HeroProps) => {
+    const titleChars = useMemo(() => "FUTORALIFT".split(""), []);
+
     return (
         <section id="home" className="relative min-h-screen flex items-center justify-center overflow-hidden px-6 md:px-12 pt-24">
-            <div className="absolute inset-0 bg-gradient-to-br from-phoenix1/20 via-midnight to-midnight" />
+            <div className="absolute inset-0 bg-gradient-to-br from-phoenix1/20 via-midnight to-midnight pointer-events-none" />
 
 
-            <div className="absolute inset-0 opacity-30">
+            <div className="absolute inset-0 opacity-30 pointer-events-none">
                 <div className="absolute top-1/4 left-1/4 w-64 h-64 bg-cyan/20 rounded-full blur-3xl animate-pulse" />
                 <div className="absolute bottom-1/4 right-1/4 w-96 h-96 bg-phoenix1/20 rounded-full blur-3xl animate-pulse" style={{ animationDelay: "1s" }} />
             </div>
@@ -22,14 +24,15 @@ const Hero = memo(({ scrollToContact }: HeroProps) => {
                 <motion.div
                     initial={{ opacity: 0, y: 30 }}
                     animate={{ opacity: 1, y: 0 }}
-                    transition={{ duration: 0.8, ease: "easeOut" }}
+                    transition={{ duration: 0.8, ease: [0.22, 1, 0.36, 1] }}
                     className="text-center space-y-6"
                 >
                     <div className="flex flex-col items-center gap-4">
                         <motion.img
                             src={blLogo}
-                            alt="Futoralift by Madhur Dhadve - Futora Group of Companies Logo"
+                            alt="Futoralift Logo"
                             className="w-32 h-32 md:w-48 md:h-48 object-contain"
+                            loading="eager"
                             decoding="async"
                             animate={{
                                 y: [0, -20, 0],
@@ -54,7 +57,7 @@ const Hero = memo(({ scrollToContact }: HeroProps) => {
                                 }
                             }}
                         >
-                            {"FUTORALIFT".split("").map((char, i) => (
+                            {titleChars.map((char, i) => (
                                 <motion.span
                                     key={i}
                                     className={i >= 6 ? "text-phoenix1" : ""}
@@ -69,6 +72,7 @@ const Hero = memo(({ scrollToContact }: HeroProps) => {
                                         textShadow: `0 0 20px ${i >= 6 ? "rgba(0,229,255,0.6)" : "rgba(255,107,0,0.6)"}`,
                                         transition: { duration: 0.2 }
                                     }}
+                                    style={{ willChange: "transform, opacity, filter" }}
                                 >
                                     {char}
                                 </motion.span>
@@ -98,7 +102,7 @@ const Hero = memo(({ scrollToContact }: HeroProps) => {
                     <motion.p
                         initial={{ opacity: 0, y: 10 }}
                         animate={{ opacity: 1, y: 0 }}
-                        transition={{ delay: 1.5, duration: 1 }}
+                        transition={{ delay: 1.2, duration: 1 }}
                         className="text-base md:text-2xl text-muted-foreground font-poppins max-w-3xl mx-auto px-4"
                     >
                         Skyrocketing your brand to digital dominance 🚀
