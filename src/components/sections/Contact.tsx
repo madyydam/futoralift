@@ -150,9 +150,9 @@ const Contact = memo(() => {
                                 <div>
                                     <p className="font-semibold">Phone</p>
                                     <div className="flex flex-col gap-1">
-                                        <a href="tel:+918446653644" className="text-muted-foreground hover:text-phoenix1 transition-colors">+91 84466 53644</a>
-                                        <a href="tel:+917887578006" className="text-muted-foreground hover:text-phoenix1 transition-colors">+91 78875 78006</a>
+                                        <a href="tel:+919373976449" className="text-muted-foreground hover:text-phoenix1 transition-colors">+91 9373976449</a>
                                         <a href="tel:+918452854044" className="text-muted-foreground hover:text-phoenix1 transition-colors">+91 84528 54044</a>
+                                        <a href="tel:+918446653644" className="text-muted-foreground hover:text-phoenix1 transition-colors">+91 84466 53644</a>
                                     </div>
                                 </div>
                             </div>
