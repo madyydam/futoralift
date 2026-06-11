@@ -1,6 +1,6 @@
 import { motion, AnimatePresence } from "framer-motion";
 import { useEffect, useState, useMemo, useCallback } from "react";
-import blLogo from "@/assets/bl-logo.png";
+import blLogo from "@/assets/bl-logo.webp";
 
 
 /**

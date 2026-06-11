@@ -1,51 +1,102 @@
+import { memo, useMemo } from "react";
 import { motion } from "framer-motion";
-import { memo } from "react";
+import { categoryData } from "@/data/clients";
+import { Button } from "@/components/ui/button";
+import { Globe } from "lucide-react";
 
-const steps = [
-    { title: "Consultation", desc: "Understanding your brand vision and goals." },
-    { title: "Strategy", desc: "Developing a tailored marketing roadmap." },
-    { title: "Creation", desc: "Bringing ideas to life with high-impact content." },
-    { title: "Lifting", desc: "Executing and optimizing for maximum growth." }
-];
+// Derived once at module level — categoryData is a static import, never changes at runtime
+const websites = Object.entries(categoryData).flatMap(([, cat]) =>
+    cat.clients
+        .filter(client => Boolean(client.websiteUrl))
+        .map(client => ({
+            ...client,
+            categoryLabel: cat.label,
+        }))
+);
+
+// Stable animation variants — defined outside component to avoid recreation on every render
+const cardVariants = {
+    hidden: { opacity: 0, y: 20 },
+    visible: (i: number) => ({
+        opacity: 1,
+        y: 0,
+        transition: { duration: 0.4, delay: Math.min(i * 0.05, 0.3) },
+    }),
+};
 
 const Process = memo(() => {
+    // Generate stable keys once per render (web.name is unique per website)
+    const keys = useMemo(() => websites.map((w, i) => `${w.name}-${i}`), []);
+
     return (
-        <section className="py-16 md:py-24 px-6 md:px-12">
-            <div className="container max-w-6xl mx-auto">
+        <section id="websites" className="py-16 md:py-24 px-6 md:px-12 bg-midnight/30">
+            <div className="container max-w-7xl mx-auto">
                 <motion.div
                     initial={{ opacity: 0, y: 20 }}
                     whileInView={{ opacity: 1, y: 0 }}
                     viewport={{ once: true }}
                     className="text-center mb-16"
                 >
-                    <h2 className="font-poppins font-bold text-4xl md:text-5xl mb-4">Our Process</h2>
+                    <h2 className="font-poppins font-bold text-4xl md:text-5xl mb-4">
+                        Business Websites We Have <span className="text-phoenix1">Made</span> 💻
+                    </h2>
                     <p className="text-lg text-muted-foreground max-w-2xl mx-auto">
-                        A proven framework designed to lift your brand from inception to market leader.
+                        Check out some of the high-converting and premium web experiences we have built for our clients.
                     </p>
                 </motion.div>
 
-                <div className="relative">
-                    <div className="hidden lg:block absolute top-[2.5rem] left-0 right-0 h-0.5 bg-border z-0" />
-                    <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 relative z-10">
-                        {steps.map((step, i) => (
-                            <motion.div
-                                key={i}
-                                initial={{ opacity: 0, x: -20 }}
-                                whileInView={{ opacity: 1, x: 0 }}
-                                viewport={{ once: true }}
-                                transition={{ duration: 0.5, delay: i * 0.1 }}
-                                className="flex flex-col items-center lg:items-start text-center lg:text-left space-y-4"
+                <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
+                    {websites.map((web, i) => (
+                        <motion.div
+                            key={keys[i]}
+                            custom={i}
+                            initial="hidden"
+                            whileInView="visible"
+                            whileHover={{ scale: 1.04 }}
+                            viewport={{ once: true }}
+                            variants={cardVariants}
+                            // Use will-change only for the scale transform, not transition-all
+                            style={{ willChange: "transform" }}
+                            className="rounded-2xl border-2 border-cyan/40 bg-[#0D0D0F]/80 backdrop-blur-xl p-5 flex flex-col justify-between hover:border-phoenix1 hover:shadow-[0_15px_30px_rgba(255,107,0,0.25)] transition-[border-color,box-shadow] duration-300 group min-h-[150px] cursor-pointer"
+                        >
+                            <div className="flex items-center gap-3 mb-4">
+                                <div className="w-10 h-10 rounded-xl overflow-hidden border border-white/10 flex items-center justify-center flex-shrink-0 bg-charcoal group-hover:scale-105 transition-transform duration-300">
+                                    {web.image ? (
+                                        <img
+                                            src={web.image}
+                                            alt={`${web.name} logo`}
+                                            className="w-full h-full object-cover"
+                                            loading="lazy"
+                                            decoding="async"
+                                        />
+                                    ) : (
+                                        <span className="font-poppins font-bold text-sm text-white">
+                                            {web.initials}
+                                        </span>
+                                    )}
+                                </div>
+                                <div className="min-w-0 flex-1">
+                                    <h3 className="font-poppins font-bold text-base leading-snug group-hover:text-phoenix1 transition-colors duration-300 truncate">
+                                        {web.name}
+                                    </h3>
+                                    <p className="text-[10px] text-muted-foreground mt-0.5 font-medium truncate">
+                                        {web.categoryLabel}
+                                    </p>
+                                </div>
+                            </div>
+                            <a
+                                href={web.websiteUrl}
+                                target="_blank"
+                                rel="noopener noreferrer"
+                                className="w-full mt-auto"
+                                aria-label={`Visit ${web.name} website`}
                             >
-                                <div className="w-12 h-12 rounded-full bg-midnight border-2 border-phoenix1 flex items-center justify-center font-bold text-phoenix1 font-poppins relative z-10">
-                                    {i + 1}
-                                </div>
-                                <div className="space-y-2">
-                                    <h3 className="text-xl font-poppins font-semibold">{step.title}</h3>
-                                    <p className="text-muted-foreground text-sm">{step.desc}</p>
-                                </div>
-                            </motion.div>
-                        ))}
-                    </div>
+                                <Button className="w-full gap-1.5 bg-phoenix1 hover:bg-phoenix2 text-white font-bold h-8 rounded-lg shadow-md shadow-phoenix1/10 transition-all hover:shadow-phoenix2/30 active:scale-95 text-[11px] py-1 px-3">
+                                    <Globe className="w-3.5 h-3.5" aria-hidden="true" /> Visit Website
+                                </Button>
+                            </a>
+                        </motion.div>
+                    ))}
                 </div>
             </div>
         </section>

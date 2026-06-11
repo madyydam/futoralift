@@ -2,33 +2,69 @@ import { useState, useMemo, memo } from "react";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Slider } from "@/components/ui/slider";
 import { Button } from "@/components/ui/button";
-import { Calculator, TrendingUp, Users, Target } from "lucide-react";
+import { Calculator, TrendingUp, Users, Target, Coins } from "lucide-react";
+import type { LucideIcon } from "lucide-react";
 
 interface ROICalculatorProps {
     onButtonClick?: () => void;
 }
 
+interface Stat {
+    label: string;
+    value: string;
+    icon: LucideIcon;
+    color: string;
+}
+
 const ROICalculator = memo(({ onButtonClick }: ROICalculatorProps) => {
     const [adSpend, setAdSpend] = useState([5000]);
-    const [currentEngagement, setCurrentEngagement] = useState([1000]);
+    const [cpc, setCpc] = useState([10]);
 
-    const { projectedReach, projectedFollowers, projectedROI } = useMemo(() => {
-        // Data-driven Reach: 17,764 reach for ₹94.70 spent
-        // Ratio: ~187.5 reach per ₹1 spent (Excellent efficiency from provide data)
-        const reach = Math.round(adSpend[0] * 187.5);
-        
-        // Lead conversion: Based on high-quality reach, assuming ~1% cold conversion + 15% from engagement
-        const potentialLeads = Math.round(reach * 0.01 + currentEngagement[0] * 0.15);
-        
-        // Value per lead estimated at ₹50 given the high targeting quality
-        const roi = Math.round(((potentialLeads * 50) / adSpend[0]) * 100);
+    const { projectedReach, lowerLeads, upperLeads, projectedROI } = useMemo(() => {
+        const spend = adSpend[0];
+        const costPerClick = Math.max(1, cpc[0]);
+
+        // Data-driven Reach: ~187.5 reach per ₹1 spent
+        const reach = Math.round(spend * 187.5);
+
+        // Leads = budget / CPC (1 click = 1 lead)
+        const potentialLeads = Math.round(spend / costPerClick);
+
+        // 20% margin to account for GST (18%) and bidding fluctuations
+        const lower = Math.round(potentialLeads * 0.8);
+
+        // Value per lead estimated at ₹50
+        const roi = spend > 0 ? Math.round(((potentialLeads * 50) / spend) * 100) : 0;
 
         return {
             projectedReach: reach,
-            projectedFollowers: potentialLeads,
-            projectedROI: roi
+            lowerLeads: lower,
+            upperLeads: potentialLeads,
+            projectedROI: roi,
         };
-    }, [adSpend, currentEngagement]);
+    }, [adSpend, cpc]);
+
+    // Computed at top-level, not inside JSX — fixes Rules of Hooks violation
+    const stats = useMemo<Stat[]>(() => [
+        {
+            label: "Est. New Reach",
+            value: projectedReach.toLocaleString() + "+",
+            icon: Target,
+            color: "text-cyan",
+        },
+        {
+            label: "Est. New Leads",
+            value: `${lowerLeads.toLocaleString()} - ${upperLeads.toLocaleString()}`,
+            icon: Users,
+            color: "text-amber-400",
+        },
+        {
+            label: "Potential ROI",
+            value: projectedROI + "%",
+            icon: TrendingUp,
+            color: "text-green-400",
+        },
+    ], [projectedReach, lowerLeads, upperLeads, projectedROI]);
 
     return (
         <Card className="bg-charcoal/60 backdrop-blur-xl border-phoenix1/20 glow-card overflow-hidden">
@@ -43,50 +79,53 @@ const ROICalculator = memo(({ onButtonClick }: ROICalculatorProps) => {
             </CardHeader>
             <CardContent className="p-8 space-y-8">
                 <div className="space-y-6">
+                    {/* Monthly Ad Budget */}
                     <div className="space-y-4">
                         <div className="flex justify-between items-center">
                             <label className="text-sm font-medium flex items-center gap-2">
                                 <Target className="w-4 h-4 text-cyan" />
                                 Monthly Ad Budget (₹)
                             </label>
-                            <span className="text-phoenix1 font-bold text-lg">₹{adSpend[0].toLocaleString()}</span>
+                            <span className="text-phoenix1 font-bold text-lg">
+                                ₹{adSpend[0].toLocaleString()}
+                            </span>
                         </div>
                         <Slider
                             value={adSpend}
                             onValueChange={setAdSpend}
-                            max={100000}
-                            step={1000}
-                            className="py-4"
-                        />
-                    </div>
-
-                    <div className="space-y-4">
-                        <div className="flex justify-between items-center">
-                            <label className="text-sm font-medium flex items-center gap-2">
-                                <Users className="w-4 h-4 text-cyan" />
-                                Current Monthly Engagement
-                            </label>
-                            <span className="text-phoenix1 font-bold text-lg">{currentEngagement[0].toLocaleString()}</span>
-                        </div>
-                        <Slider
-                            value={currentEngagement}
-                            onValueChange={setCurrentEngagement}
+                            min={500}
                             max={50000}
                             step={500}
                             className="py-4"
                         />
                     </div>
+
+                    {/* CPC */}
+                    <div className="space-y-4">
+                        <div className="flex justify-between items-center">
+                            <label className="text-sm font-medium flex items-center gap-2">
+                                <Coins className="w-4 h-4 text-cyan" />
+                                Cost Per Click (CPC) (₹)
+                            </label>
+                            <span className="text-phoenix1 font-bold text-lg">₹{cpc[0]}</span>
+                        </div>
+                        <Slider
+                            value={cpc}
+                            onValueChange={setCpc}
+                            min={1}
+                            max={500}
+                            step={1}
+                            className="py-4"
+                        />
+                    </div>
                 </div>
 
+                {/* Stats Grid */}
                 <div className="grid grid-cols-1 md:grid-cols-3 gap-4 pt-4">
-                    {useMemo(() => [
-                        { label: "Est. New Reach", value: projectedReach.toLocaleString() + "+", icon: Target, color: "text-cyan" },
-                        { label: "Est. New Leads", value: projectedFollowers.toLocaleString() + "+", icon: Users, color: "text-phoenix1" },
-                        { label: "Potential ROI", value: projectedROI + "%", icon: TrendingUp, color: "text-green-400" }
-                    ], [projectedReach, projectedFollowers, projectedROI]).map((stat, i) => (
+                    {stats.map((stat) => (
                         <div
-                            key={i}
-                            className="bg-midnight/40 p-4 rounded-xl border border-white/5 text-center"
+                            key={stat.label}
+                            className="bg-midnight/40 p-4 rounded-xl border border-white/5 text-center flex flex-col justify-between"
                         >
                             <stat.icon className={`w-6 h-6 mx-auto mb-2 ${stat.color}`} aria-hidden="true" />
                             <p className="text-xs text-muted-foreground uppercase tracking-wider">{stat.label}</p>

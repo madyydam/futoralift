@@ -1,7 +1,7 @@
 import { motion } from "framer-motion";
 import { Card, CardContent } from "@/components/ui/card";
 import { memo } from "react";
-import blLogo from "@/assets/bl-logo.png";
+import blLogo from "@/assets/bl-logo.webp";
 import { Link } from "react-router-dom";
 import { ArrowLeft } from "lucide-react";
 import ScrollProgress from "@/components/ScrollProgress";

@@ -1,6 +1,6 @@
 import { useState, useCallback, lazy, Suspense, useMemo } from "react";
 import { motion } from "framer-motion";
-import blLogo from "@/assets/bl-logo.png";
+import blLogo from "@/assets/bl-logo.webp";
 import ScrollProgress from "@/components/ScrollProgress";
 
 // Essential Sections
@@ -37,11 +37,12 @@ const Index = () => {
   }, []);
 
   const navLinks = useMemo(() => [
-    { id: "home", label: "Home" },
-    { id: "why-choose-us", label: "Why Us" },
-    { id: "portfolio", label: "Portfolio" },
-    { id: "team", label: "Team" },
-    { id: "contact", label: "Contact" }
+    { id: "home",          label: "Home"     },
+    { id: "why-choose-us", label: "Why Us"   },
+    { id: "portfolio",     label: "Brands"   },
+    { id: "reels",         label: "Reels"    },
+    { id: "websites",      label: "Websites" },
+    { id: "contact",       label: "Contact"  },
   ], []);
 
   return (
@@ -133,7 +134,7 @@ const Index = () => {
 
           <ReelsGallery />
 
-          <div className="py-16 md:py-24 px-6 md:px-12 bg-charcoal/50 min-h-[400px]">
+          <div id="calculator" className="py-16 md:py-24 px-6 md:px-12 bg-charcoal/50 min-h-[400px]">
             <ROICalculator />
           </div>
 

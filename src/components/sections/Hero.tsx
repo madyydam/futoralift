@@ -1,6 +1,6 @@
 import { motion } from "framer-motion";
 import { Button } from "@/components/ui/button";
-import blLogo from "@/assets/bl-logo.png";
+import blLogo from "@/assets/bl-logo.webp";
 import { memo, useMemo } from "react";
 
 interface HeroProps {

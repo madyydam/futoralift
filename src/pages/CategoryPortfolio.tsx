@@ -3,7 +3,7 @@ import { useParams, useNavigate } from "react-router-dom";
 import { Button } from "@/components/ui/button";
 import { ArrowLeft, Instagram, Globe } from "lucide-react";
 import { motion } from "framer-motion";
-import blLogo from "@/assets/bl-logo.png";
+import blLogo from "@/assets/bl-logo.webp";
 import { categoryData } from "@/data/clients";
 import type { Client } from "@/data/clients";
 

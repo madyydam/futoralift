@@ -1,15 +1,15 @@
-import fitnessTouch from "@/assets/fitness-touch.png";
-import stories12am from "@/assets/12am-stories.jpg";
-import tcwLogo from "@/assets/tcw-logo.png";
-import cakeCarnival from "@/assets/the-cake-carnival.png";
-import ripplees from "@/assets/portfolio/ripplees.png";
-import gurudev from "@/assets/portfolio/gurudev.png";
-import shivratna from "@/assets/portfolio/shivratna.png";
-import brew from "@/assets/portfolio/brew.png";
-import blackHeart from "@/assets/portfolio/black-heart.png";
-import gadgetdash from "@/assets/portfolio/gadgetdash.png";
-import proshakti from "@/assets/portfolio/proshakti.png";
-import radhaPureVeg from "@/assets/portfolio/radha-pure-veg.png";
+import fitnessTouch from "@/assets/fitness-touch.webp";
+import stories12am from "@/assets/12am-stories.webp";
+import tcwLogo from "@/assets/tcw-logo.webp";
+import cakeCarnival from "@/assets/the-cake-carnival.webp";
+import ripplees from "@/assets/portfolio/ripplees.webp";
+import gurudev from "@/assets/portfolio/gurudev.webp";
+import shivratna from "@/assets/portfolio/shivratna.webp";
+import brew from "@/assets/portfolio/brew.webp";
+import blackHeart from "@/assets/portfolio/black-heart.webp";
+import gadgetdash from "@/assets/portfolio/gadgetdash.webp";
+import proshakti from "@/assets/portfolio/proshakti.webp";
+import radhaPureVeg from "@/assets/portfolio/radha-pure-veg.webp";
 
 export interface Client {
     id: number;
@@ -259,7 +259,6 @@ export const categoryData: Record<string, CategoryConfig> = {
                     "Brand Positioning for FMCG Growth",
                 ],
                 image: proshakti,
-                websiteUrl: "https://proshakti.com/",
                 instagramUrl: "https://www.instagram.com/proshakti_dairy?utm_source=ig_web_button_share_sheet&igsh=ZDNlZDc0MzIxNw==",
                 serviceCharge: 20000,
                 adBudget: 10000,
@@ -276,7 +275,7 @@ export const categoryData: Record<string, CategoryConfig> = {
                     "Product-Focused Creative Campaigns",
                 ],
                 image: gadgetdash,
-                websiteUrl: "https://www.gadgetdash.in/",
+                websiteUrl: "https://gadgetdash.vercel.app/",
                 instagramUrl: "https://www.instagram.com/gadgetdash_01?utm_source=ig_web_button_share_sheet&igsh=ZDNlZDc0MzIxNw==",
                 serviceCharge: 15000,
                 adBudget: 5000,
