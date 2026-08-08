@@ -39,7 +39,7 @@ const categories = [
   },
   {
     id: "d2c-startups",
-    label: "D2C Brands & Startups",
+    label: "Brands & Startups",
     icon: Zap,
     description: "From FMCG to tech startups, we help modern brands scale with performance marketing, creative strategy & high-converting funnels.",
     color: "text-violet-400",
@@ -69,7 +69,7 @@ const BrandsWeLiftedPortfolio = memo(() => {
             Brands We've <span className="text-phoenix1">Lifted</span> 🚀
           </h2>
           <p className="text-lg text-muted-foreground max-w-2xl mx-auto">
-            Real businesses. Real growth. Real results.
+            Explore our case studies by clicking on any industry category below.
           </p>
         </motion.div>
 
@@ -82,6 +82,7 @@ const BrandsWeLiftedPortfolio = memo(() => {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ duration: 0.5, delay: Math.min(i * 0.1, 0.4) }}
+              className="h-full"
             >
               <Card
                 role="button"
@@ -91,15 +92,18 @@ const BrandsWeLiftedPortfolio = memo(() => {
                 onClick={() => handleCategoryClick(cat.id)}
                 onKeyDown={(e) => e.key === 'Enter' && handleCategoryClick(cat.id)}
               >
-                <CardContent className="py-5 px-4 flex flex-col items-center text-center gap-3">
-                  <div className={`p-2.5 rounded-2xl bg-charcoal border border-border group-hover:border-phoenix1/40 transition-colors`}>
-                    <cat.icon className={`w-7 h-7 ${cat.color}`} aria-hidden="true" />
+                <CardContent className="py-6 px-4 flex flex-col items-center text-center gap-3 h-full justify-between">
+                  <div className="flex flex-col items-center gap-3">
+                    <div className="p-3 rounded-2xl bg-charcoal border border-border group-hover:border-phoenix1/40 transition-colors">
+                      <cat.icon className={`w-8 h-8 ${cat.color}`} aria-hidden="true" />
+                    </div>
+                    <h3 className="font-poppins font-bold text-lg leading-tight group-hover:text-phoenix1 transition-colors">{cat.label}</h3>
+                    <p className="text-xs text-muted-foreground leading-relaxed line-clamp-3">{cat.description}</p>
                   </div>
-                  <h3 className="font-poppins font-semibold text-lg leading-tight">{cat.label}</h3>
-                  <p className="text-[12px] text-muted-foreground leading-relaxed line-clamp-3">{cat.description}</p>
-                  <div className="flex items-center gap-1 text-phoenix1 text-[10px] font-bold mt-auto pt-1 group-hover:gap-2 transition-all">
-                    View Clients
-                    <ArrowUpRight className="w-3 h-3" aria-hidden="true" />
+                  
+                  <div className="mt-4 w-full py-2.5 bg-phoenix1/10 group-hover:bg-phoenix1 text-phoenix1 group-hover:text-white border border-phoenix1/20 group-hover:border-phoenix1 text-center text-xs font-poppins font-bold rounded-xl transition-all duration-300 flex items-center justify-center gap-1.5 shadow-[0_4px_12px_rgba(251,146,60,0.05)] group-hover:shadow-[0_4px_12px_rgba(251,146,60,0.25)] animate-pulse group-hover:animate-none">
+                    Explore Portfolio
+                    <ArrowUpRight className="w-3.5 h-3.5" aria-hidden="true" />
                   </div>
                 </CardContent>
               </Card>

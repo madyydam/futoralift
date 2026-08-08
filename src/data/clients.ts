@@ -9,6 +9,7 @@ import brew from "@/assets/portfolio/brew.webp";
 import blackHeart from "@/assets/portfolio/black-heart.webp";
 import gadgetdash from "@/assets/portfolio/gadgetdash.webp";
 import proshakti from "@/assets/portfolio/proshakti.webp";
+import prowexa from "@/assets/portfolio/prowexa.png";
 import radhaPureVeg from "@/assets/portfolio/radha-pure-veg.webp";
 
 export interface Client {
@@ -203,7 +204,7 @@ export const categoryData: Record<string, CategoryConfig> = {
                 ],
                 image: stories12am,
                 instagramUrl: "https://www.instagram.com/12am_stories_/",
-                websiteUrl: "https://12amstories.vercel.app/",
+                websiteUrl: "https://12amstoriesshop.vercel.app/",
                 serviceCharge: 13000,
                 adBudget: 0,
             },
@@ -243,7 +244,7 @@ export const categoryData: Record<string, CategoryConfig> = {
         ],
     },
     "d2c-startups": {
-        label: "D2C Brands & Startups",
+        label: "Brands & Startups",
         accent: "text-violet-400",
         accentBg: "bg-violet-400/10",
         clients: [
@@ -279,6 +280,22 @@ export const categoryData: Record<string, CategoryConfig> = {
                 instagramUrl: "https://www.instagram.com/gadgetdash_01?utm_source=ig_web_button_share_sheet&igsh=ZDNlZDc0MzIxNw==",
                 serviceCharge: 15000,
                 adBudget: 5000,
+            },
+            {
+                id: 3,
+                name: "Prowexa Technologies",
+                initials: "PX",
+                location: "India",
+                services: ["Website Design", "Brand Identity", "Digital Presence"],
+                whatWeDid: [
+                    "Professional Website Design & Development",
+                    "Brand Identity & Visual Strategy",
+                    "Digital Presence & SEO Optimization",
+                ],
+                image: prowexa,
+                websiteUrl: "https://www.prowexa.com/",
+                serviceCharge: 12000,
+                adBudget: 0,
             }
         ],
     },

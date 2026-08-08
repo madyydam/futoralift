@@ -13,6 +13,7 @@ const BrandsWeLiftedPortfolio = lazy(() => import("@/components/BrandsWeLiftedPo
 const Process = lazy(() => import("@/components/sections/Process"));
 const ReelsGallery = lazy(() => import("@/components/sections/ReelsGallery"));
 const Team = lazy(() => import("@/components/sections/Team"));
+const FAQ = lazy(() => import("@/components/sections/FAQ"));
 const Contact = lazy(() => import("@/components/sections/Contact"));
 const GlowCharts = lazy(() => import("@/components/GlowCharts"));
 const ROICalculator = lazy(() => import("@/components/ROICalculator"));
@@ -141,6 +142,8 @@ const Index = () => {
           <Process />
 
           <Team />
+
+          <FAQ />
 
           <Contact />
         </Suspense>

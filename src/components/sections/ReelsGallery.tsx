@@ -10,33 +10,21 @@ const categories = [
   { id: "cake-shops", label: "Cake Shops", icon: Cake, color: "text-pink-400" },
 ] as const;
 
-// Optimized Reel Card with Intersection Observer
+// Optimized Reel Card with hover-to-load
 const ReelCard = memo(({ reel, index }: { reel: Reel, index: number }) => {
-  const [isVisible, setIsVisible] = useState(false);
+  const [isHovered, setIsHovered] = useState(false);
   const [isLoaded, setIsLoaded] = useState(false);
-  const cardRef = useRef<HTMLDivElement>(null);
-
-  useEffect(() => {
-    const observer = new IntersectionObserver((entries) => {
-      if (entries[0].isIntersecting) {
-        setIsVisible(true);
-        observer.disconnect();
-      }
-    }, { threshold: 0.1 });
-
-    if (cardRef.current) observer.observe(cardRef.current);
-    return () => observer.disconnect();
-  }, []);
 
   return (
     <div
-      ref={cardRef}
-      className="snap-center shrink-0 w-[200px] sm:w-[220px] lg:w-[260px] aspect-[9/16] relative rounded-2xl overflow-hidden bg-charcoal border border-white/10 group shadow-2xl"
+      className="snap-center shrink-0 w-[150px] sm:w-[170px] lg:w-[210px] aspect-[9/16] relative rounded-2xl overflow-hidden bg-charcoal border border-white/10 group shadow-2xl cursor-pointer"
+      onMouseEnter={() => setIsHovered(true)}
+      onTouchStart={() => setIsHovered(true)}
     >
-      <div className="absolute inset-0 bg-black/20 group-hover:bg-transparent transition-colors z-10 pointer-events-none" />
+      <div className="absolute inset-0 bg-gradient-to-br from-charcoal via-[#1a1a1f] to-midnight z-0" />
       
-      {isVisible ? (
-        <div className="absolute inset-0 z-0">
+      {isHovered ? (
+        <div className="absolute inset-0 z-10">
           {!isLoaded && (
             <div className="absolute inset-0 flex items-center justify-center bg-charcoal">
               <Loader2 className="w-8 h-8 text-phoenix1 animate-spin" />
@@ -48,24 +36,21 @@ const ReelCard = memo(({ reel, index }: { reel: Reel, index: number }) => {
             allow="autoplay; fullscreen; picture-in-picture"
             onLoad={() => setIsLoaded(true)}
             style={{ border: "none" }}
-            loading="lazy"
           />
         </div>
       ) : (
-        <div className="absolute inset-0 bg-charcoal/50 flex items-center justify-center">
-           <Play className="w-8 h-8 text-white/20" />
+        <div className="absolute inset-0 flex flex-col items-center justify-center z-10 bg-gradient-to-b from-transparent via-black/30 to-black/80">
+          <div className="w-14 h-14 rounded-full bg-white/10 flex items-center justify-center backdrop-blur-md border border-white/20 group-hover:scale-110 group-hover:bg-phoenix1/20 group-hover:border-phoenix1 transition-all duration-300">
+             <Play className="w-6 h-6 text-white group-hover:text-phoenix1 fill-white group-hover:fill-phoenix1 transition-colors ml-0.5" />
+          </div>
+          <span className="text-[10px] text-muted-foreground uppercase font-bold tracking-widest mt-3 opacity-60 group-hover:opacity-100 transition-opacity">Hover to Play</span>
         </div>
       )}
 
-      <div className="absolute bottom-0 left-0 right-0 p-6 bg-gradient-to-t from-black/90 via-black/50 to-transparent z-20 translate-y-2 group-hover:translate-y-0 transition-transform duration-300 pointer-events-none">
-        <div className="flex items-center gap-2">
-          <div className="w-8 h-8 rounded-full bg-phoenix1/20 flex items-center justify-center backdrop-blur-sm border border-phoenix1/50">
-            <Play className="w-3 h-3 text-phoenix1 fill-phoenix1" />
-          </div>
-          <h3 className="text-offwhite font-poppins font-medium text-sm">
-            {reel.title}
-          </h3>
-        </div>
+      <div className="absolute bottom-0 left-0 right-0 p-4 bg-gradient-to-t from-black via-black/60 to-transparent z-20 pointer-events-none">
+        <h3 className="text-offwhite font-poppins font-medium text-xs leading-tight group-hover:text-phoenix1 transition-colors">
+          {reel.title}
+        </h3>
       </div>
     </div>
   );
@@ -78,6 +63,45 @@ const ReelsGallery = () => {
 
   const filteredReels = reelsData.filter(r => r.category === activeTab);
 
+  useEffect(() => {
+    const scrollContainer = scrollRef.current;
+    if (!scrollContainer) return;
+
+    let animationFrameId: number;
+    let scrollSpeed = 0.6; // Speed of auto scroll
+    let isTouched = false;
+
+    const scroll = () => {
+      if (scrollContainer && !isTouched) {
+        scrollContainer.scrollLeft += scrollSpeed;
+        
+        const maxScroll = scrollContainer.scrollWidth - scrollContainer.clientWidth;
+        if (scrollContainer.scrollLeft >= maxScroll - 1) {
+          scrollContainer.scrollLeft = 0;
+        }
+      }
+      animationFrameId = requestAnimationFrame(scroll);
+    };
+
+    animationFrameId = requestAnimationFrame(scroll);
+
+    const handleTouchStart = () => { isTouched = true; };
+    const handleTouchEnd = () => { isTouched = false; };
+
+    scrollContainer.addEventListener("touchstart", handleTouchStart, { passive: true });
+    scrollContainer.addEventListener("touchend", handleTouchEnd, { passive: true });
+    scrollContainer.addEventListener("touchcancel", handleTouchEnd, { passive: true });
+
+    return () => {
+      cancelAnimationFrame(animationFrameId);
+      if (scrollContainer) {
+        scrollContainer.removeEventListener("touchstart", handleTouchStart);
+        scrollContainer.removeEventListener("touchend", handleTouchEnd);
+        scrollContainer.removeEventListener("touchcancel", handleTouchEnd);
+      }
+    };
+  }, [activeTab]);
+
   return (
     <section id="reels" className="py-24 relative overflow-hidden bg-midnight border-y border-border">
       <div className="absolute top-0 left-1/4 w-96 h-96 bg-phoenix1/10 rounded-full blur-[100px] pointer-events-none" />
@@ -85,9 +109,10 @@ const ReelsGallery = () => {
 
       <div className="container max-w-7xl mx-auto px-4 md:px-12 relative z-10">
         <div className="text-center mb-16">
-          <span className="text-phoenix1 font-poppins font-semibold tracking-wider uppercase text-sm mb-4 block">
-            Creative Reels
-          </span>
+          <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-phoenix1/15 border border-phoenix1/30 text-phoenix1 font-poppins font-semibold text-xs mb-4 shadow-[0_0_15px_rgba(251,146,60,0.1)]">
+            <span className="w-2 h-2 rounded-full bg-phoenix1 animate-pulse" />
+            100+ Reels Created
+          </div>
           <h2 className="text-4xl md:text-5xl lg:text-6xl font-poppins font-bold text-offwhite mb-6">
             Watch Us <span className="text-transparent bg-clip-text bg-gradient-to-r from-phoenix1 to-phoenix2">Lift Brands</span>
           </h2>
@@ -125,7 +150,7 @@ const ReelsGallery = () => {
         <div 
           key={activeTab}
           ref={scrollRef}
-          className="flex overflow-x-auto gap-6 sm:gap-8 pb-12 pt-4 px-4 -mx-4 snap-x snap-mandatory hide-scrollbar relative"
+          className="flex overflow-x-auto gap-4 sm:gap-6 pb-12 pt-4 px-4 -mx-4 snap-x snap-mandatory hide-scrollbar relative scroll-smooth"
         >
           {filteredReels.map((reel, index) => (
             <ReelCard key={`${activeTab}-${reel.id}`} reel={reel} index={index} />

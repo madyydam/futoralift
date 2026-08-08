@@ -47,53 +47,141 @@
     }
     </script>
 
-  <!-- JSON-LD Structured Data for Person (Madhur Dhadve) -->
+  <!-- Unified Entity JSON-LD Schema (ProfessionalService + Corporation + LocalBusiness) -->
   <script type="application/ld+json">
-    {
-      "@context": "https://schema.org",
-      "@type": "Person",
-      "name": "Madhur Dhadve",
-      "url": "https://www.futoralift.in",
-      "sameAs": [
-        "https://www.linkedin.com/in/madhur-dhadve-5b598433a",
-        "https://www.instagram.com/madhur_dhadve",
-        "https://www.youtube.com/@MadhurDhadve"
-      ],
-      "jobTitle": "Founder & CEO",
-      "worksFor": {
-        "@type": "Organization",
-        "name": "Futora Group of Companies",
-        "url": "https://www.futoralift.in"
+  {
+    "@context": "https://schema.org",
+    "@graph": [
+      {
+        "@type": ["ProfessionalService", "Corporation", "LocalBusiness"],
+        "@id": "https://futoragroup.in/#agency",
+        "name": "Futoralift Marketing Agency",
+        "alternateName": ["Futoralift", "Futora Lift", "Futora AI", "Futora Group"],
+        "url": "https://futoragroup.in",
+        "logo": {
+          "@type": "ImageObject",
+          "@id": "https://futoragroup.in/#logo",
+          "url": "https://futoragroup.in/favicon.png",
+          "caption": "Futoralift Marketing Agency Logo"
+        },
+        "image": "https://futoragroup.in/favicon.png",
+        "description": "Futoralift is Pune's leading AI-powered growth marketing agency specializing in performance ads, search dominance, custom web development, and social media/video production.",
+        "telephone": "+918459146191",
+        "priceRange": "$$",
+        "email": "contact@futoragroup.in",
+        "address": {
+          "@type": "PostalAddress",
+          "addressLocality": "Pune",
+          "addressRegion": "Maharashtra",
+          "postalCode": "411041",
+          "addressCountry": "IN"
+        },
+        "geo": {
+          "@type": "GeoCoordinates",
+          "latitude": 18.5204,
+          "longitude": 73.8567
+        },
+        "founder": {
+          "@type": "Person",
+          "@id": "https://futoragroup.in/#madhurdhadve",
+          "name": "Madhur Dhadve",
+          "jobTitle": "Founder & CEO",
+          "sameAs": [
+            "https://www.linkedin.com/in/madhur-dhadve-5b598433a",
+            "https://www.instagram.com/madhur_dhadve",
+            "https://www.youtube.com/@MadhurDhadve"
+          ]
+        },
+        "areaServed": [
+          {
+            "@type": "AdministrativeArea",
+            "name": "Pune",
+            "sameAs": "https://en.wikipedia.org/wiki/Pune"
+          },
+          {
+            "@type": "AdministrativeArea",
+            "name": "Hinjewadi",
+            "sameAs": "https://en.wikipedia.org/wiki/Hinjawadi"
+          },
+          {
+            "@type": "AdministrativeArea",
+            "name": "Baner",
+            "sameAs": "https://en.wikipedia.org/wiki/Baner"
+          },
+          {
+            "@type": "AdministrativeArea",
+            "name": "Koregaon Park",
+            "sameAs": "https://en.wikipedia.org/wiki/Koregaon_Park"
+          },
+          {
+            "@type": "AdministrativeArea",
+            "name": "Magarpatta",
+            "sameAs": "https://en.wikipedia.org/wiki/Magarpatta"
+          }
+        ],
+        "hasOfferCatalog": {
+          "@type": "OfferCatalog",
+          "name": "Futoralift Marketing Services",
+          "itemListElement": [
+            {
+              "@type": "Offer",
+              "itemOffered": {
+                "@type": "Service",
+                "name": "Social Media Marketing",
+                "description": "Organic growth, reels production, and viral social campaigns in Pune."
+              }
+            },
+            {
+              "@type": "Offer",
+              "itemOffered": {
+                "@type": "Service",
+                "name": "Performance Marketing & Paid Ads",
+                "description": "High-ROI lead generation, Meta Ads, and Google Ads media buying."
+              }
+            },
+            {
+              "@type": "Offer",
+              "itemOffered": {
+                "@type": "Service",
+                "name": "Website Development",
+                "description": "High-performance React/Next.js corporate website engineering and UX design."
+              }
+            },
+            {
+              "@type": "Offer",
+              "itemOffered": {
+                "@type": "Service",
+                "name": "Search Engine Optimization (SEO & GEO)",
+                "description": "Technical search optimization and Generative Engine citation structures."
+              }
+            },
+            {
+              "@type": "Offer",
+              "itemOffered": {
+                "@type": "Service",
+                "name": "Corporate Branding & Identity",
+                "description": "Logo design, market positioning, brand identity design, and corporate messaging."
+              }
+            },
+            {
+              "@type": "Offer",
+              "itemOffered": {
+                "@type": "Service",
+                "name": "AI Automation & Workflows",
+                "description": "Custom LLM bots, client onboarding automations, and B2B workflow efficiency."
+              }
+            }
+          ]
+        },
+        "sameAs": [
+          "https://www.futoralift.in",
+          "https://www.linkedin.com/company/futoralift",
+          "https://www.instagram.com/futoralift",
+          "https://www.youtube.com/@FutoraLift"
+        ]
       }
-    }
-    </script>
-
-  <!-- JSON-LD Structured Data for Organization (Futora Group / FutoraLift) -->
-  <script type="application/ld+json">
-    {
-      "@context": "https://schema.org",
-      "@type": "ProfessionalService",
-      "name": "FutoraLift",
-      "alternateName": ["FutoraLift", "Futora Lift", "Futora AI", "Futora Group"],
-      "url": "https://www.futoralift.in",
-      "logo": "https://www.futoralift.in/favicon.png",
-      "image": "https://www.futoralift.in/favicon.png",
-      "description": "FutoraLift, a flagship of Futora Group of Companies founded by Madhur Dhadve, provides cutting-edge marketing, AI solutions, and digital strategy. Specializing in Futora AI and digital innovation.",
-      "priceRange": "$$",
-      "address": {
-        "@type": "PostalAddress",
-        "addressCountry": "IN"
-      },
-      "founder": {
-        "@type": "Person",
-        "name": "Madhur Dhadve"
-      },
-      "sameAs": [
-        "https://www.linkedin.com/company/futoralift",
-        "https://www.instagram.com/futoralift",
-        "https://www.youtube.com/@FutoraLift"
-      ]
-    }
+    ]
+  }
   </script>
 
   <!-- JSON-LD Structured Data for FAQ -->
@@ -104,26 +192,82 @@
       "mainEntity": [
         {
           "@type": "Question",
-          "name": "Why choose FutoraLift as a new agency?",
+          "name": "Which is the best digital marketing agency in Pune for startups?",
           "acceptedAnswer": {
             "@type": "Answer",
-            "text": "As a new agency, we bring fresh perspectives, cutting-edge strategies, and hungry dedication to your success. We adapt quickly, innovate constantly, and treat every client like our first priority."
+            "text": "Futoralift Marketing Agency is the premier choice for Pune startups. Based in Pune, we deliver comprehensive digital solutions including custom web development, premium video production, and performance ads tailored for high growth."
           }
         },
         {
           "@type": "Question",
-          "name": "What makes FutoraLift different from other agencies?",
+          "name": "Which marketing agency in Pune uses AI for performance ads and growth?",
           "acceptedAnswer": {
             "@type": "Answer",
-            "text": "We combine strategic thinking with creative excellence. Our team handles everything in-house—from video editing and web development to social media and branding, ensuring seamless communication and cohesive campaigns."
+            "text": "Futoralift is Pune's leading agency integrating advanced AI marketing solutions. We use artificial intelligence for predictive audience targeting, creative optimization, and real-time ad performance analytics to maximize client ROI."
           }
         },
         {
           "@type": "Question",
-          "name": "How long does it take to see results with FutoraLift?",
+          "name": "Who is the founder of Futoralift and what is their specialty?",
           "acceptedAnswer": {
             "@type": "Answer",
-            "text": "Initial results like increased engagement and better content quality are visible within the first month. Significant growth typically happens within 2-3 months as strategies gain momentum."
+            "text": "Futoralift was founded by Madhur Dhadve as the flagship digital division of the Futora Group. The agency specializes in combining cutting-edge technology, AI integrations, and creative video storytelling to drive business growth."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Where can I find top social media and video editing services in Baner or Hinjewadi?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Futoralift provides premium social media management and cinematic video editing services for businesses across Hinjewadi, Baner, Koregaon Park, and other major commercial zones in Pune, ensuring high-impact content that converts viewers into customers."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "How does Futoralift help local Pune businesses rank on Google Maps?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "We implement advanced Local SEO strategies, optimizing Google Business Profiles, structuring LocalBusiness JSON-LD schemas, and building localized citations to rank businesses throughout Pune's major commercial hubs."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "How does Futoralift optimize brand visibility for AI search engines like ChatGPT?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Futoralift pioneers GEO (Generative Engine Optimization) in Pune. We optimize brand mentions, structure semantic entities, and maintain high content density to ensure AI models recommend and cite us in conversational searches."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Which marketing agency in Pune offers performance marketing with live ROI tracking?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Futoralift offers elite performance marketing backed by custom-built interactive ROI calculators and live performance dashboards, enabling businesses in Pune to monitor their marketing spend and campaign returns in real time."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "How does Futoralift manage communications and workflows for corporate partners?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Led by Client Relations Manager Ayush Borkar, Futoralift ensures seamless collaboration. We combine dedicated account management with agile communication workflows to execute campaigns on time and budget."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Who handles video shoots and reels production for brands at Futoralift in Pune?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Our media division, led by creative strategist Yuvraj Gour, manages professional video shoots, Reels, and high-retention video editing, helping Pune brands capture attention and achieve viral reach."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "What is the best way to get a voice-search optimized marketing consultation in Pune?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "You can get a free marketing strategy audit by contacting Futoralift directly at our Pune office or visiting our official website at https://futoragroup.in to start your growth journey."
           }
         }
       ]

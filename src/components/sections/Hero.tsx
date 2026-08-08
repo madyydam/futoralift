@@ -108,25 +108,39 @@ const Hero = memo(({ scrollToContact }: HeroProps) => {
                         Skyrocketing your brand to digital dominance 🚀
                     </motion.p>
 
-                    <div className="flex flex-col sm:flex-row gap-4 justify-center pt-8">
+                    <div className="flex flex-col sm:flex-row gap-4 justify-center pt-8 items-center">
                         <motion.div
                             animate={{
-                                boxShadow: ["0 0 0 0px rgba(255,107,0,0)", "0 0 0 20px rgba(255,107,0,0)"],
+                                boxShadow: ["0 0 0 0px rgba(255,107,0,0)", "0 0 0 15px rgba(255,107,0,0)"],
                             }}
                             transition={{
                                 duration: 2,
                                 repeat: Infinity,
                                 ease: "easeOut"
                             }}
-                            className="rounded-md"
+                            className="rounded-xl w-full sm:w-auto"
                         >
                             <Button
-                                className="bg-phoenix1 hover:bg-phoenix2 text-white shadow-lg hover:shadow-xl hover:shadow-phoenix1/50 transition-all active:scale-95"
-                                onClick={scrollToContact}
+                                className="w-full sm:w-auto bg-phoenix1 hover:bg-phoenix2 text-white shadow-lg hover:shadow-xl hover:shadow-phoenix1/50 transition-all active:scale-95 font-poppins font-bold px-8 py-6 rounded-xl text-base"
+                                onClick={() => {
+                                    const element = document.getElementById("websites");
+                                    element?.scrollIntoView({ behavior: "smooth" });
+                                }}
                             >
-                                Start Your Project
+                                See Websites
                             </Button>
                         </motion.div>
+                        
+                        <Button
+                            variant="outline"
+                            className="w-full sm:w-auto border-white/10 hover:border-phoenix1/40 hover:bg-phoenix1/5 text-offwhite hover:text-phoenix1 font-poppins font-bold px-8 py-6 rounded-xl text-base transition-all active:scale-95"
+                            onClick={() => {
+                                const element = document.getElementById("portfolio");
+                                element?.scrollIntoView({ behavior: "smooth" });
+                            }}
+                        >
+                            See Clients
+                        </Button>
                     </div>
                 </motion.div>
             </div>

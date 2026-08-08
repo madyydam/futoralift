@@ -1,79 +1,44 @@
 import { motion } from "framer-motion";
-import { Card, CardContent } from "@/components/ui/card";
 import { memo } from "react";
 import { Button } from "@/components/ui/button";
 import { Link } from "react-router-dom";
 import { ArrowRight } from "lucide-react";
 
-const team = [
-    {
-        name: "Madhur Dhadve",
-        role: "Founder of Futora Group",
-        initials: "MD",
-        desc: "Leads technology and marketing systems, managing everything from websites and apps to ads and creative campaigns."
-    },
-    {
-        name: "Ayush Borkar",
-        role: "Manager",
-        initials: "AB",
-        desc: "Oversees all client relations and ensures seamless communication between the team and partners."
-    },
-    {
-        name: "Yuvraj Gour",
-        role: "Media Team",
-        initials: "YG",
-        desc: "Creative strategist focused on video shoots, editing, and delivering visually powerful campaigns."
-    }
-];
-
 const Team = memo(() => {
     return (
-        <section id="team" className="py-16 md:py-24 px-6 md:px-12 bg-charcoal/50">
-            <div className="container max-w-6xl mx-auto">
-                <motion.h2
+        <section id="team" className="py-20 px-6 md:px-12 bg-charcoal/50 border-t border-border">
+            <div className="container max-w-4xl mx-auto text-center space-y-6">
+                <motion.div
                     initial={{ opacity: 0, y: 20 }}
                     whileInView={{ opacity: 1, y: 0 }}
                     viewport={{ once: true }}
-                    className="font-poppins font-bold text-4xl md:text-5xl text-center mb-16"
+                    className="space-y-4"
                 >
-                    Meet the Team
-                </motion.h2>
-                <Card className="bg-charcoal border-phoenix1/20 max-w-6xl mx-auto">
-                    <CardContent className="p-8 md:p-12">
-                        <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-                            {team.map((member, i) => (
-                                <motion.div
-                                    key={i}
-                                    initial={{ opacity: 0, y: 30 }}
-                                    whileInView={{ opacity: 1, y: 0 }}
-                                    viewport={{ once: true }}
-                                    transition={{ duration: 0.5, delay: i * 0.1 }}
-                                    className="member flex flex-col items-center text-center space-y-4 group"
-                                >
-                                    <div className="w-32 h-32 rounded-full bg-gradient-to-br from-phoenix1 to-cyan p-1 group-hover:scale-105 group-hover:shadow-lg group-hover:shadow-phoenix1/50 transition-all">
-                                        <div className="w-full h-full rounded-full bg-charcoal flex items-center justify-center text-4xl font-bold font-poppins">
-                                            {member.initials}
-                                        </div>
-                                    </div>
-                                    <div>
-                                        <h3 className="font-poppins font-semibold text-xl">{member.name}</h3>
-                                        <p className={`text-sm ${i === 0 ? 'text-phoenix1' : 'text-cyan'}`}>{member.role}</p>
-                                        <p className="text-sm text-muted-foreground mt-2 max-w-sm">
-                                            {member.desc}
-                                        </p>
-                                    </div>
-                                </motion.div>
-                            ))}
-                        </div>
-                        <div className="mt-12 flex justify-center">
-                            <Button asChild variant="outline" className="border-phoenix1 text-phoenix1 hover:bg-phoenix1 hover:text-white group">
-                                <Link to="/team" className="flex items-center gap-2">
-                                    See full team <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
-                                </Link>
-                            </Button>
-                        </div>
-                    </CardContent>
-                </Card>
+                    <span className="text-phoenix1 font-poppins font-semibold tracking-wider uppercase text-sm">
+                        Our Team
+                    </span>
+                    <h2 className="font-poppins font-bold text-4xl md:text-5xl text-offwhite">
+                        Meet the Force
+                    </h2>
+                    <p className="text-muted-foreground max-w-xl mx-auto text-base md:text-lg">
+                        Discover the creative minds, strategists, and builders behind FutoraLift driving massive growth for brands.
+                    </p>
+                </motion.div>
+                
+                <motion.div
+                    initial={{ opacity: 0, scale: 0.95 }}
+                    whileInView={{ opacity: 1, scale: 1 }}
+                    viewport={{ once: true }}
+                    transition={{ delay: 0.1 }}
+                    className="pt-6"
+                >
+                    <Button asChild className="bg-phoenix1 hover:bg-phoenix2 text-white font-poppins font-bold px-8 py-6 rounded-xl text-base transition-all active:scale-95 shadow-lg shadow-phoenix1/20 hover:shadow-phoenix1/40 group">
+                        <Link to="/team" className="flex items-center gap-2">
+                            Meet the Force
+                            <ArrowRight className="w-5 h-5 group-hover:translate-x-1 transition-transform" />
+                        </Link>
+                    </Button>
+                </motion.div>
             </div>
         </section>
     );
