@@ -11,7 +11,7 @@ import gadgetdash from "@/assets/portfolio/gadgetdash.webp";
 import proshakti from "@/assets/portfolio/proshakti.webp";
 import prowexa from "@/assets/portfolio/prowexa.png";
 import radhaPureVeg from "@/assets/portfolio/radha-pure-veg.webp";
-import billionaireAqua from "@/assets/portfolio/the-billionaires-aqua.webp";
+import billionaireAqua from "@/assets/portfolio/the-billionaires-aqua.png";
 import axonEstate from "@/assets/portfolio/axon-estate.png";
 import homeMantra from "@/assets/portfolio/home-mantra.png";
 import jizaJewellery from "@/assets/portfolio/jiza-jewellery.webp";
