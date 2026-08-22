@@ -11,6 +11,9 @@ import gadgetdash from "@/assets/portfolio/gadgetdash.webp";
 import proshakti from "@/assets/portfolio/proshakti.webp";
 import prowexa from "@/assets/portfolio/prowexa.png";
 import radhaPureVeg from "@/assets/portfolio/radha-pure-veg.webp";
+import billionaireAqua from "@/assets/portfolio/the-billionaires-aqua.webp";
+import axonEstate from "@/assets/portfolio/axon-estate.png";
+import homeMantra from "@/assets/portfolio/home-mantra.png";
 
 export interface Client {
     id: number;
@@ -296,6 +299,55 @@ export const categoryData: Record<string, CategoryConfig> = {
                 websiteUrl: "https://www.prowexa.com/",
                 serviceCharge: 12000,
                 adBudget: 0,
+            },
+            {
+                id: 4,
+                name: "THE BILLIONAIRE'S AQUA",
+                initials: "TBA",
+                location: "Pune, Maharashtra, India",
+                services: ["E-Commerce Website", "Luxury Brand Identity", "Digital Presence"],
+                whatWeDid: [
+                    "High-End E-Commerce & Brand Showcase Website",
+                    "Premium Brand Presentation & Storytelling UI",
+                    "Digital Presence & Regional Scaling Strategy",
+                ],
+                image: billionaireAqua,
+                websiteUrl: "https://thebillionairesaqua.com/",
+                instagramUrl: "https://www.instagram.com/thebillionairesaqua/",
+                serviceCharge: 15000,
+                adBudget: 5000,
+            },
+            {
+                id: 5,
+                name: "Axon Estate",
+                initials: "AE",
+                location: "Pune, Maharashtra, India",
+                services: ["Real Estate CRM", "Lead Management Portal", "UI/UX Development"],
+                whatWeDid: [
+                    "Full-Featured Real Estate CRM & Lead Console",
+                    "Advisor Property Management Interface",
+                    "High-Performance Next-Gen Web Application",
+                ],
+                image: axonEstate,
+                websiteUrl: "https://axonestate.vercel.app/crm",
+                serviceCharge: 18000,
+                adBudget: 0,
+            },
+            {
+                id: 6,
+                name: "Home Mantra",
+                initials: "HM",
+                location: "Wakad, Pune, Maharashtra, India",
+                services: ["Luxury Real Estate Portal", "360° Walkthrough UI", "Lead Generation"],
+                whatWeDid: [
+                    "Cinematic Luxury Real Estate Web Experience",
+                    "Interactive 360° Virtual Architectural Showcase",
+                    "High-Converting Consultation & Booking Flow",
+                ],
+                image: homeMantra,
+                websiteUrl: "https://homemantra.vercel.app",
+                serviceCharge: 15000,
+                adBudget: 5000,
             }
         ],
     },
