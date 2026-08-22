@@ -14,8 +14,8 @@ import radhaPureVeg from "@/assets/portfolio/radha-pure-veg.webp";
 import billionaireAqua from "@/assets/portfolio/the-billionaires-aqua.png";
 import axonEstate from "@/assets/portfolio/axon-estate.png";
 import homeMantra from "@/assets/portfolio/home-mantra.png";
-import jizaJewellery from "@/assets/portfolio/jiza-jewellery.webp";
-import trizStore from "@/assets/portfolio/the-triz-store.svg";
+import jizaJewellery from "@/assets/portfolio/jiza-jewellery.png";
+import trizStore from "@/assets/portfolio/the-triz-store.png";
 
 export interface Client {
     id: number;

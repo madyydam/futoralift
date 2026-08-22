@@ -59,13 +59,13 @@ const Process = memo(() => {
                             style={{ willChange: "transform" }}
                             className="rounded-2xl border-2 border-cyan/40 bg-[#0D0D0F]/80 backdrop-blur-xl p-5 flex flex-col justify-between hover:border-phoenix1 hover:shadow-[0_15px_30px_rgba(255,107,0,0.25)] transition-[border-color,box-shadow] duration-300 group min-h-[150px] cursor-pointer"
                         >
-                            <div className="flex items-center gap-3 mb-4">
-                                <div className="w-10 h-10 rounded-xl overflow-hidden border border-white/10 flex items-center justify-center flex-shrink-0 bg-charcoal group-hover:scale-105 transition-transform duration-300">
+                            <div className="flex items-center gap-3.5 mb-4">
+                                <div className="w-12 h-12 rounded-xl overflow-hidden border border-white/10 flex items-center justify-center flex-shrink-0 bg-charcoal group-hover:scale-105 transition-transform duration-300 p-1">
                                     {web.image ? (
                                         <img
                                             src={web.image}
                                             alt={`${web.name} logo`}
-                                            className="w-full h-full object-cover"
+                                            className="w-full h-full object-contain"
                                             loading="lazy"
                                             decoding="async"
                                         />
@@ -76,10 +76,10 @@ const Process = memo(() => {
                                     )}
                                 </div>
                                 <div className="min-w-0 flex-1">
-                                    <h3 className="font-poppins font-bold text-base leading-snug group-hover:text-phoenix1 transition-colors duration-300 truncate">
+                                    <h3 className="font-poppins font-bold text-base leading-snug group-hover:text-phoenix1 transition-colors duration-300 break-words">
                                         {web.name}
                                     </h3>
-                                    <p className="text-[10px] text-muted-foreground mt-0.5 font-medium truncate">
+                                    <p className="text-[10px] text-muted-foreground mt-0.5 font-medium">
                                         {web.categoryLabel}
                                     </p>
                                 </div>

@@ -30,17 +30,17 @@ const ClientCard = memo(({ client, accent, index, isD2C }: ClientCardProps) => (
         <div className="p-5 flex flex-col gap-4 flex-grow">
             {/* Image Section */}
             {client.image && (
-                <div className={`relative w-full aspect-video rounded-xl overflow-hidden border border-white/5 shadow-2xl transition-colors ${isD2C ? 'bg-white p-6 group-hover:border-phoenix1/20' : ''}`}>
+                <div className={`relative w-full aspect-video rounded-xl overflow-hidden border border-white/5 shadow-2xl transition-colors ${isD2C ? 'bg-black/50 p-4 group-hover:border-phoenix1/30 flex items-center justify-center' : ''}`}>
                     <img
                         src={client.image}
                         alt={`${client.name} project showcase`}
-                        className={`w-full h-full object-center group-hover:scale-105 transition-transform duration-700 ${isD2C ? 'object-contain' : 'object-cover'}`}
+                        className={`w-full h-full object-center group-hover:scale-105 transition-transform duration-700 ${isD2C ? 'object-contain max-h-[140px]' : 'object-cover'}`}
                         loading="lazy"
                         decoding="async"
                         style={{ willChange: "transform" }}
                     />
                     <div className="absolute inset-0 bg-gradient-to-t from-black/5 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500 flex items-end p-3">
-                        <span className={`text-[8px] font-bold tracking-tighter uppercase ${isD2C ? 'text-black/40' : 'text-white/80'}`}>Project Spotlight</span>
+                        <span className="text-[8px] font-bold tracking-tighter uppercase text-white/80">Project Spotlight</span>
                     </div>
                 </div>
             )}
@@ -53,10 +53,10 @@ const ClientCard = memo(({ client, accent, index, isD2C }: ClientCardProps) => (
                             {client.initials}
                         </div>
                         <div className="min-w-0">
-                            <h3 className="font-poppins font-bold text-base leading-tight group-hover:text-phoenix1 transition-colors truncate">
+                            <h3 className="font-poppins font-bold text-base leading-tight group-hover:text-phoenix1 transition-colors break-words">
                                 {client.name}
                             </h3>
-                            <p className="text-[10px] text-muted-foreground mt-0.5 flex items-center gap-1.5 truncate">
+                            <p className="text-[10px] text-muted-foreground mt-0.5 flex items-center gap-1.5">
                                 <span className="w-1 h-1 rounded-full bg-cyan animate-pulse" aria-hidden="true" />
                                 {client.location}
                             </p>
