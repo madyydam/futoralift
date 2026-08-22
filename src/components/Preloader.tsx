@@ -1,7 +1,6 @@
-import { motion, AnimatePresence } from "framer-motion";
+import { motion } from "framer-motion";
 import { useEffect, useState, useMemo, useCallback } from "react";
 import blLogo from "@/assets/bl-logo.webp";
-
 
 /**
  * Preloader - Performance Optimized Cinematic Splash Screen.
@@ -58,7 +57,7 @@ const Preloader = () => {
                 delay: status === "verified" ? 0.2 : 0,
                 ease: "easeOut"
             }}
-            className="fixed inset-0 z-[9999] bg-[#0A0A0C] flex flex-col items-center justify-center overflow-hidden pointer-events-auto"
+            className={`fixed inset-0 z-[9999] bg-[#0A0A0C] flex flex-col items-center justify-center overflow-hidden ${status === "verified" ? "pointer-events-none" : "pointer-events-auto"}`}
         >
             {/* Grid Background - Uses opacity for performance */}
             <div

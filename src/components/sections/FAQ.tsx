@@ -40,7 +40,7 @@ const FAQ = memo(() => {
                 >
                     <Accordion type="single" collapsible className="space-y-4">
                         {faqs.map((faq, i) => (
-                            <AccordionItem key={i} value={`item-${i}`} className="bg-midnight border border-border rounded-lg px-6">
+                            <AccordionItem key={faq.q} value={`item-${i}`} className="bg-midnight border border-border rounded-lg px-6">
                                 <AccordionTrigger className="text-left hover:text-phoenix1 transition-colors">
                                     <span className="font-semibold">{faq.q}</span>
                                 </AccordionTrigger>

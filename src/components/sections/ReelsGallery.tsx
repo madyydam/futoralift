@@ -1,4 +1,4 @@
-import { useState, useRef, memo, useEffect } from "react";
+import { useState, useRef, memo, useEffect, useMemo } from "react";
 import { useNavigate } from "react-router-dom";
 import { motion } from "framer-motion";
 import { Dumbbell, Coffee, Cake, Play, Loader2, LayoutGrid } from "lucide-react";
@@ -32,6 +32,8 @@ const ReelCard = memo(({ reel, index }: { reel: Reel, index: number }) => {
           )}
           <iframe
             src={reel.driveLink}
+            title={reel.title}
+            loading="lazy"
             className={`w-[200%] h-[200%] absolute top-0 left-0 origin-top-left scale-50 transition-opacity duration-500 ${isLoaded ? 'opacity-100' : 'opacity-0'}`}
             allow="autoplay; fullscreen; picture-in-picture"
             onLoad={() => setIsLoaded(true)}
@@ -61,18 +63,18 @@ const ReelsGallery = () => {
   const [activeTab, setActiveTab] = useState<typeof categories[number]["id"]>("gyms");
   const scrollRef = useRef<HTMLDivElement>(null);
 
-  const filteredReels = reelsData.filter(r => r.category === activeTab);
+  const filteredReels = useMemo(() => reelsData.filter(r => r.category === activeTab), [activeTab]);
 
   useEffect(() => {
     const scrollContainer = scrollRef.current;
     if (!scrollContainer) return;
 
     let animationFrameId: number;
-    let scrollSpeed = 0.6; // Speed of auto scroll
-    let isTouched = false;
+    const scrollSpeed = 0.6;
+    let isPaused = false;
 
     const scroll = () => {
-      if (scrollContainer && !isTouched) {
+      if (scrollContainer && !isPaused) {
         scrollContainer.scrollLeft += scrollSpeed;
         
         const maxScroll = scrollContainer.scrollWidth - scrollContainer.clientWidth;
@@ -85,19 +87,23 @@ const ReelsGallery = () => {
 
     animationFrameId = requestAnimationFrame(scroll);
 
-    const handleTouchStart = () => { isTouched = true; };
-    const handleTouchEnd = () => { isTouched = false; };
+    const handlePause = () => { isPaused = true; };
+    const handleResume = () => { isPaused = false; };
 
-    scrollContainer.addEventListener("touchstart", handleTouchStart, { passive: true });
-    scrollContainer.addEventListener("touchend", handleTouchEnd, { passive: true });
-    scrollContainer.addEventListener("touchcancel", handleTouchEnd, { passive: true });
+    scrollContainer.addEventListener("touchstart", handlePause, { passive: true });
+    scrollContainer.addEventListener("touchend", handleResume, { passive: true });
+    scrollContainer.addEventListener("touchcancel", handleResume, { passive: true });
+    scrollContainer.addEventListener("mouseenter", handlePause);
+    scrollContainer.addEventListener("mouseleave", handleResume);
 
     return () => {
       cancelAnimationFrame(animationFrameId);
       if (scrollContainer) {
-        scrollContainer.removeEventListener("touchstart", handleTouchStart);
-        scrollContainer.removeEventListener("touchend", handleTouchEnd);
-        scrollContainer.removeEventListener("touchcancel", handleTouchEnd);
+        scrollContainer.removeEventListener("touchstart", handlePause);
+        scrollContainer.removeEventListener("touchend", handleResume);
+        scrollContainer.removeEventListener("touchcancel", handleResume);
+        scrollContainer.removeEventListener("mouseenter", handlePause);
+        scrollContainer.removeEventListener("mouseleave", handleResume);
       }
     };
   }, [activeTab]);

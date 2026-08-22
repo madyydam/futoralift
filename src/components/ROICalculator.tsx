@@ -66,6 +66,14 @@ const ROICalculator = memo(({ onButtonClick }: ROICalculatorProps) => {
         },
     ], [projectedReach, lowerLeads, upperLeads, projectedROI]);
 
+    const handleButtonClick = useCallback(() => {
+        if (onButtonClick) {
+            onButtonClick();
+        } else {
+            document.getElementById("contact")?.scrollIntoView({ behavior: "smooth" });
+        }
+    }, [onButtonClick]);
+
     return (
         <Card className="bg-charcoal/60 backdrop-blur-xl border-phoenix1/20 glow-card overflow-hidden">
             <CardHeader className="bg-phoenix1/10 pb-8">
@@ -135,7 +143,7 @@ const ROICalculator = memo(({ onButtonClick }: ROICalculatorProps) => {
                 </div>
 
                 <Button
-                    onClick={onButtonClick}
+                    onClick={handleButtonClick}
                     className="w-full bg-phoenix1 hover:bg-phoenix2 text-white py-6 text-lg mt-4 shadow-lg shadow-phoenix1/20"
                 >
                     Get This Strategy Now

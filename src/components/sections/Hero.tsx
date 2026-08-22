@@ -111,7 +111,7 @@ const Hero = memo(({ scrollToContact }: HeroProps) => {
                     <div className="flex flex-col sm:flex-row gap-4 justify-center pt-8 items-center">
                         <motion.div
                             animate={{
-                                boxShadow: ["0 0 0 0px rgba(255,107,0,0)", "0 0 0 15px rgba(255,107,0,0)"],
+                                boxShadow: ["0 0 0 0px rgba(255,107,0,0.4)", "0 0 0 15px rgba(255,107,0,0)"],
                             }}
                             transition={{
                                 duration: 2,

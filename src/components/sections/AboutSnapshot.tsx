@@ -29,7 +29,7 @@ const AboutSnapshot = memo(() => {
                 <div className="grid grid-cols-2 md:grid-cols-2 lg:grid-cols-4 gap-4 md:gap-6">
                     {stats.map((stat, i) => (
                         <motion.div
-                            key={i}
+                            key={stat.label}
                             initial={{ opacity: 0, scale: 0.9 }}
                             whileInView={{ opacity: 1, scale: 1 }}
                             viewport={{ once: true }}

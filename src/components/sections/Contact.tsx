@@ -79,7 +79,7 @@ const Contact = memo(() => {
                                             placeholder="Your name"
                                             className="bg-midnight border-border focus:border-phoenix1 focus:ring-phoenix1"
                                             value={formData.name}
-                                            onChange={(e) => setFormData({ ...formData, name: e.target.value })}
+                                            onChange={(e) => setFormData(prev => ({ ...prev, name: e.target.value }))}
                                             required
                                         />
                                     </div>
@@ -91,7 +91,7 @@ const Contact = memo(() => {
                                             placeholder="your@email.com"
                                             className="bg-midnight border-border focus:border-phoenix1 focus:ring-phoenix1"
                                             value={formData.email}
-                                            onChange={(e) => setFormData({ ...formData, email: e.target.value })}
+                                            onChange={(e) => setFormData(prev => ({ ...prev, email: e.target.value }))}
                                             required
                                         />
                                     </div>
@@ -103,7 +103,7 @@ const Contact = memo(() => {
                                             placeholder="+91 98765 43210"
                                             className="bg-midnight border-border focus:border-phoenix1 focus:ring-phoenix1"
                                             value={formData.phone}
-                                            onChange={(e) => setFormData({ ...formData, phone: e.target.value })}
+                                            onChange={(e) => setFormData(prev => ({ ...prev, phone: e.target.value }))}
                                         />
                                     </div>
                                     <div className="space-y-2">
@@ -113,7 +113,7 @@ const Contact = memo(() => {
                                             placeholder="Tell us about your project..."
                                             className="bg-midnight border-border focus:border-phoenix1 focus:ring-phoenix1 min-h-32"
                                             value={formData.message}
-                                            onChange={(e) => setFormData({ ...formData, message: e.target.value })}
+                                            onChange={(e) => setFormData(prev => ({ ...prev, message: e.target.value }))}
                                             required
                                         />
                                     </div>

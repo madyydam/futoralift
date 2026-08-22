@@ -93,7 +93,7 @@ const FullTeam = memo(() => {
                     <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
                         {founders.map((member, i) => (
                             <motion.div
-                                key={i}
+                                key={member.name}
                                 initial={{ opacity: 0, scale: 0.95 }}
                                 animate={{ opacity: 1, scale: 1 }}
                                 transition={{ duration: 0.5, delay: i * 0.1 }}
@@ -125,15 +125,15 @@ const FullTeam = memo(() => {
                 </div>
 
                 {/* Departments Section */}
-                {departments.map((dept, deptIdx) => (
-                    <div key={deptIdx} className="container max-w-6xl mx-auto mb-20 last:mb-0">
+                {departments.map((dept) => (
+                    <div key={dept.title} className="container max-w-6xl mx-auto mb-20 last:mb-0">
                         <h2 className="font-poppins font-bold text-xl md:text-2xl mb-8 text-left border-l-4 border-phoenix1 pl-4">
                             {dept.title}
                         </h2>
                         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
                             {dept.members.map((member, i) => (
                                 <motion.div
-                                    key={i}
+                                    key={`${dept.title}-${member.name}-${i}`}
                                     initial={{ opacity: 0, y: 20 }}
                                     whileInView={{ opacity: 1, y: 0 }}
                                     viewport={{ once: true }}

@@ -37,6 +37,7 @@ const ReelCard = memo(({ reel }: { reel: Reel }) => {
           )}
           <iframe
             src={reel.driveLink}
+            title={reel.title}
             className={`w-[200%] h-[200%] absolute top-0 left-0 origin-top-left scale-50 transition-opacity duration-500 ${isLoaded ? 'opacity-100' : 'opacity-0'}`}
             allow="autoplay; fullscreen; picture-in-picture"
             onLoad={() => setIsLoaded(true)}
@@ -106,7 +107,7 @@ const AllReels = () => {
 
       {/* Footer Info */}
       <footer className="mt-20 text-center text-muted-foreground text-sm font-poppins">
-         <p>© 2024 FutoraLift • Quality Content Marketing</p>
+         <p>© {new Date().getFullYear()} FutoraLift • Quality Content Marketing</p>
       </footer>
     </div>
   );
